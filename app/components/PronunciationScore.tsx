@@ -3,7 +3,7 @@ import {useState} from 'react'
 
 var result
 //BELOW: connecting python portion
-const postData = async (data) => {
+const postData = async (data: Blob) => {
   const response = await fetch('./app', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -38,6 +38,22 @@ export default function PronunciationScoring() {
         </div>
     )
 
+}
+
+async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).end(); // Method Not Allowed
+  }
+
+  const formData = req.body;
+  const audioBlob = formData.get('audio');
+
+  // converting Blob to a base64-encoded string
+  const base64AudioData = await audioBlob.arrayBuffer();
+  const base64String = Buffer.from(base64AudioData).toString('base64');
+
+  // sending the base64-encoded audio data to the client
+  res.status(200).json({ audio: base64String });
 }
 
 

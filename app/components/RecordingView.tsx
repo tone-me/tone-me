@@ -10,7 +10,7 @@ declare global {
 
     }
 }
-export default function RecordingView() {
+const Recorder=() => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [recordingComplete, setRecordingComplete] = useState<boolean>(false);
     const [transcript, setTranscript] = useState<string>("");
@@ -37,6 +37,10 @@ export default function RecordingView() {
     };
 
     const handleStopRecording = async () => {
+        if (recognitionRef.current) {
+                    recognitionRef.current.stop();
+                    setRecordingComplete(true);
+                }
         mediaRecorder.stop();
         const audioData = new FormData();
         audioData.append('audio', audioBlob);
@@ -109,8 +113,6 @@ export default function RecordingView() {
         } else{
             handleStopRecording();
         }
-
-    }
     }
     
 
@@ -173,22 +175,7 @@ export default function RecordingView() {
         </div>
         </div>
     )
-}
+                }
+            }
 
-
-
-export async function handler(req, res) {
-    if (req.method !== 'POST') {
-      return res.status(405).end(); // Method Not Allowed
-    }
-  
-    const formData = req.body;
-    const audioBlob = formData.get('audio');
-  
-    // Convert the Blob to a base64-encoded string
-    const base64AudioData = await audioBlob.arrayBuffer();
-    const base64String = Buffer.from(base64AudioData).toString('base64');
-  
-    // Send the base64-encoded audio data to the client
-    res.status(200).json({ audio: base64String });
-  }
+export default Recorder;
