@@ -17,12 +17,12 @@ export default function RecordingView() {
 
     const recognitionRef = useRef<any>(null);
 
-    var audioBlob;
-    var mediaRecorder;
+    var audioBlob: Blob
+    var mediaRecorder: MediaRecorder
     const handleStartRecording = async () => {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         mediaRecorder = new MediaRecorder(stream);
-        const parts = [];
+        var parts: Blob[];
     
         mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
@@ -111,7 +111,7 @@ export default function RecordingView() {
         }
 
     }
-
+    }
     
 
     return (
