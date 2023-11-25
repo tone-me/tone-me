@@ -62,19 +62,19 @@ export default function RecordingView() {
       };
         
 
-    // const startRecording = () => {
-    //     setIsRecording(true);
-    //     // mediaRecorder.start()
-    //     handleStartRecording()
+    const startRecording = () => {
+        setIsRecording(true);
+        // mediaRecorder.start()
+        handleStartRecording()
 
-    //     recognitionRef.current = new window.webkitSpeechRecognition();
-    //     recognitionRef.current.continuous = true;
-    //     recognitionRef.current.interimResults = true;
-    //     recognitionRef.current.onresult = (event:any) => {
-    //         const {transcript} = event.results[event.results.length -1][0];
+        recognitionRef.current = new window.webkitSpeechRecognition();
+        recognitionRef.current.continuous = true;
+        recognitionRef.current.interimResults = true;
+        recognitionRef.current.onresult = (event:any) => {
+            const {transcript} = event.results[event.results.length -1][0];
 
-    //         setTranscript(transcript)
-    //     }
+            setTranscript(transcript)
+        }
 
     //     recognitionRef.current.start()
 
@@ -105,7 +105,7 @@ export default function RecordingView() {
     const handleToggleRecording = () => {
         setIsRecording(!isRecording)
         if(!isRecording){
-            handleStartRecording();
+            startRecording();
         } else{
             handleStopRecording();
         }
