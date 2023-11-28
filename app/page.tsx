@@ -1,5 +1,5 @@
 'use client'
-import RecordingView from "./components/RecordingView"
+import RecordingView from "./components/recview"
 import './globals.css'
 import {useState} from 'react'
 
@@ -42,7 +42,7 @@ const subtitleStyle = {
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
-      <div style={{color:"white"}}>
+      <div style={{color:"black"}}>
         <h1 style={titleStyle}>
           *✧･ﾟ:* Tone-Me ✧･ﾟ: *✧
           </h1>
