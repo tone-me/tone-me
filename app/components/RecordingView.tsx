@@ -10,7 +10,7 @@ declare global {
 
     }
 }
-const Recorder=() => {
+const RecordingView=() => {
     const [isRecording, setIsRecording] = useState<boolean>(false);
     const [recordingComplete, setRecordingComplete] = useState<boolean>(false);
     const [transcript, setTranscript] = useState<string>("");
@@ -178,4 +178,4 @@ const Recorder=() => {
                 }
             }
 
-export default Recorder;
+export default RecordingView;
