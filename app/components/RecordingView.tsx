@@ -79,7 +79,7 @@ const RecordingView=() => {
 
             setTranscript(transcript)
         }
-
+    }
     //     recognitionRef.current.start()
 
     //     // setTranscript("Phrase");
@@ -176,6 +176,6 @@ const RecordingView=() => {
         </div>
     )
                 }
-            }
+            
 
 export default RecordingView;
