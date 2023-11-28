@@ -1,5 +1,5 @@
 'use client'
-import RecordingView from "./components/recview"
+import RecordingView from "./components/WorkingRecordingView"
 import './globals.css'
 import {useState} from 'react'
 

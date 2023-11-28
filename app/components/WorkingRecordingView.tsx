@@ -94,7 +94,7 @@ export default function RecordingView() {
                         onClick={(handleToggleRecording)}
                         className="rounded-full mt-10 m-auto flex items-center justify-center bg-red-200 hover:bg-red-400">
                             <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                    <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                                         <path d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0Z"/>
                                         <path d="M9 10a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4Z"/>
                                     </g>
@@ -107,9 +107,9 @@ export default function RecordingView() {
                         onClick={(handleToggleRecording)}
                         className="rounded-full mt-10 m-auto flex items-center justify-center bg-blue-200 hover:bg-blue-400">
                             <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.2">
-                                    <rect width="6" height="11" x="9" y="3" fill="currentColor" fill-opacity=".25" rx="3"/>
-                                    <path stroke-linecap="round" d="M5.4 11a6.6 6.6 0 1 0 13.2 0M12 21v-2"/>
+                                <g fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.2">
+                                    <rect width="6" height="11" x="9" y="3" fill="currentColor" fillOpacity=".25" rx="3"/>
+                                    <path strokeLinecap="round" d="M5.4 11a6.6 6.6 0 1 0 13.2 0M12 21v-2"/>
                                 </g>
                             </svg>
                         </button>
