@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import Image from 'next/image'
 import FeaturesBg from '/public/images/features-bg.png'
+import Features1 from '/public/images/features-1.png'
 
 export default function Features() {
   
@@ -113,7 +114,7 @@ export default function Features() {
                     unmount={false}                     
                   >
                     <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
+                      <Image className="md:max-w-none mx-auto rounded" src={Features1} width={500} height="462" alt="Features bg" />
                     </div>
                   </Transition>
                   {/* Item 2 */}
