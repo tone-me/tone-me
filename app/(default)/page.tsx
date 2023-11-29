@@ -58,7 +58,7 @@
 
 export const metadata = {
   title: 'Home - Tone.me',
-  description: 'Page description',
+  description: 'About Tone.me',
 }
 
 import Header from '../components/header'

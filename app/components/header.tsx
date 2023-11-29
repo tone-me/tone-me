@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
 import MobileMenu from './mobile-menu'
+import Image from 'next/image'
+import Logo from '/public/images/logo.png'
 
 export default function Header() {
 
@@ -27,7 +29,7 @@ export default function Header() {
 
           {/* Site branding */}
           <div className="shrink-0 mr-4">
-            Tone.Me Logo?!
+            <Image className="md:max-w-none mx-auto rounded" src={Logo} width={150} alt="Features bg" />
           </div>
 
           {/* Desktop navigation */}
@@ -35,7 +37,7 @@ export default function Header() {
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link href="/signin" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Code</Link>
+                <Link href="https://github.com/tone-me/tone-me" target="_blank" className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out">Code</Link>
               </li>
               <li>
                 <Link href="/signup" className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3">
