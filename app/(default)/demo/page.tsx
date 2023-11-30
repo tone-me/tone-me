@@ -41,19 +41,23 @@ const subtitleStyle = {
 
 const fetchData = async () => {
   try {
-    let postData = { name: "Hello World" };
-    const response = await fetch("/api/fetch_audio", {
+    const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(postData),
+      body: JSON.stringify({ text: "Hello World" }),
     });
-    // const response = await fetch("/api/fetch_audio");
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
     const data = await response.json();
-    console.log("Data from Flask:", data);
+    console.log(data);
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Failed to process text:", error);
   }
 };
 
