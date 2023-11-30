@@ -33,7 +33,7 @@ export default function Features() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1 className="h2 mb-4">Our Technology</h1>
-            <p className="text-xl text-gray-600">something something something something something something something something something something something something </p>
+            <p className="text-xl text-gray-600">We use a transformer-based tone classification model to determine if you pronounce Mandarin syllables with correct tones.</p>
           </div>
 
           {/* Section content */}
@@ -43,7 +43,7 @@ export default function Features() {
             <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
                 <h3 className="h3 mb-3">The Process</h3>
-                <p className="text-xl text-gray-600">Our three-step process takes down audio input, breaks it down into individual components, and returns an analysis of each component</p>
+                <p className="text-xl text-gray-600">Our three-step process accepts a voice recording of a Chinese character, determines the tone in the recording, and returns feedback on the correctness of the tone.</p>
               </div>
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
@@ -53,8 +53,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(1); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Taking in voice recording</div>
-                    <div className="text-gray-600">Users input audio into our web software, which is relayed via Flask to run with our model.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">1. Audio Input</div>
+                    <div className="text-gray-600">Record an audio of yourself pronouncing a character. Specify the intended tone.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -68,8 +68,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(2); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Breaking down audio input</div>
-                    <div className="text-gray-600">Leveraging OpenAI's whisper, our software first breaks down sentences into its individuals words</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">2. Analysis</div>
+                    <div className="text-gray-600">Our software predicts tone from the audio and compares it to the intended one.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
@@ -78,13 +78,13 @@ export default function Features() {
                   </div>
                 </a>
                 <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`flex items-center justify-between text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
                   href="#0"
                   onClick={(e) => { e.preventDefault(); setTab(3); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Returning word accuracy</div>
-                    <div className="text-gray-600">Each word is analyzed based on our model [more model info], and its accuracy is returned to the user</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">3. Feedback</div>
+                    <div className="text-gray-600">You are told whether or not your pronunciation was right.</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
                     <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">

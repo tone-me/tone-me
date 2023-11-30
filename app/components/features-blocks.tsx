@@ -12,7 +12,7 @@ export default function FeaturesBlocks() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Machine Learning</h2>
-            <p className="text-xl text-gray-600">im thinking we can write more about our ml stuff here? like brief specific features that we have. originally I was thinking of just writing our tech stack here</p>
+            <p className="text-xl text-gray-600">Our tone classifier is a finetuned version of Facebook's wav2vec2 transformer for speech recognition. We finetuned it on the aishell-3 Mandarin corpus, having leveraged Whisper to split corpus sentences into syllables.</p>
           </div>
 
           {/* Items */}
@@ -31,8 +31,8 @@ export default function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Next.js</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">wav2vec2</h4>
+              <p className="text-gray-600 text-center">Facebook's speech recognition model pretrained on 960 h of unlabeled audio, learning discrete speech units in a self-supervised way. </p>
             </div>
 
             {/* 2nd item */}
@@ -47,12 +47,12 @@ export default function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Flask</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">aishell-3</h4>
+              <p className="text-gray-600 text-center">Large transcribed dataset of Mandarin sentences pronounced by speakers of varying genders, ages, and regional backgrounds.</p>
             </div>
 
             {/* 3rd item */}
-            <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-xl">
+            <div className="relative flex flex-col items-center p-6 pb-12 bg-white rounded shadow-xl">
               <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <g fill="none" fillRule="evenodd">
                   <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
@@ -64,56 +64,8 @@ export default function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Typescript</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
-            </div>
-
-            {/* 4th item */}
-            <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-xl">
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M32 37.714A5.714 5.714 0 0037.714 32a5.714 5.714 0 005.715 5.714" />
-                    <path className="stroke-current text-white" d="M32 37.714a5.714 5.714 0 015.714 5.715 5.714 5.714 0 015.715-5.715M20.571 26.286a5.714 5.714 0 005.715-5.715A5.714 5.714 0 0032 26.286" />
-                    <path className="stroke-current text-white" d="M20.571 26.286A5.714 5.714 0 0126.286 32 5.714 5.714 0 0132 26.286" />
-                    <path className="stroke-current text-blue-300" d="M21.714 40h4.572M24 37.714v4.572M37.714 24h4.572M40 21.714v4.572" strokeLinecap="square" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Tensorflow</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
-            </div>
-
-            {/* 5th item */}
-            <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-xl">
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2">
-                    <path className="stroke-current text-white" d="M19.429 32a12.571 12.571 0 0021.46 8.89L23.111 23.11A12.528 12.528 0 0019.429 32z" />
-                    <path className="stroke-current text-blue-300" d="M32 19.429c6.943 0 12.571 5.628 12.571 12.571M32 24a8 8 0 018 8" />
-                    <path className="stroke-current text-white" d="M34.286 29.714L32 32" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">AST</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
-            </div>
-
-            {/* 6th item */}
-            <div className="relative flex flex-col items-center p-6 bg-white rounded shadow-xl">
-              <svg className="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-                <g fill="none" fillRule="evenodd">
-                  <rect className="fill-current text-blue-600" width="64" height="64" rx="32" />
-                  <g strokeWidth="2" strokeLinecap="square">
-                    <path className="stroke-current text-white" d="M29.714 40.358l-4.777 2.51 1.349-7.865-5.715-5.57 7.898-1.147L32 21.13l3.531 7.155 7.898 1.147L40 32.775" />
-                    <path className="stroke-current text-blue-300" d="M44.571 43.429H34.286M44.571 37.714H34.286" />
-                  </g>
-                </g>
-              </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Whisper</h4>
-              <p className="text-gray-600 text-center">smth smth stmh stmh smth smth smth smth stmh smth</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Whisper + stable-ts</h4>
+              <p className="text-gray-600 text-center">A framework to timestamp individual syllables in a sentence audio (applied to aishell-3 to generate training data).</p>
             </div>
 
           </div>
