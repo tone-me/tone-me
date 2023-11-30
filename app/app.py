@@ -9,12 +9,7 @@ import os
 
 app = Flask(__name__)
 CORS(app)
-@app.route('/process-audio', methods=['POST'])
 
-def process_audio():
-    data = request.json 
-    # result = *AI MODEL FUNCTION* (data)
-    # return jsonify(result)
 
 def evaluate_model(audio, rate, model, feature_extractor):
     input_values = feature_extractor(audio, sampling_rate=rate, return_tensors = "pt").input_values

@@ -16,7 +16,6 @@
 // //   "web-vitals": "^2.1.4"
 // // }
 
-
 // import {
 //     BrowserRouter as Router,
 //     Routes,
@@ -38,7 +37,6 @@
 //   color: "#d4a373"
 // }
 
-
 // export default function Home() {
 //   return (
 //     <main className="flex min-h-screen flex-col items-center bg-gray-10">
@@ -47,7 +45,7 @@
 //           *✧･ﾟ:* Tone-Me ✧･ﾟ: *✧
 //           </h1>
 //         <p style={subtitleStyle}>
-//           Your Personal Chinese Mandarin Tone & Pronunciation Assistant 
+//           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
 //         </p>
 //         <RecordingView/>
 //       </div>
@@ -55,18 +53,16 @@
 //   )
 //   }
 
-
 export const metadata = {
-  title: 'Home - Tone.me',
-  description: 'About Tone.me',
-}
+  title: "Home - Tone.me",
+  description: "About Tone.me",
+};
 
-import Header from '../components/header'
-import Hero from '../components/hero'
-import Features from '../components/features'
-import FeaturesBlocks from '../components/features-blocks'
-import Footer from '../components/footer'
-
+import Header from "../components/header";
+import Hero from "../components/hero";
+import Features from "../components/features";
+import FeaturesBlocks from "../components/features-blocks";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
@@ -77,5 +73,5 @@ export default function Home() {
       <FeaturesBlocks />
       <Footer />
     </>
-  )
+  );
 }
