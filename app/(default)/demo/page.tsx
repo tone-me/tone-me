@@ -7,6 +7,7 @@ import "/app/css/additional-styles/theme.css";
 import "app/css/additional-styles/toggle-switch.css";
 import "app/css/additional-styles/utility-patterns.css";
 import { useState } from "react";
+import { useEffect } from "react";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -40,7 +41,15 @@ const subtitleStyle = {
 
 const fetchData = async () => {
   try {
-    const response = await fetch("/api/fetch_audio");
+    let postData = { name: "Hello World" };
+    const response = await fetch("/api/fetch_audio", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    });
+    // const response = await fetch("/api/fetch_audio");
     const data = await response.json();
     console.log("Data from Flask:", data);
   } catch (error) {
