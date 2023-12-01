@@ -27,7 +27,7 @@ def process_audio():
         # print(audio_data)
         script_directory = os.path.dirname(os.path.realpath(__file__))
         path_to_audio = os.path.join(script_directory, "recording.wav")
-        # path_to_audio2 = os.path.join(script_directory, "recording2.wav")
+        path_to_audio2 = os.path.join(script_directory, "recording2.wav")
         # Set metadata for the WAV file
         channels = 2
         sample_width = 2
@@ -38,15 +38,16 @@ def process_audio():
         # s = io.BytesIO(audio_data)
         # audio = AudioSegment.from_raw(s, sample_width, sample_width, channels).export("recorded.wav", format='wav')
 
-        with wave.open(path_to_audio, 'wb') as wave_file:
-            wave_file.setparams((channels, sample_width, sample_rate, 0, 'NONE', 'NONE'))
-            wave_file.writeframes(audio_data)
+        # with wave.open(path_to_audio, 'wb') as wave_file:
+        #     wave_file.setparams((channels, sample_width, sample_rate, 0, 'NONE', 'NONE'))
+        #     wave_file.writeframes(audio_data)
             
+
         
-        # with open(path_to_audio2, "wb") as f:
-        #     f.write(audio_data)
+        with open(path_to_audio2, "wb") as f:
+            f.write(audio_data)
         #print(path_to_audio)
-        pred = evaluate_model(path_to_audio)
+        pred = evaluate_model(path_to_audio2)
         return jsonify({'prediction': pred}), 200
 
 def evaluate_model(path_to_audio):
