@@ -79,6 +79,12 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   fetchData();
+  const [permission, setPermission] = useState(false);
+  const mediaRecorder = useRef(null);
+  const [recordingStatus, setRecordingStatus] = useState("inactive");
+  const [stream, setStream] = useState(null);
+  const [audioChunks, setAudioChunks] = useState([]);
+  const [audio, setAudio] = useState(null);
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
       <div style={{ color: "black" }}>
