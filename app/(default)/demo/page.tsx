@@ -5,7 +5,6 @@ import "/app/css/style.css";
 import { useState, useRef } from "react";
 import AudioRecorder from "./components/AudioRecorder";
 
-import Recview3 from "./components/Recview3";
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
 //   "@testing-library/react": "^13.4.0",
@@ -78,13 +77,8 @@ export default function Home() {
   //   audio.controls = true;
   //   document.body.appendChild(audio);
   // };
-  fetchData();
-  const [permission, setPermission] = useState(false);
-  const mediaRecorder = useRef(null);
-  const [recordingStatus, setRecordingStatus] = useState("inactive");
-  const [stream, setStream] = useState(null);
-  const [audioChunks, setAudioChunks] = useState([]);
-  const [audio, setAudio] = useState(null);
+  // fetchData();
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
       <div style={{ color: "black" }}>

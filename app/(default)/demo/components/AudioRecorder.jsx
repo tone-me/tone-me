@@ -1,5 +1,44 @@
 import { useState, useRef } from "react";
 
+const fetchData = async (audioBlob) => {
+    try {
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'audio.wav');
+        const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Failed to process text:", error);
+    }
+  };
+// const readBlobAsArrayBuffer = (blob) => {
+//     return new Promise((resolve, reject) => {
+//         const reader = new FileReader();
+
+//         reader.onload = () => {
+//             if (reader.result instanceof ArrayBuffer) {
+//                 resolve(reader.result);
+//             } else {
+//                 reject(new Error('Failed to read Blob as ArrayBuffer.'));
+//             }
+//         };
+
+//         reader.onerror = (error) => {
+//             reject(error);
+//         };
+
+//         reader.readAsArrayBuffer(blob);
+//     });
+// };
 const AudioRecorder = () => {
     const mimeType = "audio/wav";
     const [permission, setPermission] = useState(false);
@@ -49,7 +88,10 @@ const AudioRecorder = () => {
         mediaRecorder.current.onstop = () => {
           //creates a blob file from the audiochunks data
            const audioBlob = new Blob(audioChunks, { type: mimeType });
+           
           //creates a playable URL from the blob file.
+             // console.log(audioBlob);
+            fetchData(audioBlob)
            const audioUrl = URL.createObjectURL(audioBlob);
            setAudio(audioUrl);
            setAudioChunks([]);

@@ -13,12 +13,16 @@ CORS(app)
 @app.route('/fetch_audio', methods=['POST'])
 def process_audio():
     if request.method == "POST":
-        if not request.json or 'text' not in request.json: # Check if text is sent via JSON
-            return jsonify({'error': 'No text provided'}), 400
-        text = request.json['text']
-        processed_text = text.upper() 
-        response = jsonify({'text': processed_text})
-        return response
+        print(request.files)
+        if 'audio' not in request.files:
+            return jsonify({'error': 'No audio file provided'}), 400
+
+        audio_file = request.files.get('audio')
+        audio_data = audio_file.read()
+        with open('audio.wav', 'wb') as f:
+            f.write(audio_data)
+
+        return jsonify({'success': 'Audio file received and processed'}), 200
 
 
 def evaluate_model(audio, rate, model, feature_extractor):
@@ -36,5 +40,5 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(os.path.realpath(__file__))
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     audio, rate = librosa.load(path_to_audio, sr=16000)
-    print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
+    # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)
