@@ -2,12 +2,8 @@
 import RecordingView from "./components/RecordingView";
 import "app/globals.css";
 import "/app/css/style.css";
-import "/app/css/additional-styles/range-slider.css";
-import "/app/css/additional-styles/theme.css";
-import "app/css/additional-styles/toggle-switch.css";
-import "app/css/additional-styles/utility-patterns.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useRef } from "react";
+import AudioRecorder from "./components/AudioRecorder";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -21,9 +17,6 @@ import { useEffect } from "react";
 //   "styled-components": "^5.3.10",
 //   "web-vitals": "^2.1.4"
 // }
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 const titleStyle = {
   marginTop: "30px",
   marginBottom: "15px",
@@ -62,7 +55,30 @@ const fetchData = async () => {
 };
 
 export default function Home() {
-  fetchData();
+  // const [microphonePermission, setMicrophonePermission] = useState(false);
+
+  // const handleMicrophonePermission = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     // If the promise resolves, the user granted permission
+  //     setMicrophonePermission(true);
+  //     stream.getTracks().forEach((track) => track.stop()); // Stop the stream
+  //   } catch (error) {
+  //     console.error("Error accessing microphone:", error);
+  //     setMicrophonePermission(false);
+  //   }
+  // };
+
+  // const addAudioElement = (blob: any) => {
+  //   console.log("complete");
+  //   const url = URL.createObjectURL(blob);
+  //   const audio = document.createElement("audio");
+  //   audio.src = url;
+  //   audio.controls = true;
+  //   document.body.appendChild(audio);
+  // };
+  // fetchData();
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
       <div style={{ color: "black" }}>
@@ -70,7 +86,23 @@ export default function Home() {
         <p style={subtitleStyle}>
           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
         </p>
-        <RecordingView />
+        <AudioRecorder></AudioRecorder>
+        {/* {!microphonePermission && (
+          <button onClick={handleMicrophonePermission}>
+            Grant Microphone Permission
+          </button>
+        )}
+        {microphonePermission && (
+          <AudioRecorder
+            onRecordingComplete={(blob) => addAudioElement(blob)}
+            audioTrackConstraints={{
+              noiseSuppression: true,
+              echoCancellation: true,
+            }}
+            downloadOnSavePress={true}
+            downloadFileExtension="wav"
+          />
+        )} */}
       </div>
     </main>
   );
