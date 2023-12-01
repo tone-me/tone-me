@@ -20,25 +20,6 @@ const fetchData = async (audioBlob) => {
       console.error("Failed to process text:", error);
     }
   };
-// const readBlobAsArrayBuffer = (blob) => {
-//     return new Promise((resolve, reject) => {
-//         const reader = new FileReader();
-
-//         reader.onload = () => {
-//             if (reader.result instanceof ArrayBuffer) {
-//                 resolve(reader.result);
-//             } else {
-//                 reject(new Error('Failed to read Blob as ArrayBuffer.'));
-//             }
-//         };
-
-//         reader.onerror = (error) => {
-//             reject(error);
-//         };
-
-//         reader.readAsArrayBuffer(blob);
-//     });
-// };
 const AudioRecorder = () => {
     const mimeType = "audio/wav";
     const [permission, setPermission] = useState(false);
@@ -47,6 +28,7 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
+
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
             try {
@@ -67,6 +49,11 @@ const AudioRecorder = () => {
     const startRecording = async () => {
         setRecordingStatus("recording");
         //create new Media recorder instance using the stream
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaStreamSource(stream);
+        console.log('Sample Rate:', audioContext.sampleRate);
+        console.log('Number of Channels:', source.channelCount);
+
         const media = new MediaRecorder(stream, { type: mimeType });
         //set the MediaRecorder instance to the mediaRecorder ref
         mediaRecorder.current = media;
