@@ -2,10 +2,10 @@
 import RecordingView from "./components/RecordingView";
 import "app/globals.css";
 import "/app/css/style.css";
-import { useState } from "react";
-import { useEffect } from "react";
-import { AudioRecorder } from "react-audio-voice-recorder";
+import { useState, useRef } from "react";
+import AudioRecorder from "./components/AudioRecorder";
 
+import Recview3 from "./components/Recview3";
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
 //   "@testing-library/react": "^13.4.0",
@@ -56,36 +56,28 @@ const fetchData = async () => {
 };
 
 export default function Home() {
-  const [microphonePermission, setMicrophonePermission] = useState(false);
+  // const [microphonePermission, setMicrophonePermission] = useState(false);
 
-  const handleMicrophonePermission = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      // If the promise resolves, the user granted permission
-      setMicrophonePermission(true);
-      stream.getTracks().forEach((track) => track.stop()); // Stop the stream
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
-      setMicrophonePermission(false);
-    }
-  };
+  // const handleMicrophonePermission = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     // If the promise resolves, the user granted permission
+  //     setMicrophonePermission(true);
+  //     stream.getTracks().forEach((track) => track.stop()); // Stop the stream
+  //   } catch (error) {
+  //     console.error("Error accessing microphone:", error);
+  //     setMicrophonePermission(false);
+  //   }
+  // };
 
-  const handleRecordingComplete = (blob: any) => {
-    if (microphonePermission) {
-      addAudioElement(blob);
-    } else {
-      console.error("Microphone permission not granted.");
-    }
-  };
-
-  const addAudioElement = (blob: any) => {
-    console.log("complete");
-    const url = URL.createObjectURL(blob);
-    const audio = document.createElement("audio");
-    audio.src = url;
-    audio.controls = true;
-    document.body.appendChild(audio);
-  };
+  // const addAudioElement = (blob: any) => {
+  //   console.log("complete");
+  //   const url = URL.createObjectURL(blob);
+  //   const audio = document.createElement("audio");
+  //   audio.src = url;
+  //   audio.controls = true;
+  //   document.body.appendChild(audio);
+  // };
   fetchData();
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
@@ -94,14 +86,15 @@ export default function Home() {
         <p style={subtitleStyle}>
           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
         </p>
-        {!microphonePermission && (
+        <AudioRecorder></AudioRecorder>
+        {/* {!microphonePermission && (
           <button onClick={handleMicrophonePermission}>
             Grant Microphone Permission
           </button>
         )}
         {microphonePermission && (
           <AudioRecorder
-            onRecordingComplete={handleRecordingComplete}
+            onRecordingComplete={(blob) => addAudioElement(blob)}
             audioTrackConstraints={{
               noiseSuppression: true,
               echoCancellation: true,
@@ -109,7 +102,7 @@ export default function Home() {
             downloadOnSavePress={true}
             downloadFileExtension="wav"
           />
-        )}
+        )} */}
       </div>
     </main>
   );
