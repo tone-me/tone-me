@@ -1,0 +1,17 @@
+services:
+- type: web
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  build: 
+    commands: 
+    - npm run dev
+    - yarn build
+cache:
+        paths:
+          - '.next/cache/**/*'
+          - 'node_modules/**/*'
+    appRoot: path/to/frontend
