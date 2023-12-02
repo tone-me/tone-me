@@ -68,10 +68,11 @@ export default function Home() {
     <main>
       <div style={{ color: "black" }}>
         <Header />
-        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/2">
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4">
           <SelectionBox
             tonestring={tonestring}
             setTonestring={setTonestring}
+            setInputText={setInputText}
           ></SelectionBox>
           <AudioRecorder
             predictionOutput={predictionOutput}

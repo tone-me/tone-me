@@ -50,11 +50,28 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             return (
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
+                  console.log(cellEl.column)
                   return (
                     <td key={cellEl.id}>
-                      {flexRender(
-                        cellEl.column.columnDef.cell,
-                        cellEl.getContext()
+                      {cellEl.column.accessorKey === "pronunciation" ? (
+                        // Handle Pronunciation Output column
+                        <>
+                          {cellEl.value && (
+                            <>
+                              <p>
+                                Expected tone: {cellEl.value.expected},
+                                Actual tone: {cellEl.value.prediction}
+                              </p>
+                              <p>Correctness: {cellEl.value.correctness}</p>
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        // Render other columns as usual
+                        flexRender(
+                          cellEl.column.columnDef.cell,
+                          cellEl.getContext()
+                        )
                       )}
                     </td>
                   );
