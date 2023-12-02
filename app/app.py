@@ -42,14 +42,24 @@ def process_audio():
         #     wave_file.setparams((channels, sample_width, sample_rate, 0, 'NONE', 'NONE'))
         #     wave_file.writeframes(audio_data)
             
-
-        
         with open(path_to_audio2, "wb") as f:
             f.write(audio_data)
         #print(path_to_audio)
         pred = evaluate_model(path_to_audio2)
-        return jsonify({'prediction': pred}), 200
+        correctness = int(pred) == int(text) 
+        return jsonify({'prediction': pred, 'correctness': correctness}), 200
 
+
+@app.route('/fetch_text', methods=['POST'])
+def process_text():
+    if request.method == "POST":
+        if not request.json or 'text' not in request.json: # Check if text is sent via JSON
+            return jsonify({'error': 'No text provided'}), 400
+        global text
+        text = request.json['text']
+        response = jsonify({'text': "Successfully handled"})
+        return response
+        
 def evaluate_model(path_to_audio):
     global model 
     global feature_extractor
@@ -69,6 +79,7 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(os.path.realpath(__file__))
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     sample_audio, sample_rate = librosa.load(path_to_audio)
+    text = ""
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)

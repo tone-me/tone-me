@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import "tailwindcss/tailwind.css";
+import { useEffect } from "react";
 
 const fetchData = async (audioBlob, setPredictionOutput) => {
     try {
@@ -16,8 +17,7 @@ const fetchData = async (audioBlob, setPredictionOutput) => {
       }
   
       const data = await response.json();
-      let preds = data['prediction']
-      console.log(preds);
+      let preds = [data['prediction'], data['correctness']]
       setPredictionOutput(preds)
     
       
@@ -90,7 +90,10 @@ const AudioRecorder = () => {
            setAudioChunks([]);
         };
     };
-    getMicrophonePermission()
+    useEffect( () => {
+        getMicrophonePermission()
+    }, []
+    )
     return (
         <div>
             <main>
@@ -148,9 +151,14 @@ const AudioRecorder = () => {
                         </div>
                     </div>
                 </div>
-            <div>
-                <p>Prediction: {predictionOutput}</p>
-            </div>
+                <div>
+                    { predictionOutput ? (<>
+                        { predictionOutput[1] ? (<p>Your correct tone: {predictionOutput[0]}</p>)
+                        : (<p>Your incorrect tone: {predictionOutput[0]}</p>) 
+                        }
+                    </>) : (<p> Input a recording</p>)}
+                    
+                </div>
             </>
             ) : null}
             </main>
