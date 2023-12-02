@@ -4,6 +4,7 @@ import "/app/css/style.css";
 import { useState, useRef } from "react";
 import AudioRecorder from "./components/AudioRecorder";
 import SelectionBox from "./components/SelectionBox";
+import Header from "./components/Header";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -82,36 +83,20 @@ export default function Home() {
   const [predictionOutput, setPredictionOutput] = useState(0);
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-10">
+    // className="flex min-h-screen flex-col items-center bg-gray-10"
+    <main>
       <div style={{ color: "black" }}>
-        <h1 style={titleStyle}>*✧･ﾟ:* Tone-Me ✧･ﾟ: *✧</h1>
-        <p style={subtitleStyle}>
-          Your Personal Chinese Mandarin Tone & Pronunciation Assistant
-        </p>
-        <SelectionBox
-          tonestring={tonestring}
-          setTonestring={setTonestring}
-        ></SelectionBox>
-        <AudioRecorder
-          predictionOutput={predictionOutput}
-          setPredictionOutput={setPredictionOutput}
-        ></AudioRecorder>
-        {/* {!microphonePermission && (
-          <button onClick={handleMicrophonePermission}>
-            Grant Microphone Permission
-          </button>
-        )}
-        {microphonePermission && (
+        <Header />
+        <div className="relative w-screen mx-auto px-4 sm:px-6 bg-gray-200 transform -translate-y-1/2">
+          <SelectionBox
+            tonestring={tonestring}
+            setTonestring={setTonestring}
+          ></SelectionBox>
           <AudioRecorder
-            onRecordingComplete={(blob) => addAudioElement(blob)}
-            audioTrackConstraints={{
-              noiseSuppression: true,
-              echoCancellation: true,
-            }}
-            downloadOnSavePress={true}
-            downloadFileExtension="wav"
-          />
-        )} */}
+            predictionOutput={predictionOutput}
+            setPredictionOutput={setPredictionOutput}
+          ></AudioRecorder>
+        </div>
       </div>
     </main>
   );
