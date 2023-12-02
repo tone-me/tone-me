@@ -68,16 +68,21 @@ export default function Home() {
     <main>
       <div style={{ color: "black" }}>
         <Header />
-        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4 flex items-center justify-center">
-          <SelectionBox
-            tonestring={tonestring}
-            setTonestring={setTonestring}
-            setInputText={setInputText}
-          ></SelectionBox>
-          <AudioRecorder
-            predictionOutput={predictionOutput}
-            setPredictionOutput={setPredictionOutput}
-          ></AudioRecorder>
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4 flex flex-row items-center justify-center">
+          <div className="px-8">
+            <SelectionBox
+              tonestring={tonestring}
+              setTonestring={setTonestring}
+              setInputText={setInputText}
+            ></SelectionBox>
+          </div>
+
+          <div className="px-8">
+            <AudioRecorder
+              predictionOutput={predictionOutput}
+              setPredictionOutput={setPredictionOutput}
+            ></AudioRecorder>
+          </div>
         </div>
         <div className="w-screen flex items-center justify-center">
           <Table
