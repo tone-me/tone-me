@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-
+/* eslint-disable react/no-unescaped-entities */
 const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
     const onSubmit = async (e) => {
         e.preventDefault();

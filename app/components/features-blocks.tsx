@@ -1,4 +1,5 @@
 export default function FeaturesBlocks() {
+  /* eslint-disable react/no-unescaped-entities */
   return (
     <section className="relative">
 
