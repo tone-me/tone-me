@@ -1,17 +1,15 @@
 services:
-- type: web
+  - name: flask-backend
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: gunicorn -b 0.0.0.0:$PORT your_flask_app:app
 
-on:
-  push:
-    branches: ['main']
-
-jobs:
-  build: 
-    commands: 
-    - npm run dev
-    - yarn build
-cache:
-        paths:
-          - '.next/cache/**/*'
-          - 'node_modules/**/*'
-    appRoot: path/to/frontend
+  - name: nextjs-frontend
+    env: node
+    buildCommand: |
+      npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
