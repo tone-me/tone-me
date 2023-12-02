@@ -68,7 +68,7 @@ export default function Home() {
     <main>
       <div style={{ color: "black" }}>
         <Header />
-        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4">
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4 flex items-center justify-center">
           <SelectionBox
             tonestring={tonestring}
             setTonestring={setTonestring}
@@ -86,6 +86,8 @@ export default function Home() {
             inputText={inputText}
           />
         </div>
+        {tonestring}
+        {inputText}
       </div>
     </main>
   );
