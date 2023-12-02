@@ -83,33 +83,20 @@ export default function Home() {
   const [predictionOutput, setPredictionOutput] = useState(0);
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-10">
+    // className="flex min-h-screen flex-col items-center bg-gray-10"
+    <main>
       <div style={{ color: "black" }}>
         <Header />
-        <SelectionBox
-          tonestring={tonestring}
-          setTonestring={setTonestring}
-        ></SelectionBox>
-        <AudioRecorder
-          predictionOutput={predictionOutput}
-          setPredictionOutput={setPredictionOutput}
-        ></AudioRecorder>
-        {/* {!microphonePermission && (
-          <button onClick={handleMicrophonePermission}>
-            Grant Microphone Permission
-          </button>
-        )}
-        {microphonePermission && (
+        <div className="relative w-screen mx-auto px-4 sm:px-6 bg-gray-200 transform -translate-y-1/2">
+          <SelectionBox
+            tonestring={tonestring}
+            setTonestring={setTonestring}
+          ></SelectionBox>
           <AudioRecorder
-            onRecordingComplete={(blob) => addAudioElement(blob)}
-            audioTrackConstraints={{
-              noiseSuppression: true,
-              echoCancellation: true,
-            }}
-            downloadOnSavePress={true}
-            downloadFileExtension="wav"
-          />
-        )} */}
+            predictionOutput={predictionOutput}
+            setPredictionOutput={setPredictionOutput}
+          ></AudioRecorder>
+        </div>
       </div>
     </main>
   );

@@ -25,7 +25,7 @@ const fetchData = async (audioBlob, setPredictionOutput) => {
       console.error("Failed to process text:", error);
     }
   };
-const AudioRecorder = ( {predictionOutput, setPredictionOutput} ) => {
+const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
     const mimeType = "audio/wav";
     const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef(null);
