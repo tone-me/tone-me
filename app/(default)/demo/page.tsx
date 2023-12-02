@@ -4,6 +4,7 @@ import "/app/css/style.css";
 import { useState, useRef } from "react";
 import AudioRecorder from "./components/AudioRecorder";
 import SelectionBox from "./components/SelectionBox";
+import Header from "./components/Header";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -84,10 +85,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
       <div style={{ color: "black" }}>
-        <h1 style={titleStyle}>*✧･ﾟ:* Tone-Me ✧･ﾟ: *✧</h1>
-        <p style={subtitleStyle}>
-          Your Personal Chinese Mandarin Tone & Pronunciation Assistant
-        </p>
+        <Header />
         <SelectionBox
           tonestring={tonestring}
           setTonestring={setTonestring}
