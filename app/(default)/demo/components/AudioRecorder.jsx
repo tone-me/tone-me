@@ -90,6 +90,7 @@ const AudioRecorder = () => {
            setAudioChunks([]);
         };
     };
+    getMicrophonePermission()
     return (
         <div>
             <main>
