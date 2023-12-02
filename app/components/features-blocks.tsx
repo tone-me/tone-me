@@ -64,8 +64,8 @@ export default function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Whisper + stable-ts</h4>
-              <p className="text-gray-600 text-center">A framework to timestamp individual syllables in a sentence audio (applied to aishell-3 to generate training data).</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">&quot;Whisper + stable-ts&quot;</h4>
+              <p className="text-gray-600 text-center">&quot;A framework to timestamp individual syllables in a sentence audio (applied to aishell-3 to generate training data).&quot;</p>
             </div>
 
           </div>
