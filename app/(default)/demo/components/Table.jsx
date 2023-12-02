@@ -13,7 +13,8 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
         };
       });
       
-  const finalData = React.useMemo( () => data, [])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const finalData = React.useMemo( () => data, []);
   const finalColumnDef = React.useMemo( () => columnDef, [])
     
   const tableInstance = useReactTable({
