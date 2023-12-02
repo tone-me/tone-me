@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
 
-const SelectionBox = () => {
-    const [tonestring, setTonestring] = useState(null);
-
+const SelectionBox = ( {tonestring, setTonestring} ) => {
+    
     const handleChange = async (event) => {
         try {
             const response = await fetch("http://127.0.0.1:5000/fetch_text", {

@@ -25,7 +25,7 @@ const fetchData = async (audioBlob, setPredictionOutput) => {
       console.error("Failed to process text:", error);
     }
   };
-const AudioRecorder = () => {
+const AudioRecorder = ( {predictionOutput, setPredictionOutput} ) => {
     const mimeType = "audio/wav";
     const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef(null);
@@ -33,8 +33,6 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
-    const [predictionOutput, setPredictionOutput] = useState(null);
-
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
             try {

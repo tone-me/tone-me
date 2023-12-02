@@ -1,5 +1,4 @@
 "use client";
-import RecordingView from "./components/RecordingView";
 import "app/globals.css";
 import "/app/css/style.css";
 import { useState, useRef } from "react";
@@ -79,6 +78,8 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   // fetchData();
+  const [tonestring, setTonestring] = useState(null);
+  const [predictionOutput, setPredictionOutput] = useState(0);
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-10">
@@ -87,8 +88,14 @@ export default function Home() {
         <p style={subtitleStyle}>
           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
         </p>
-	<SelectionBox></SelectionBox>
-        <AudioRecorder></AudioRecorder>
+        <SelectionBox
+          tonestring={tonestring}
+          setTonestring={setTonestring}
+        ></SelectionBox>
+        <AudioRecorder
+          predictionOutput={predictionOutput}
+          setPredictionOutput={setPredictionOutput}
+        ></AudioRecorder>
         {/* {!microphonePermission && (
           <button onClick={handleMicrophonePermission}>
             Grant Microphone Permission
