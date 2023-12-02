@@ -68,7 +68,7 @@ export default function Home() {
     <main>
       <div style={{ color: "black" }}>
         <Header />
-        <div className="relative w-screen mx-auto px-4 sm:px-6 bg-gray-200 transform -translate-y-1/2">
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/2">
           <SelectionBox
             tonestring={tonestring}
             setTonestring={setTonestring}
@@ -78,7 +78,7 @@ export default function Home() {
             setPredictionOutput={setPredictionOutput}
           ></AudioRecorder>
         </div>
-        <div className="w-9/12">
+        <div className="w-screen flex items-center justify-center">
           <Table
             tonestring={tonestring}
             predictionOutput={predictionOutput}

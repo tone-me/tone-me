@@ -1,23 +1,25 @@
 import React from "react";
 import "./table.css"
-import { useReactTable, flexRender } from "@tanstack/react-table";
+import { useReactTable, flexRender, getCoreRowModel } from "@tanstack/react-table";
 import { columnDef } from "./columns";
 
 
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
-  let dataJSON = inputText.split(' ').map((word, index) => {
+  let data = inputText.split(' ').map((word, index) => {
         return {
           word: word,
           pronunciation: predictionOutput[index] || {} // Use empty object if out of bounds
         };
       });
-
-  dataJSON = JSON.stringify(dataJSON, null, 2);
-
-
+      
+  const finalData = React.useMemo( () => data, [])
+  const finalColumnDef = React.useMemo( () => columnDef, [])
+    
   const tableInstance = useReactTable({
-    columns: columnDef
+    columns: finalColumnDef,
+    data: finalData,
+    getCoreRowModel: getCoreRowModel()
   })
   return (
     <>
@@ -42,6 +44,24 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             );
           })}
         </thead>
+        <tbody>
+          {tableInstance.getRowModel().rows.map((rowEl) => {
+            return (
+              <tr key={rowEl.id}>
+                {rowEl.getVisibleCells().map((cellEl) => {
+                  return (
+                    <td key={cellEl.id}>
+                      {flexRender(
+                        cellEl.column.columnDef.cell,
+                        cellEl.getContext()
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+          </tbody>
       </table>
     
     </>
