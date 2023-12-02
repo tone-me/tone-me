@@ -1,6 +1,10 @@
 "use client";
+import RecordingView from "./components/RecordingView";
 import "app/globals.css";
+import "/app/css/style.css";
+import { useState, useRef } from "react";
 import AudioRecorder from "./components/AudioRecorder";
+import SelectionBox from "./components/SelectionBox";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -18,7 +22,7 @@ const titleStyle = {
   marginTop: "30px",
   marginBottom: "15px",
   fontSize: "60px",
-  color: "var(--orange)",
+  color: "#bc6c25",
   fontFamily: "Trebuchet MS",
 };
 
@@ -26,37 +30,82 @@ const subtitleStyle = {
   marginTop: "12px",
   fontSize: "30px",
   fontFamily: "Trebuchet MS",
-  color: "var(--light-brown)",
+  color: "#d4a373",
+};
+
+const fetchData = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: "Hello World" }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error("Failed to process text:", error);
+  }
 };
 
 export default function Home() {
+  // const [microphonePermission, setMicrophonePermission] = useState(false);
+
+  // const handleMicrophonePermission = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     // If the promise resolves, the user granted permission
+  //     setMicrophonePermission(true);
+  //     stream.getTracks().forEach((track) => track.stop()); // Stop the stream
+  //   } catch (error) {
+  //     console.error("Error accessing microphone:", error);
+  //     setMicrophonePermission(false);
+  //   }
+  // };
+
+  // const addAudioElement = (blob: any) => {
+  //   console.log("complete");
+  //   const url = URL.createObjectURL(blob);
+  //   const audio = document.createElement("audio");
+  //   audio.src = url;
+  //   audio.controls = true;
+  //   document.body.appendChild(audio);
+  // };
+  // fetchData();
+
   return (
-    <main className="flex min-h-screen flex-col items-center bg-gray-100">
-      <div className="text-black">
-        {" "}
-        {/* Use Tailwind CSS text color classes */}
-        <h1 className="mt-8 mb-4 text-6xl font-bold" style={titleStyle}>
-          *✧･ﾟ:* Tone-Me ✧･ﾟ: *✧
-        </h1>
-        <p className="mt-2 text-2xl" style={subtitleStyle}>
+    <main className="flex min-h-screen flex-col items-center bg-gray-10">
+      <div style={{ color: "black" }}>
+        <h1 style={titleStyle}>*✧･ﾟ:* Tone-Me ✧･ﾟ: *✧</h1>
+        <p style={subtitleStyle}>
           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
         </p>
-        <AudioRecorder />
+	<SelectionBox></SelectionBox>
+        <AudioRecorder></AudioRecorder>
+        {/* {!microphonePermission && (
+          <button onClick={handleMicrophonePermission}>
+            Grant Microphone Permission
+          </button>
+        )}
+        {microphonePermission && (
+          <AudioRecorder
+            onRecordingComplete={(blob) => addAudioElement(blob)}
+            audioTrackConstraints={{
+              noiseSuppression: true,
+              echoCancellation: true,
+            }}
+            downloadOnSavePress={true}
+            downloadFileExtension="wav"
+          />
+        )} */}
       </div>
     </main>
   );
 }
-
-// export default function Home() {
-//   return (
-//     <main className="flex min-h-screen flex-col items-center bg-gray-10">
-//       <div style={{ color: "black" }}>
-//         <h1 style={titleStyle}>*✧･ﾟ:* Tone-Me ✧･ﾟ: *✧</h1>
-//         <p style={subtitleStyle}>
-//           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
-//         </p>
-//         <AudioRecorder></AudioRecorder>
-//       </div>
-//     </main>
-//   );
-// }
