@@ -5,6 +5,7 @@ import { useState, useRef } from "react";
 import AudioRecorder from "./components/AudioRecorder";
 import SelectionBox from "./components/SelectionBox";
 import Header from "./components/Header";
+import Table from "./components/Table";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -33,28 +34,6 @@ const subtitleStyle = {
   color: "#d4a373",
 };
 
-const fetchData = async () => {
-  try {
-    const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text: "Hello World" }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error("Failed to process text:", error);
-  }
-};
-
 export default function Home() {
   // const [microphonePermission, setMicrophonePermission] = useState(false);
 
@@ -79,9 +58,11 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   // fetchData();
-  const [tonestring, setTonestring] = useState(null);
-  const [predictionOutput, setPredictionOutput] = useState(0);
-
+  const [tonestring, setTonestring] = useState("2");
+  const [inputText, setInputText] = useState(String.fromCodePoint(0x9593));
+  const [predictionOutput, setPredictionOutput] = useState([
+    { prediction: 1, correctness: 0, expected: 3 },
+  ]);
   return (
     // className="flex min-h-screen flex-col items-center bg-gray-10"
     <main>
@@ -96,6 +77,13 @@ export default function Home() {
             predictionOutput={predictionOutput}
             setPredictionOutput={setPredictionOutput}
           ></AudioRecorder>
+        </div>
+        <div className="w-9/12">
+          <Table
+            tonestring={tonestring}
+            predictionOutput={predictionOutput}
+            inputText={inputText}
+          />
         </div>
       </div>
     </main>

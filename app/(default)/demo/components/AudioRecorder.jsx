@@ -17,7 +17,9 @@ const fetchData = async (audioBlob, setPredictionOutput) => {
       }
   
       const data = await response.json();
-      let preds = [data['prediction'], data['correctness']]
+      let preds = [{"prediction": data.prediction, 
+      "correctness": data.correctness,
+        "expected": data.expected}]
       setPredictionOutput(preds)
     
       
@@ -151,8 +153,8 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
                 </div>
                 <div>
                     { predictionOutput ? (<>
-                        { predictionOutput[1] ? (<p>Your correct tone: {predictionOutput[0]}</p>)
-                        : (<p>Your incorrect tone: {predictionOutput[0]}</p>) 
+                        { predictionOutput[0]["correctness"] ? (<p>Your correct tone: {predictionOutput[0]["prediction"]}</p>)
+                        : (<p>Your incorrect tone: {predictionOutput[0]["prediction"]}</p>) 
                         }
                     </>) : (<p> Input a recording</p>)}
                     
