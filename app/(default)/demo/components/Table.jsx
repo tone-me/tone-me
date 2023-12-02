@@ -6,7 +6,7 @@ import { columnDef } from "./columns";
 
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
-  let data = inputText.split(' ').map((word, index) => {
+  let data = inputText.split(" ").map((word, index) => {
         return {
           word: word,
           pronunciation: predictionOutput[index] || {} // Use empty object if out of bounds

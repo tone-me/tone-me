@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import { useState, useRef, useEffect } from 'react'
-import { Transition } from '@headlessui/react'
-import Image from 'next/image'
-import FeaturesBg from '/public/images/features-bg.png'
-import Features1 from '/public/images/features-1.png'
+import { useState, useRef, useEffect } from "react"
+import { Transition } from "@headlessui/react"
+import Image from "next/image"
+import FeaturesBg from "/public/images/features-bg.png"
+import Features1 from "/public/images/features-1.png"
 
 export default function Features() {
   
@@ -48,7 +48,7 @@ export default function Features() {
               {/* Tabs buttons */}
               <div className="mb-8 md:mb-0">
                 <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? "bg-white shadow-md border-gray-200 hover:shadow-lg" : "bg-gray-200 border-transparent"}`}
                   href="#0"
                   onClick={(e) => { e.preventDefault(); setTab(1); }}
                 >
@@ -63,7 +63,7 @@ export default function Features() {
                   </div>
                 </a>
                 <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? "bg-white shadow-md border-gray-200 hover:shadow-lg" : "bg-gray-200 border-transparent"}`}
                   href="#0"
                   onClick={(e) => { e.preventDefault(); setTab(2); }}
                 >
@@ -78,7 +78,7 @@ export default function Features() {
                   </div>
                 </a>
                 <a
-                  className={`flex items-center justify-between text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
+                  className={`flex items-center justify-between text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? "bg-white shadow-md border-gray-200 hover:shadow-lg" : "bg-gray-200 border-transparent"}`}
                   href="#0"
                   onClick={(e) => { e.preventDefault(); setTab(3); }}
                 >

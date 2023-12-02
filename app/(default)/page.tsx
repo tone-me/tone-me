@@ -1,7 +1,7 @@
-// 'use client'
+// "use client"
 // import RecordingView from "./components/WorkingRecordingView"
-// import './globals.css'
-// import {useState} from 'react'
+// import "./globals.css"
+// import {useState} from "react"
 
 // // dependencies: {
 // //   "@testing-library/jest-dom": "^5.17.0",

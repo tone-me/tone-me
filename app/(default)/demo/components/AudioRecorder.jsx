@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const fetchData = async (audioBlob, setPredictionOutput) => {
     try {
         const formData = new FormData();
-        formData.append('audio', audioBlob, 'audio.wav');
+        formData.append("audio", audioBlob, "audio.wav");
         const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
         method: "POST",
         mode: "cors",
@@ -57,8 +57,8 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
         //create new Media recorder instance using the stream
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioContext.createMediaStreamSource(stream);
-        // console.log('Sample Rate:', audioContext.sampleRate);
-        // console.log('Number of Channels:', source.channelCount);
+        // console.log("Sample Rate:", audioContext.sampleRate);
+        // console.log("Number of Channels:", source.channelCount);
 
         const media = new MediaRecorder(stream, { type: mimeType });
         //set the MediaRecorder instance to the mediaRecorder ref
