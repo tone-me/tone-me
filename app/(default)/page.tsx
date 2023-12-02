@@ -37,22 +37,6 @@
 //   color: "#d4a373"
 // }
 
-// export default function Home() {
-//   return (
-//     <main className="flex min-h-screen flex-col items-center bg-gray-10">
-//       <div style={{color:"black"}}>
-//         <h1 style={titleStyle}>
-//           *✧･ﾟ:* Tone-Me ✧･ﾟ: *✧
-//           </h1>
-//         <p style={subtitleStyle}>
-//           Your Personal Chinese Mandarin Tone & Pronunciation Assistant
-//         </p>
-//         <RecordingView/>
-//       </div>
-//     </main>
-//   )
-//   }
-
 export const metadata = {
   title: "Home - Tone.me",
   description: "About Tone.me",
