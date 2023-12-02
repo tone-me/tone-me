@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-const fetchData = async (audioBlob) => {
+const fetchData = async (audioBlob, setPredictionOutput) => {
     try {
         const formData = new FormData();
         formData.append('audio', audioBlob, 'audio.wav');
@@ -15,7 +15,11 @@ const fetchData = async (audioBlob) => {
       }
   
       const data = await response.json();
-      console.log(data);
+      let preds = data['prediction']
+      console.log(preds);
+      setPredictionOutput(preds)
+    
+      
     } catch (error) {
       console.error("Failed to process text:", error);
     }
@@ -28,6 +32,7 @@ const AudioRecorder = () => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
+    const [predictionOutput, setPredictionOutput] = useState(null);
 
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
@@ -78,7 +83,7 @@ const AudioRecorder = () => {
            
           //creates a playable URL from the blob file.
              // console.log(audioBlob);
-            fetchData(audioBlob)
+            fetchData(audioBlob, setPredictionOutput)
            const audioUrl = URL.createObjectURL(audioBlob);
            setAudio(audioUrl);
            setAudioChunks([]);
@@ -106,12 +111,17 @@ const AudioRecorder = () => {
                 ) : null}
             </div>
             {audio ? (
+                <>
             <div className="audio-container">
                 <audio src={audio} controls></audio>
                 <a download href={audio}>
                     Download Recording
                 </a>
             </div>
+            <div>
+                <p>Prediction: {predictionOutput}</p>
+            </div>
+            </>
             ) : null}
             </main>
         </div>
