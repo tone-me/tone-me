@@ -20,7 +20,6 @@ export default function Header() {
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
-
   return (
     <header
       className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
@@ -45,6 +44,14 @@ export default function Header() {
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
                 <Link
+                  href="http://localhost:3000"
+                  className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="https://github.com/tone-me/tone-me"
                   target="_blank"
                   className="font-medium text-gray-600 hover:text-gray-900 px-5 py-3 flex items-center transition duration-150 ease-in-out"
@@ -54,7 +61,7 @@ export default function Header() {
               </li>
               <li>
                 <Link
-                  href="/demo"
+                  href="http://localhost:3000/demo"
                   className="btn-sm text-gray-200 bg-gray-900 hover:bg-gray-800 ml-3"
                 >
                   <span>Demo</span>
