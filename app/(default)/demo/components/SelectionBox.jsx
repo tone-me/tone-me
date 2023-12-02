@@ -55,7 +55,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
             <h2>Specify Tones</h2>
             <main>
                 <input style={{ border: "solid" }} type="tones" id="tones" name="tones" onChange={handleChange}/>
-        <p>You"ve specified: {tonestring}</p>
+        <p>&quot;You've specified:{tonestring}&quot;</p>
             </main>
         </div>
         </>
