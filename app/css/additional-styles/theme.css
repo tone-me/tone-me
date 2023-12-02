@@ -72,7 +72,7 @@ html {
     animation: pulseMiniLoop 6000ms linear infinite;                                   
 }
 .pulse-1 {
-    animation-delay: -3000ms;
+    animation-delay: -3010ms;
 }
 .pulse-2 {
     animation-delay: -6000ms;
