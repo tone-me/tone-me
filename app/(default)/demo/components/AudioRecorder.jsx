@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import "tailwindcss/tailwind.css";
 import { useEffect } from "react";
 
-const fetchData = async (audioBlob, setPredictionOutput) => {
+const fetchData = async (audioBlob, setAudioPath) => {
     try {
         const formData = new FormData();
         formData.append("audio", audioBlob, "audio.wav");
@@ -17,15 +17,34 @@ const fetchData = async (audioBlob, setPredictionOutput) => {
       }
   
       const data = await response.json();
-      let preds = data.result
-      setPredictionOutput(preds)
-    
-      
+      setAudioPath(data.path)
     } catch (error) {
       console.error("Failed to process text:", error);
     }
   };
-const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBoundaries}) => {
+
+const fetchPreds = async (boundaries, setPredictionOutput) => {
+    
+    try {
+        const response = await fetch("http://127.0.0.1:5000/predict_audio", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ breakpoints: boundaries }),
+        });
+        const data = await response.json();
+        let preds = data.result;
+        setPredictionOutput(preds);
+        console.log(preds);
+
+    } catch (error) {
+        console.error("Failed to predict audio:", error);
+    }
+}
+
+const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBoundaries,  audioPath, setAudioPath}) => {
     const mimeType = "audio/wav";
     const [permission, setPermission] = useState(false);
     const mediaRecorder = useRef(null);
@@ -40,13 +59,11 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
     useEffect(() => {
         // Set the default playback rate to 0.5x when the component mounts
         if (audioRef.current) {
-            console.log("did this")
           audioRef.current.playbackRate = 0.5;
         }
       }, []);
 
       useEffect( () => {
-        console.log("resetting boundaries");
         setBoundaries([])
       }
         ,[audio]
@@ -73,7 +90,13 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
         {
             let curTime = audioRef.current.currentTime
             setBoundaries(boundaries.concat([curTime]))
-            console.log(curTime);
+        }
+    }
+
+    const deleteTime = () => {
+        if (boundaries.length >= 1)
+        {
+            setBoundaries(boundaries.slice(0, boundaries.length-1))
         }
     }
     const handleSpeedChange = (newSpeed) => {
@@ -85,8 +108,6 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
         //create new Media recorder instance using the stream
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const source = audioContext.createMediaStreamSource(stream);
-        // console.log("Sample Rate:", audioContext.sampleRate);
-        // console.log("Number of Channels:", source.channelCount);
 
         const media = new MediaRecorder(stream, { type: mimeType });
         //set the MediaRecorder instance to the mediaRecorder ref
@@ -111,8 +132,7 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
            const audioBlob = new Blob(audioChunks, { type: mimeType });
            
           //creates a playable URL from the blob file.
-             // console.log(audioBlob);
-            fetchData(audioBlob, setPredictionOutput)
+            fetchData(audioBlob, setAudioPath)
            const audioUrl = URL.createObjectURL(audioBlob);
            setAudio(audioUrl);
            setAudioChunks([]);
@@ -194,13 +214,20 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
                     </div>
                 </div>
                 <div>
-                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={ () => setMarkSyllables(true)}> 
+                    {boundaries.map( (elem) =><p>{elem}</p> )}
+                </div>
+                <div>
+                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={ () => setMarkSyllables(true)}> 
                     Start
                 </button>
-                <button className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={captureTime}>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={captureTime}>
                     Mark syllable
                 </button>
-                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={ () => {setMarkSyllables(false); console.log(boundaries)}}> 
+                <button className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={deleteTime}>
+                    Delete last
+                </button>
+                <p>{audioRef.duration}</p>
+                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={ () => {setMarkSyllables(false); setBoundaries(boundaries.concat([audioRef.current.duration])); fetchPreds(boundaries.concat([audioRef.current.duration]), setPredictionOutput)}}> 
                     End
                 </button>
                 </div>

@@ -23,6 +23,7 @@ def process_audio():
         audio_file = request.files.get("audio")
         audio_data = audio_file.read()
 
+        global path_to_audio
         # print(audio_data)
         script_directory = os.path.dirname(os.path.realpath(__file__))
         path_to_audio = os.path.join(script_directory, "recording.wav")
@@ -35,14 +36,35 @@ def process_audio():
         with open(path_to_audio, "wb") as f:
             f.write(audio_data)
         #print(path_to_audio)
-        preds = evaluate_model(path_to_audio)
-        print(preds, tones)
-        return_list = []
-        for pred, tone in zip(preds, tones):
-            correctness = int(pred) == int(tone)
-            return_list.append({"prediction": int(pred), "correctness": correctness, "expected": int(tone)})
-        # print(return_list)
-        return jsonify({"result": return_list}), 200
+
+        return jsonify({"path": path_to_audio}), 200
+
+@app.route("/predict_audio", methods=["POST"])
+def predict_audio():
+    if not request.json or "breakpoints" not in request.json: # Check if text is sent via JSON
+        return jsonify({"error": "No breakpoints provided"}), 400
+    breakpoints = request.json["breakpoints"]
+    print(breakpoints)
+    # print(return_list)
+    breakpoints.insert(0, 0)
+    audio = AudioSegment.from_file(path_to_audio)
+    predicted_labels = []
+    for i in range(len(breakpoints)-1):
+        start_time = breakpoints[i]*1000
+        end_time = breakpoints[i+1]*1000
+        cut_audio = audio[start_time:end_time]
+        syllable_path = f"./syllables/chunk{i}.wav"
+        with open(syllable_path, "w") as f:
+             f.write("")
+        cut_audio.export(syllable_path, format="wav")
+        predicted_labels.append(evaluate_model(syllable_path))
+
+    return_list = []
+    for pred, tone in zip(predicted_labels, tones):
+        correctness = int(pred) == int(tone)
+        return_list.append({"prediction": int(pred), "correctness": correctness, "expected": int(tone)})
+
+    return jsonify({"result": return_list}), 200
 
 def parse(string):
     res = []
@@ -87,27 +109,16 @@ def process_text():
 def evaluate_model(path_to_audio):
     global model 
     global feature_extractor
+
+    wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
+    input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
+    os.environ["TORCH_USE_NNPACK"] = "0"
+    logits = model(input_values).logits
+    del os.environ["TORCH_USE_NNPACK"]
     
-    audio = AudioSegment.from_file(path_to_audio)
-    chunks = split_on_silence(audio, min_silence_len=100, silence_thresh=-30)
-    predicted_labels = []
-    for i, chunk in enumerate(chunks):
-        # script_directory = os.path.dirname(os.path.realpath(__file__))
-        # path_to_cur_audio = os.path.join(script_directory, f"")
-        # os.makedirs(os.path.dirname(path_to_cur_audio), exist_ok=True)
-        with open(f"./syllables/chunk{i}.wav", "w") as f:
-             f.write("")
-        
-        chunk.export(f"./syllables/chunk{i}.wav", format = "wav")
-        
-        wav_chunk, rate = librosa.load(f"./syllables/chunk{i}.wav", sr=16000)
-        input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
-        os.environ["TORCH_USE_NNPACK"] = "0"
-        logits = model(input_values).logits
-        del os.environ["TORCH_USE_NNPACK"]
-        predicted_label = torch.argmax(logits, dim=-1).item()
-        predicted_labels.append(predicted_label)
-    return predicted_labels
+    return torch.argmax(logits, dim=-1).item()
+
+    
     
 
 if __name__ == "__main__":
@@ -118,6 +129,7 @@ if __name__ == "__main__":
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     sample_audio, sample_rate = librosa.load(path_to_audio)
     text = ""
+    path_to_audio = ""
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)

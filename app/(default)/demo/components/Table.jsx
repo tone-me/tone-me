@@ -1,84 +1,47 @@
 import React from "react";
 import "./table.css"
 import "app/globals.css";
-import { useReactTable, flexRender, getCoreRowModel } from "@tanstack/react-table";
-import { columnDef } from "./columns";
-
-
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.map((word, index) => {
         return {
           word: word,
-          pronunciation: predictionOutput[index]
+          pronunciation: predictionOutput[index],
+          id: index
         };
       });
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const finalColumnDef = React.useMemo( () => columnDef, [])
-    
-  const tableInstance = useReactTable({
-    columns: finalColumnDef,
-    data: data,
-    getCoreRowModel: getCoreRowModel()
-  })
-
-  //console.log(data);
+  console.log(data)
   return (
     <>
-      <table>
-        <thead>
-          {tableInstance.getHeaderGroups().map((headerEl) => {
-            return (
-              <tr key={headerEl.id}>
-                {headerEl.headers.map((columnEl) => {
-                  return (
-                    <th key={columnEl.id} colSpan={columnEl.colSpan}>
-                      {columnEl.isPlaceholder
-                        ? null
-                        : flexRender(
-                            columnEl.column.columnDef.header,
-                            columnEl.getContext()
-                          )}
-                    </th>
-                  );
-                })}
+        <table>
+          <thead>
+            <tr>
+              <th> Word </th>
+              <th> Pronunciation </th>
+              <th> Correct Pronunciation </th>
               </tr>
-            );
-          })}
-        </thead>
-        <tbody>
-          {tableInstance.getRowModel().rows.map((rowEl) => {
-            return (
-              <tr key={rowEl.id}>
-                {rowEl.getVisibleCells().map((cellEl) => {
-                  //console.log(cellEl.id)
-                  // console.log(cellEl.getValue())
-                  return (
-                    <td key={cellEl.id}>
-                      {typeof cellEl.getValue() !== "string"  ? (
-                      <> 
-                        <p>Expected Tone: {cellEl.getValue()["expected"]}</p> 
-                        {cellEl.getValue()["correctness"] ? 
-                        (<p style={{ color: '#00D100' }}>Actual Tone:  {cellEl.getValue()["prediction"]} </p>) : 
-                        (<p style={{ color: '#ff0000' }}>Actual Tone: {cellEl.getValue()["prediction"]}</p>) }
-                      </>) :
-                      (
-                        // Render other columns as usual
-                        flexRender(
-                          cellEl.column.columnDef.cell,
-                          cellEl.getContext()
-                        )
-                      )}
-                    </td>
-                  );
-                })}
+          </thead>
+          <tbody>
+            {data.map( (row_dict, i) => { return (
+              <tr key={row_dict['id']}> 
+                <td>
+                  {row_dict["word"]}
+                </td>
+                <td>
+                  {<> 
+                      <p>Expected Tone: {row_dict["pronunciation"]["expected"]}</p> 
+                      {row_dict["pronunciation"]["correctness"] ? 
+                      (<p style={{ color: '#00D100' }}>Actual Tone:  {row_dict["pronunciation"]["prediction"]} </p>) : 
+                      (<p style={{ color: '#ff0000' }}>Actual Tone: {row_dict["pronunciation"]["prediction"]}</p>) }
+                      </>}
+                </td>
+                <td>
+                    Riddhi's stuff
+                </td>
               </tr>
-            );
-          })}
+            )})}
           </tbody>
-      </table>
-    
+        </table>
     </>
   )
 };
