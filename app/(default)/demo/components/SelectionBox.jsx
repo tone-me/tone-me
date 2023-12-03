@@ -4,9 +4,8 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
-        setInputText(formData.get("text-input"));
         setTonestring(formData.get("tone-input"));
-        // console.log(formData.get("text-input"))
+        console.log(formData.get("text-input"))
         try {
             const response = await fetch("http://127.0.0.1:5000/fetch_text", {
               method: "POST",
@@ -19,6 +18,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
             const data = await response.json() 
             // console.log(data.text)
             setInputText(data.text)
+            console.log(data.text)
           } catch (error) {
             console.error("Failed to process text:", error);
           }

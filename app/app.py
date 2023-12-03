@@ -8,7 +8,8 @@ import torch
 import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-from re import compile as _Re
+import pinyin_jyutping_sentence
+
 
 
 app = Flask(__name__)
@@ -56,6 +57,14 @@ _unicode_chr_splitter = _Re( '(?s)((?:[\ud800-\udbff][\udc00-\udfff])|.)' ).spli
 
 def split_unicode_chrs( text ):
   return [ chr for chr in _unicode_chr_splitter( text ) if chr]
+
+def extract_tones(text):
+	result = pinyin_jyutping_sentence.pinyin(text, tone_numbers=True)
+	ans = []
+	for letter in result:
+		if letter in ['1', '2', '3', '4', '5']:
+			ans.append(letter)
+	return ans
 
 @app.route("/fetch_text", methods=["POST"])
 def process_text():
