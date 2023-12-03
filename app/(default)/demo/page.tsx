@@ -83,7 +83,7 @@ export default function Home() {
             ></AudioRecorder>
           </div>
         </div>
-        <div className="w-screen flex items-center justify-center">
+        <div className="w-1/2 flex items-center justify-center">
           <Table
             tonestring={tonestring}
             predictionOutput={predictionOutput}

@@ -62,11 +62,12 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                         (<p style={{ color: '#ff0000' }}>Actual Tone: {cellEl.getValue()["prediction"]}</p>) }
                       </>) :
                       (
+                        <p > {cellEl.getValue()} </p>
                         // Render other columns as usual
-                        flexRender(
-                          cellEl.column.columnDef.cell,
-                          cellEl.getContext()
-                        )
+                        // flexRender(
+                        //   cellEl.column.columnDef.cell,
+                        //   cellEl.getContext()
+                        // )
                       )}
                     </td>
                   );
