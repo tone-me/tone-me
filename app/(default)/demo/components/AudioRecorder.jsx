@@ -193,7 +193,7 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
                         <audio ref={audioRef} src={audio} playbackRate="0.5" controls></audio>
                         
 
-                        <div className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <div className=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <a download href={audio} className="download-link">
                             Download Recording
                             </a>
