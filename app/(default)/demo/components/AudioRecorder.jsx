@@ -33,6 +33,17 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
     const [stream, setStream] = useState(null);
     const [audioChunks, setAudioChunks] = useState([]);
     const [audio, setAudio] = useState(null);
+    const audioRef = useRef(null);
+    const [speed, setSpeed] = useState(1.0);
+    const [markSyllables, setMarkSyllables] = useState(false);
+
+    useEffect(() => {
+        // Set the default playback rate to 0.5x when the component mounts
+        if (audioRef.current) {
+            console.log("did this")
+          audioRef.current.playbackRate = 0.5;
+        }
+      }, []);
     const getMicrophonePermission = async () => {
         if ("MediaRecorder" in window) {
             try {
@@ -50,6 +61,16 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
         }
     };
 
+    const captureTime = () => {
+        if (markSyllables)
+        {
+            console.log(audioRef.current.currentTime);
+        }
+    }
+    const handleSpeedChange = (newSpeed) => {
+        setSpeed(newSpeed);
+        audioRef.current.playbackRate = newSpeed;
+      };
     const startRecording = async () => {
         setRecordingStatus("recording");
         //create new Media recorder instance using the stream
@@ -140,15 +161,38 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
                 <>
                 <div className = "flex items-center justify-center">
                     <div className="audio-container">
-                        <audio src={audio} controls></audio>
+                        <audio ref={audioRef} src={audio} playbackRate="0.5" controls></audio>
                         
+
                         <div className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             <a download href={audio} className="download-link">
                             Download Recording
                             </a>
                         </div>
+
+                        <label>
+                        Speed:
+                        <select
+                            value={speed}
+                            onChange={(e) => handleSpeedChange(parseFloat(e.target.value))}
+                        >
+                            <option value={0.25}>0.25x</option>
+                            <option value={0.5}>0.5x</option>
+                            <option value={1.0}>1.0x</option>
+                            <option value={1.5}>1.5x</option>
+                        </select>
+                        </label>
                     </div>
                 </div>
+                <div>
+                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={ () => setMarkSyllables(true)}> 
+                    Start
+                </button>
+                <button className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={captureTime}>
+                    Mark syllable
+                </button>
+                </div>
+                
             </>
             ) : null}
             </main>
