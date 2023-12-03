@@ -8,9 +8,8 @@ import torch
 import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+from re import compile as _Re
 import pinyin_jyutping_sentence
-
-
 
 app = Flask(__name__)
 CORS(app)
@@ -38,8 +37,6 @@ def process_audio():
         #print(path_to_audio)
         preds = evaluate_model(path_to_audio)
         return_list = []
-        print(preds)
-        print(tones)
         for pred, tone in zip(preds, tones):
             correctness = int(pred) == int(tone)
             return_list.append({"prediction": pred, "correctness": correctness, "expected": tone})
@@ -72,8 +69,6 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         global text
-        text = request.json["text"]
-        response = jsonify({"text": "Successfully handled"})
         global tones 
         tones = parse(request.json["tones"])
         text = split_unicode_chrs(request.json["text"])
@@ -88,8 +83,15 @@ def evaluate_model(path_to_audio):
     chunks = split_on_silence(audio, min_silence_len=150, silence_thresh=-30)
     predicted_labels = []
     for i, chunk in enumerate(chunks):
-        chunk.export(f".//syllables/chunk{i}.wav", format = "wav")
-        wav_chunk, rate = librosa.load(f".//syllables/chunk{i}.wav", sr=16000)
+        script_directory = os.path.dirname(os.path.realpath(__file__))
+        # path_to_cur_audio = os.path.join(script_directory, f"")
+        # os.makedirs(os.path.dirname(path_to_cur_audio), exist_ok=True)
+        with open(f"./syllables/chunk{i}.wav", "w") as f:
+             f.write("")
+        
+        chunk.export(f"./syllables/chunk{i}.wav", format = "wav")
+        
+        wav_chunk, rate = librosa.load(f"./syllables/chunk{i}.wav", sr=16000)
         input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
         os.environ["TORCH_USE_NNPACK"] = "0"
         logits = model(input_values).logits

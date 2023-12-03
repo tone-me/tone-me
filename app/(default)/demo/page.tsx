@@ -34,6 +34,15 @@ const subtitleStyle = {
   color: "#d4a373",
 };
 
+function arrayEquals(a: string[], b: string[]) {
+  return (
+    Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.length === b.length &&
+    a.every((val, index) => val === b[index])
+  );
+}
+
 export default function Home() {
   // const [microphonePermission, setMicrophonePermission] = useState(false);
 
@@ -72,7 +81,7 @@ export default function Home() {
       expected: 2,
     },
   ]);
-
+  let old_tones = predictionOutput.map((elem) => elem["expected"].toString());
   return (
     <main>
       <div>
@@ -93,7 +102,7 @@ export default function Home() {
             ></AudioRecorder>
           </div>
         </div>
-        {predictionOutput.length == tonestring.split(" ").length && (
+        {arrayEquals(old_tones, tonestring.split(" ")) && (
           <div className="w-screen flex items-center justify-center">
             <Table
               tonestring={tonestring}
