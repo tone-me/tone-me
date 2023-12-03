@@ -5,6 +5,9 @@ import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import FeaturesBg from "/public/images/features-bg.png";
 import Features1 from "/public/images/features-1.png";
+import Features1new from "/public/images/1.png";
+import Features2new from "/public/images/2.png";
+import Features3new from "/public/images/3.png";
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
@@ -84,7 +87,10 @@ export default function Features() {
                       viewBox="0 0 12 12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
+                      <path
+                        d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"
+                        fillRule="nonzero"
+                      />
                     </svg>
                   </div>
                 </a>
@@ -115,10 +121,7 @@ export default function Features() {
                       viewBox="0 0 12 12"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path
-                        d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z"
-                        fillRule="nonzero"
-                      />
+                      <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
                     </svg>
                   </div>
                 </a>
@@ -185,7 +188,7 @@ export default function Features() {
                     <div className="relative inline-flex flex-col">
                       <Image
                         className="md:max-w-none mx-auto rounded"
-                        src={Features1}
+                        src={Features1new}
                         width={500}
                         height="462"
                         alt="Features bg"
@@ -209,7 +212,7 @@ export default function Features() {
                     <div className="relative inline-flex flex-col">
                       <Image
                         className="md:max-w-none mx-auto rounded"
-                        src={FeaturesBg}
+                        src={Features2new}
                         width={500}
                         height="462"
                         alt="Features bg"
@@ -233,7 +236,7 @@ export default function Features() {
                     <div className="relative inline-flex flex-col">
                       <Image
                         className="md:max-w-none mx-auto rounded"
-                        src={FeaturesBg}
+                        src={Features3new}
                         width={500}
                         height="462"
                         alt="Features bg"
