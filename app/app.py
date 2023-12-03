@@ -36,10 +36,12 @@ def process_audio():
             f.write(audio_data)
         #print(path_to_audio)
         preds = evaluate_model(path_to_audio)
+        # print(preds, tones)
         return_list = []
         for pred, tone in zip(preds, tones):
             correctness = int(pred) == int(tone)
             return_list.append({"prediction": pred, "correctness": correctness, "expected": tone})
+        print(return_list)
         return jsonify({"result": return_list}), 200
 
 def parse(string):
@@ -71,6 +73,7 @@ def process_text():
         global text
         global tones 
         tones = parse(request.json["tones"])
+        # tones = extract_tones(request.json["text"])
         text = split_unicode_chrs(request.json["text"])
         response = jsonify({"text": text})
         return response
@@ -80,10 +83,12 @@ def evaluate_model(path_to_audio):
     global feature_extractor
     
     audio = AudioSegment.from_file(path_to_audio)
-    chunks = split_on_silence(audio, min_silence_len=150, silence_thresh=-30)
+    print(audio)
+    chunks = split_on_silence(audio, min_silence_len=50, silence_thresh=-30)
+    print(len(chunks)) 
     predicted_labels = []
     for i, chunk in enumerate(chunks):
-        script_directory = os.path.dirname(os.path.realpath(__file__))
+        # script_directory = os.path.dirname(os.path.realpath(__file__))
         # path_to_cur_audio = os.path.join(script_directory, f"")
         # os.makedirs(os.path.dirname(path_to_cur_audio), exist_ok=True)
         with open(f"./syllables/chunk{i}.wav", "w") as f:
