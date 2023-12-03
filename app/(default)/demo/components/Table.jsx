@@ -12,7 +12,6 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
           pronunciation: predictionOutput[index] || {} // Use empty object if out of bounds
         };
       });
-      
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const finalData = React.useMemo( () => data, []);
   const finalColumnDef = React.useMemo( () => columnDef, [])
