@@ -123,7 +123,7 @@ export default function Home() {
           get to a break between two syllables, press mark syllable. Once you're
           done, press Stop.
         </h1>
-        <div className="relative w-screen mx-auto px-4 sm:px-6 transform translate-y-1/4 flex flex-row items-center justify-center">
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/8 flex flex-row items-center justify-center">
           <div className="px-8">
             <SelectionBox
               tonestring={tonestring}
