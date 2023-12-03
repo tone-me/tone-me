@@ -8,7 +8,6 @@ import torch
 import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-from re import compile as _Re
 
 
 app = Flask(__name__)
@@ -37,17 +36,33 @@ def process_audio():
         #print(path_to_audio)
         preds = evaluate_model(path_to_audio)
         return_list = []
+<<<<<<< Updated upstream
+        for pred in preds:
+            correctness = int(pred) == int(text)
+            return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
+        return jsonify({"result": return_list}), 200
+
+=======
         print(preds)
         print(tones)
         for pred, tone in zip(preds, tones):
-            correctness = int(pred) == int(tones)
+            correctness = int(pred) == int(tone)
             return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
         return jsonify({"result": return_list}), 200
+
+def parse(string):
+    res = []
+    for char in string:
+        if char != ' ':
+            res.append(char)
+    return res
+            
 
 _unicode_chr_splitter = _Re( '(?s)((?:[\ud800-\udbff][\udc00-\udfff])|.)' ).split
 
 def split_unicode_chrs( text ):
   return [ chr for chr in _unicode_chr_splitter( text ) if chr]
+>>>>>>> Stashed changes
 
 @app.route("/fetch_text", methods=["POST"])
 def process_text():
@@ -55,10 +70,15 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         global text
+<<<<<<< Updated upstream
+        text = request.json["text"]
+        response = jsonify({"text": "Successfully handled"})
+=======
         global tones 
-        tones = request.json["tones"]
+        tones = parse(request.json["tones"])
         text = split_unicode_chrs(request.json["text"])
         response = jsonify({"text": text})
+>>>>>>> Stashed changes
         return response
         
 def evaluate_model(path_to_audio):
@@ -68,9 +88,9 @@ def evaluate_model(path_to_audio):
     audio = AudioSegment.from_file(path_to_audio)
     chunks = split_on_silence(audio, min_silence_len=150, silence_thresh=-30)
     predicted_labels = []
-    for chunk in chunks:
-        chunk.export(".//chunk.wav", format = "wav")
-        wav_chunk, rate = librosa.load(".//chunk.wav", sr=16000)
+    for i, chunk in enumerate(chunks):
+        chunk.export(f".//syllables/chunk{i}.wav", format = "wav")
+        wav_chunk, rate = librosa.load(f".//syllables/chunk{i}.wav", sr=16000)
         input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
         os.environ["TORCH_USE_NNPACK"] = "0"
         logits = model(input_values).logits
@@ -87,7 +107,7 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(os.path.realpath(__file__))
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     sample_audio, sample_rate = librosa.load(path_to_audio)
-    tones = ""
+    text = ""
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)
