@@ -28,6 +28,7 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
               <th> Word </th>
               <th> Pronunciation </th>
               <th> Correct Pronunciation </th>
+              <th>Your Pronunciation </th>
               </tr>
           </thead>
           <tbody>
@@ -50,6 +51,12 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                   ) : (
                     <button onClick={() => readText(row_dict['word'], setTextToRead)}>Listen</button>
                   )}
+                </td>
+                <td>
+                  {
+                      
+                      <audio src={"../../../syllables/chunk" + row_dict['id'].toString() + ".wav"} type="audio/wav" controls></audio>
+                  }
                 </td>
               </tr>
             )})}
