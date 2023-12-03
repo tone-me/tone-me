@@ -22,6 +22,8 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
     data: data,
     getCoreRowModel: getCoreRowModel()
   })
+
+  //console.log(data);
   return (
     <>
       <table>
@@ -51,7 +53,7 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
                   //console.log(cellEl.id)
-                  //console.log(cellEl.getValue())
+                  // console.log(cellEl.getValue())
                   return (
                     <td key={cellEl.id}>
                       {typeof cellEl.getValue() !== "string"  ? (

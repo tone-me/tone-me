@@ -34,13 +34,20 @@ const subtitleStyle = {
   color: "#d4a373",
 };
 
+interface Output {
+  prediction: number;
+  expected: number;
+  correctness: Boolean;
+}
+
 function arrayEquals(a: string[], b: string[]) {
-  return (
+  let ans =
     Array.isArray(a) &&
     Array.isArray(b) &&
     a.length === b.length &&
-    a.every((val, index) => val === b[index])
-  );
+    a.every((val, index) => val === b[index]);
+  console.log("we make it out of this function");
+  return ans;
 }
 
 export default function Home() {
@@ -67,21 +74,38 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   // fetchData();
-  const [tonestring, setTonestring] = useState("1 2");
-  const [inputText, setInputText] = useState(["中", "国"]);
-  const [predictionOutput, setPredictionOutput] = useState([
-    {
-      prediction: 1,
-      correctness: 2,
-      expected: 1,
-    },
-    {
-      prediction: 2,
-      correctness: 1,
-      expected: 2,
-    },
-  ]);
-  let old_tones = predictionOutput.map((elem) => elem["expected"].toString());
+  const [tonestring, setTonestring] = useState<string>("");
+  const [inputText, setInputText] = useState<string[]>([]);
+  const [predictionOutput, setPredictionOutput] = useState<Output[]>([]);
+
+  // const [tonestring, setTonestring] = useState("1 2");
+  // const [inputText, setInputText] = useState(["中", "国"]);
+  // const [predictionOutput, setPredictionOutput] = useState([
+  //   {
+  //     prediction: 1,
+  //     correctness: 1,
+  //     expected: 1,
+  //   },
+  //   {
+  //     prediction: 2,
+  //     correctness: 1,
+  //     expected: 2,
+  //   },
+  // ]);
+  let old_tones: string[] = ["1"];
+  if (predictionOutput.length) {
+    old_tones = predictionOutput.map((elem) => elem["expected"].toString());
+  }
+
+  console.log("rerendering");
+  console.log(
+    inputText.map((word, index) => {
+      return {
+        word: word,
+        pronunciation: predictionOutput[index],
+      };
+    })
+  );
   return (
     <main>
       <div>
