@@ -8,5 +8,10 @@ export const columnDef = [
         id: 2,
         accessorKey: "pronunciation",
         header: "Pronunciation Output"
+    },
+    {
+        id: 3,
+        accessorKey: "correct_pron",
+        header: "Correct Pronunciation"
     }
 ]
