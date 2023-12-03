@@ -1,7 +1,7 @@
 # Tone.me
 Tone.me is a platform built at MIT aimed at improving Mandarin pronunciation.
 <br>
-Developed by Chris Ge, Daria Kryvosheieva, Anshul Gupta, Riddhi Bhagwat, & Kat Guo
+Developed by Chris Ge, Daria Kryvosheieva, Anshul Gupta, Riddhi Bhagwat, & Katherine Guo
 
 
 For the predictions to work properly, you'll have to install ffmpeg (brew install ffmpeg on mac)
