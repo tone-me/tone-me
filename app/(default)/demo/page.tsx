@@ -74,8 +74,8 @@ export default function Home() {
   // };
   // fetchData();
 
-  const [tonestring, setTonestring] = useState<string[]>([""]);
-  const [inputText, setInputText] = useState<string[]>([""]);
+  const [tonestring, setTonestring] = useState<string[]>([]);
+  const [inputText, setInputText] = useState<string[]>([]);
   const [predictionOutput, setPredictionOutput] = useState<Output[]>([]);
   // const [tonestring, setTonestring] = useState<string[]>(["1"]);
   // const [inputText, setInputText] = useState<string[]>(["中"]);
@@ -121,7 +121,17 @@ export default function Home() {
     <main>
       <div>
         <Header />
-        <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4 flex flex-row items-center justify-center">
+        <h1 className="prose transform -translate-y-1/2 text-xl mx-2">
+          For the below text, first, submit the Chinese sentence or phrase you
+          want to say on the left. Then record yourself saying that using the
+          microphone on the right. <br></br>
+          <br></br>Afterwards, you have to manually indicate where the syllable
+          breaks in your audio are. Press the blue start button that will show
+          up. Play the audio (you can adjust playback speed), and every time you
+          get to a break between two syllables, press mark syllable. Once you're
+          done, press End
+        </h1>
+        <div className="relative w-screen mx-auto px-4 sm:px-6 transform translate-y-1/4 flex flex-row items-center justify-center">
           <div className="px-8">
             <SelectionBox
               tonestring={tonestring}
