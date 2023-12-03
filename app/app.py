@@ -37,11 +37,6 @@ def process_audio():
         #print(path_to_audio)
         preds = evaluate_model(path_to_audio)
         return_list = []
-        for pred in preds:
-            correctness = int(pred) == int(text)
-            return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
-        return jsonify({"result": return_list}), 200
-
         print(preds)
         print(tones)
         for pred, tone in zip(preds, tones):
