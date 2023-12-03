@@ -4,8 +4,7 @@ import "app/globals.css";
 import { useState } from 'react';
 /* eslint-disable react/no-unescaped-entities */
 
-// const [textToRead, setTextToRead] = useState('');
-const readText = (text) => {
+const readText = (text, setTextToRead) => {
   setTextToRead(text);
   const speech = new SpeechSynthesisUtterance();
   speech.text = text;
@@ -13,6 +12,7 @@ const readText = (text) => {
 };
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
+  const [textToRead, setTextToRead] = useState('');
   let data = inputText.map((word, index) => {
         return {
           word: word,
@@ -48,7 +48,7 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                   {row_dict['word'] === textToRead ? (
                     <p>Speaking...</p>
                   ) : (
-                    <button onClick={() => readText(row_dict['word'])}>Listen</button>
+                    <button onClick={() => readText(row_dict['word'], setTextToRead)}>Listen</button>
                   )}
                 </td>
               </tr>
