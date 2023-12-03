@@ -1,7 +1,16 @@
 import React from "react";
 import "./table.css"
 import "app/globals.css";
+import { useState } from 'react';
 /* eslint-disable react/no-unescaped-entities */
+
+// const [textToRead, setTextToRead] = useState('');
+const readText = (text) => {
+  setTextToRead(text);
+  const speech = new SpeechSynthesisUtterance();
+  speech.text = text;
+  speechSynthesis.speak(speech);
+};
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.map((word, index) => {
@@ -36,7 +45,11 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                       </>}
                 </td>
                 <td>
-                    Riddhi's stuff
+                  {row_dict['word'] === textToRead ? (
+                    <p>Speaking...</p>
+                  ) : (
+                    <button onClick={() => readText(row_dict['word'])}>Listen</button>
+                  )}
                 </td>
               </tr>
             )})}
