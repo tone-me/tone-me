@@ -46,7 +46,6 @@ function arrayEquals(a: string[], b: string[]) {
     Array.isArray(b) &&
     a.length === b.length &&
     a.every((val, index) => val === b[index]);
-  console.log("we make it out of this function");
   return ans;
 }
 
@@ -74,7 +73,7 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   // fetchData();
-  const [tonestring, setTonestring] = useState<string>("");
+  const [tonestring, setTonestring] = useState<string[]>([]);
   const [inputText, setInputText] = useState<string[]>([]);
   const [predictionOutput, setPredictionOutput] = useState<Output[]>([]);
 
@@ -92,20 +91,20 @@ export default function Home() {
   //     expected: 2,
   //   },
   // ]);
-  let old_tones: string[] = [""];
+  let old_tones: string[] = [];
   if (predictionOutput.length) {
     old_tones = predictionOutput.map((elem) => elem["expected"].toString());
   }
 
-  console.log("rerendering");
-  console.log(
-    inputText.map((word, index) => {
-      return {
-        word: word,
-        pronunciation: predictionOutput[index],
-      };
-    })
-  );
+  // console.log("rerendering");
+  // console.log(
+  //   inputText.map((word, index) => {
+  //     return {
+  //       word: word,
+  //       pronunciation: predictionOutput[index],
+  //     };
+  //   })
+  // );
   return (
     <main>
       <div>
@@ -126,7 +125,7 @@ export default function Home() {
             ></AudioRecorder>
           </div>
         </div>
-        {arrayEquals(old_tones, tonestring.split(" ")) && (
+        {arrayEquals(old_tones, tonestring) && (
           <div className="w-screen flex items-center justify-center">
             <Table
               tonestring={tonestring}

@@ -17,6 +17,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
             const data = await response.json() 
             // console.log(data.text)
             setInputText(data.text)
+            setTonestring(data.tones)
           } catch (error) {
             console.error("Failed to process text:", error);
           }
@@ -33,7 +34,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
                 </div>
                     <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tone-input">
-                        Input the tones for your sentence
+                        Input the tones for your sentence for higher accuracy (optional)
                     </label>
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" name = "tone-input" id="tone-input" type="tone-input" placeholder="1 2"/>
                 </div>
