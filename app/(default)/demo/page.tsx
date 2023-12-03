@@ -92,7 +92,7 @@ export default function Home() {
   //     expected: 2,
   //   },
   // ]);
-  let old_tones: string[] = ["1"];
+  let old_tones: string[] = [""];
   if (predictionOutput.length) {
     old_tones = predictionOutput.map((elem) => elem["expected"].toString());
   }
