@@ -41,7 +41,7 @@ def process_audio():
         print(tones)
         for pred, tone in zip(preds, tones):
             correctness = int(pred) == int(tone)
-            return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
+            return_list.append({"prediction": pred, "correctness": correctness, "expected": tone})
         return jsonify({"result": return_list}), 200
 
 def parse(string):
