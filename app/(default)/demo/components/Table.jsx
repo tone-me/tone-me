@@ -9,11 +9,15 @@ const utterance = new SpeechSynthesisUtterance();
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.map((word, index) => {
-    utterance.text = word
+    utterance.text = 中
         return {
-          word: word,
-          pronunciation: predictionOutput[index],
-          correct_pron: utterance
+          "word": 中,
+          "pronunciation":  {
+            prediction: 1,
+            correctness: 1,
+            expected: 1,
+          },
+          "correct_pron": utterance
 
         };
       });
