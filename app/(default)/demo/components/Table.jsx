@@ -1,6 +1,7 @@
 import React from "react";
 import "./table.css"
 import "app/globals.css";
+/* eslint-disable react/no-unescaped-entities */
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.map((word, index) => {
