@@ -6,7 +6,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
     try {
         const formData = new FormData();
         formData.append("audio", audioBlob, "audio.wav");
-        const response = await fetch("http://127.0.0.1:5000/fetch_audio", {
+        const response = await fetch("https://tone-me.onrender.com/fetch_audio", {
         method: "POST",
         mode: "cors",
         body: formData,
