@@ -5,27 +5,24 @@ import { useReactTable, flexRender, getCoreRowModel } from "@tanstack/react-tabl
 import { columnDef } from "./columns";
 
 
-const utterance = new SpeechSynthesisUtterance();
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.map((word, index) => {
-    return {
-      word: word,
-      pronunciation: predictionOutput[index]
-    };
-  });
+        return {
+          word: word,
+          pronunciation: predictionOutput[index]
+        };
+      });
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const finalColumnDef = React.useMemo( () => columnDef, [])
-  
-
+    
   const tableInstance = useReactTable({
     columns: finalColumnDef,
     data: data,
     getCoreRowModel: getCoreRowModel()
   })
 
-  
   //console.log(data);
   return (
     <>
