@@ -11,7 +11,6 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
           id: index
         };
       });
-  console.log(data)
   return (
     <>
         <table>

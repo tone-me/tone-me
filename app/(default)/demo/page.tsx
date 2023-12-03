@@ -78,19 +78,10 @@ export default function Home() {
   const [tonestring, setTonestring] = useState<string[]>([]);
   const [inputText, setInputText] = useState<string[]>([]);
   const [predictionOutput, setPredictionOutput] = useState<Output[]>([]);
-  // const [tonestring, setTonestring] = useState<string[]>(["1"]);
-  // const [inputText, setInputText] = useState<string[]>(["中"]);
-  // const [predictionOutput, setPredictionOutput] = useState<Output[]>([
-  //   {
-  //     prediction: 1,
-  //     expected: 1,
-  //     correctness: true,
-  //   },
-  // ]);
   const [boundaries, setBoundaries] = useState<number[]>([]);
   const [audioPath, setAudioPath] = useState<string>("");
 
-  // const [tonestring, setTonestring] = useState("1 2");
+  // const [tonestring, setTonestring] = useState(["1", "2"]);
   // const [inputText, setInputText] = useState(["中", "国"]);
   // const [predictionOutput, setPredictionOutput] = useState([
   //   {

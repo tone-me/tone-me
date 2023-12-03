@@ -7,7 +7,6 @@ import librosa
 import torch
 import os
 from pydub import AudioSegment
-from pydub.silence import split_on_silence
 from re import compile as _Re
 import pinyin_jyutping_sentence
 
@@ -58,7 +57,7 @@ def predict_audio():
              f.write("")
         cut_audio.export(syllable_path, format="wav")
         predicted_labels.append(evaluate_model(syllable_path))
-
+    global tones
     return_list = []
     for pred, tone in zip(predicted_labels, tones):
         correctness = int(pred) == int(tone)
@@ -128,8 +127,9 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(os.path.realpath(__file__))
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     sample_audio, sample_rate = librosa.load(path_to_audio)
-    text = ""
-    path_to_audio = ""
+    text = []
+    tones = []
+    path_to_audio = "./recording.wav"
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)

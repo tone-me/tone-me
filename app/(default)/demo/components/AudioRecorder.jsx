@@ -216,19 +216,19 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
                 <div>
                     {boundaries.map( (elem) =><p>{elem}</p> )}
                 </div>
-                <div>
-                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={ () => setMarkSyllables(true)}> 
+            
+                <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button onClick={ () => setMarkSyllables(true)} type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                     Start
                 </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={captureTime}>
+                <button onClick={captureTime} type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                     Mark syllable
                 </button>
-                <button className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={deleteTime}>
+                <button onClick={deleteTime} type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
                     Delete last
                 </button>
-                <p>{audioRef.duration}</p>
-                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded" onClick={ () => {setMarkSyllables(false); setBoundaries(boundaries.concat([audioRef.current.duration])); fetchPreds(boundaries.concat([audioRef.current.duration]), setPredictionOutput)}}> 
-                    End
+                <button onClick={ () => {setMarkSyllables(false); setBoundaries(boundaries.concat([audioRef.current.duration])); fetchPreds(boundaries.concat([audioRef.current.duration]), setPredictionOutput)}} type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                    Stop
                 </button>
                 </div>
                 
