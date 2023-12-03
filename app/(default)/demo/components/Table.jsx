@@ -9,9 +9,18 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.split(" ").map((word, index) => {
         return {
           word: word,
-          pronunciation: predictionOutput[index] || {} // Use empty object if out of bounds
+          pronunciation: <> 
+            <p>Expected Tone: {predictionOutput[index]["expected"]}</p> 
+            {predictionOutput[index]["correctness"] ? 
+            (<p className="text-green-500"> {predictionOutput[index]["prediction"]} </p>) : 
+            (<p className="text-red-400"> {predictionOutput[index]["prediction"]}</p>) }
+          </>
+          
+          // Use empty object if out of bounds
         };
       });
+
+  console.log(data)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const finalData = React.useMemo( () => data, []);
   const finalColumnDef = React.useMemo( () => columnDef, [])
@@ -49,23 +58,10 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             return (
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
-                  console.log(cellEl.column)
+                  // console.log(cellEl.column)
                   return (
                     <td key={cellEl.id}>
-                      {cellEl.column.accessorKey === "pronunciation" ? (
-                        // Handle Pronunciation Output column
-                        <>
-                          {cellEl.value && (
-                            <>
-                              <p>
-                                Expected tone: {cellEl.value.expected},
-                                Actual tone: {cellEl.value.prediction}
-                              </p>
-                              <p>Correctness: {cellEl.value.correctness}</p>
-                            </>
-                          )}
-                        </>
-                      ) : (
+                      {(
                         // Render other columns as usual
                         flexRender(
                           cellEl.column.columnDef.cell,
