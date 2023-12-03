@@ -71,7 +71,9 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
     const captureTime = () => {
         if (markSyllables)
         {
-            console.log(audioRef.current.currentTime);
+            let curTime = audioRef.current.currentTime
+            setBoundaries(boundaries.concat([curTime]))
+            console.log(curTime);
         }
     }
     const handleSpeedChange = (newSpeed) => {
@@ -197,6 +199,9 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput, boundaries, setBo
                 </button>
                 <button className="class= bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={captureTime}>
                     Mark syllable
+                </button>
+                <button className= "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" onClick={ () => {setMarkSyllables(false); console.log(boundaries)}}> 
+                    End
                 </button>
                 </div>
                 
