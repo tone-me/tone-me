@@ -6,7 +6,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         const formData = new FormData(e.currentTarget);
         setInputText(formData.get("text-input"));
         setTonestring(formData.get("tone-input"));
-        console.log(formData.get("text-input"))
+        // console.log(formData.get("text-input"))
         try {
             const response = await fetch("http://127.0.0.1:5000/fetch_text", {
               method: "POST",
@@ -14,8 +14,11 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ text: formData.get("tone-input") }),
+              body: JSON.stringify({ tones: formData.get("tone-input"), text: formData.get("text-input") }),
             });
+            const data = await response.json() 
+            // console.log(data.text)
+            setInputText(data.text)
           } catch (error) {
             console.error("Failed to process text:", error);
           }
@@ -28,7 +31,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="text-input">
                         Sentence you want recorded
                     </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="text-input" id="text-input" type="text-input" placeholder="中 国"/>
+                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="text-input" id="text-input" type="text-input" placeholder="中国"/>
                 </div>
                     <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tone-input">

@@ -7,7 +7,7 @@ import { columnDef } from "./columns";
 
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {
-  let data = inputText.split(" ").map((word, index) => {
+  let data = inputText.map((word, index) => {
         return {
           word: word,
           pronunciation: predictionOutput[index]
@@ -50,8 +50,8 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             return (
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
-                  console.log(cellEl.id)
-                  console.log(cellEl.getValue())
+                  //console.log(cellEl.id)
+                  //console.log(cellEl.getValue())
                   return (
                     <td key={cellEl.id}>
                       {typeof cellEl.getValue() !== "string"  ? (

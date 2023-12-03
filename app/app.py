@@ -8,6 +8,7 @@ import torch
 import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
+from re import compile as _Re
 
 
 app = Flask(__name__)
@@ -41,6 +42,10 @@ def process_audio():
             return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
         return jsonify({"result": return_list}), 200
 
+_unicode_chr_splitter = _Re( '(?s)((?:[\ud800-\udbff][\udc00-\udfff])|.)' ).split
+
+def split_unicode_chrs( text ):
+  return [ chr for chr in _unicode_chr_splitter( text ) if chr]
 
 @app.route("/fetch_text", methods=["POST"])
 def process_text():
@@ -48,8 +53,9 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         global text
-        text = request.json["text"]
-        response = jsonify({"text": "Successfully handled"})
+        tones = request.json["tones"]
+        text = split_unicode_chrs(request.json["text"])
+        response = jsonify({"text": text})
         return response
         
 def evaluate_model(path_to_audio):
@@ -78,7 +84,7 @@ if __name__ == "__main__":
     script_directory = os.path.dirname(os.path.realpath(__file__))
     path_to_audio = os.path.join(script_directory, "../public/7#yao!1.wav")
     sample_audio, sample_rate = librosa.load(path_to_audio)
-    text = ""
+    tones = ""
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     app.run(debug=True)

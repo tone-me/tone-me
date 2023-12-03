@@ -59,7 +59,7 @@ export default function Home() {
   // };
   // fetchData();
   const [tonestring, setTonestring] = useState("1 2");
-  const [inputText, setInputText] = useState("中 国");
+  const [inputText, setInputText] = useState(["中", "国"]);
   const [predictionOutput, setPredictionOutput] = useState([
     {
       prediction: 1,
@@ -72,6 +72,7 @@ export default function Home() {
       expected: 2,
     },
   ]);
+
   return (
     <main>
       <div>
@@ -92,9 +93,8 @@ export default function Home() {
             ></AudioRecorder>
           </div>
         </div>
-
         {predictionOutput.length == tonestring.split(" ").length && (
-          <div className="w-1/2 flex items-center justify-center">
+          <div className="w-screen flex items-center justify-center">
             <Table
               tonestring={tonestring}
               predictionOutput={predictionOutput}
@@ -102,6 +102,7 @@ export default function Home() {
             />
           </div>
         )}
+        {predictionOutput.length}
         {tonestring}
         {inputText}
       </div>
