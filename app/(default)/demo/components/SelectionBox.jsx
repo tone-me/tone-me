@@ -6,7 +6,18 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         const formData = new FormData(e.currentTarget);
         setInputText(formData.get("text-input"));
         setTonestring(formData.get("tone-input"));
-        
+        try {
+            const response = await fetch("http://127.0.0.1:5000/fetch_text", {
+              method: "POST",
+              mode: "cors",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ text: formData.get("tone-input") }),
+            });
+          } catch (error) {
+            console.error("Failed to process text:", error);
+          }
     }
 
     return ( <>

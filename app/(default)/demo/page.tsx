@@ -66,8 +66,9 @@ export default function Home() {
   return (
     // className="flex min-h-screen flex-col items-center bg-gray-10"
     <main>
-      <div style={{ color: "black" }}>
+      <div>
         <Header />
+        <p className="text-green-500 sm:text-green-600"> testing </p>
         <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/4 flex flex-row items-center justify-center">
           <div className="px-8">
             <SelectionBox

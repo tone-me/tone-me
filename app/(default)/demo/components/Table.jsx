@@ -1,5 +1,6 @@
 import React from "react";
 import "./table.css"
+import "app/globals.css";
 import { useReactTable, flexRender, getCoreRowModel } from "@tanstack/react-table";
 import { columnDef } from "./columns";
 
@@ -9,25 +10,19 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
   let data = inputText.split(" ").map((word, index) => {
         return {
           word: word,
-          pronunciation: <> 
-            <p>Expected Tone: {predictionOutput[index]["expected"]}</p> 
-            {predictionOutput[index]["correctness"] ? 
-            (<p className="text-green-500"> {predictionOutput[index]["prediction"]} </p>) : 
-            (<p className="text-red-400"> {predictionOutput[index]["prediction"]}</p>) }
-          </>
-          
+          pronunciation: predictionOutput[index]
           // Use empty object if out of bounds
         };
       });
 
-  console.log(data)
+    
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const finalData = React.useMemo( () => data, []);
   const finalColumnDef = React.useMemo( () => columnDef, [])
     
   const tableInstance = useReactTable({
     columns: finalColumnDef,
-    data: finalData,
+    data: data,
     getCoreRowModel: getCoreRowModel()
   })
   return (
@@ -58,10 +53,18 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             return (
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
-                  // console.log(cellEl.column)
+                  //console.log(cellEl.id)
+                  // console.log(cellEl.getValue())
                   return (
                     <td key={cellEl.id}>
-                      {(
+                      {typeof cellEl.getValue() !== "string"  ? (
+                      <> 
+                        <p>Expected Tone: {cellEl.getValue()["expected"]}</p> 
+                        {cellEl.getValue()["correctness"] ? 
+                        (<p style={{ color: '#00D100' }}>Actual Tone:  {cellEl.getValue()["prediction"]} </p>) : 
+                        (<p style={{ color: '#ff0000' }}>Actual Tone: {cellEl.getValue()["prediction"]}</p>) }
+                      </>) :
+                      (
                         // Render other columns as usual
                         flexRender(
                           cellEl.column.columnDef.cell,
