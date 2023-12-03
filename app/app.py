@@ -9,6 +9,7 @@ import os
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 from re import compile as _Re
+from re import compile as _Re
 
 
 app = Flask(__name__)
@@ -61,8 +62,6 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         global text
-        text = request.json["text"]
-        response = jsonify({"text": "Successfully handled"})
         global tones 
         tones = parse(request.json["tones"])
         text = split_unicode_chrs(request.json["text"])
