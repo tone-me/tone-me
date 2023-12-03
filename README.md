@@ -19,7 +19,7 @@ python3 app.py
 and then on another terminal, run 
 
 npm i next <br>
-npm i next react react-dom <br>
+npm i next react react-dom react-table <br>
 virtualenv venv <br>
 source venv/bin/activate <br>
 pip3 install jsonify flask flask-cors transformers librosa torch <br>
