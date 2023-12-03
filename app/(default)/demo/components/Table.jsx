@@ -50,8 +50,8 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
             return (
               <tr key={rowEl.id}>
                 {rowEl.getVisibleCells().map((cellEl) => {
-                  //console.log(cellEl.id)
-                  // console.log(cellEl.getValue())
+                  console.log(cellEl.id)
+                  console.log(cellEl.getValue())
                   return (
                     <td key={cellEl.id}>
                       {typeof cellEl.getValue() !== "string"  ? (
@@ -62,12 +62,11 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                         (<p style={{ color: '#ff0000' }}>Actual Tone: {cellEl.getValue()["prediction"]}</p>) }
                       </>) :
                       (
-                        <p > {cellEl.getValue()} </p>
                         // Render other columns as usual
-                        // flexRender(
-                        //   cellEl.column.columnDef.cell,
-                        //   cellEl.getContext()
-                        // )
+                        flexRender(
+                          cellEl.column.columnDef.cell,
+                          cellEl.getContext()
+                        )
                       )}
                     </td>
                   );

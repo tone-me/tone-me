@@ -58,10 +58,19 @@ export default function Home() {
   //   document.body.appendChild(audio);
   // };
   // fetchData();
-  const [tonestring, setTonestring] = useState("2");
-  const [inputText, setInputText] = useState(String.fromCodePoint(0x9593));
+  const [tonestring, setTonestring] = useState("1 2");
+  const [inputText, setInputText] = useState("中 国");
   const [predictionOutput, setPredictionOutput] = useState([
-    { prediction: 1, correctness: 0, expected: 3 },
+    {
+      prediction: 1,
+      correctness: 2,
+      expected: 1,
+    },
+    {
+      prediction: 2,
+      correctness: 1,
+      expected: 2,
+    },
   ]);
   return (
     <main>
@@ -83,13 +92,16 @@ export default function Home() {
             ></AudioRecorder>
           </div>
         </div>
-        <div className="w-1/2 flex items-center justify-center">
-          <Table
-            tonestring={tonestring}
-            predictionOutput={predictionOutput}
-            inputText={inputText}
-          />
-        </div>
+
+        {predictionOutput.length == tonestring.split(" ").length && (
+          <div className="w-1/2 flex items-center justify-center">
+            <Table
+              tonestring={tonestring}
+              predictionOutput={predictionOutput}
+              inputText={inputText}
+            />
+          </div>
+        )}
         {tonestring}
         {inputText}
       </div>
