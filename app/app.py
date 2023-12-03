@@ -36,13 +36,11 @@ def process_audio():
         #print(path_to_audio)
         preds = evaluate_model(path_to_audio)
         return_list = []
-<<<<<<< Updated upstream
         for pred in preds:
             correctness = int(pred) == int(text)
             return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
         return jsonify({"result": return_list}), 200
 
-=======
         print(preds)
         print(tones)
         for pred, tone in zip(preds, tones):
@@ -62,7 +60,6 @@ _unicode_chr_splitter = _Re( '(?s)((?:[\ud800-\udbff][\udc00-\udfff])|.)' ).spli
 
 def split_unicode_chrs( text ):
   return [ chr for chr in _unicode_chr_splitter( text ) if chr]
->>>>>>> Stashed changes
 
 @app.route("/fetch_text", methods=["POST"])
 def process_text():
@@ -70,15 +67,12 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         global text
-<<<<<<< Updated upstream
         text = request.json["text"]
         response = jsonify({"text": "Successfully handled"})
-=======
         global tones 
         tones = parse(request.json["tones"])
         text = split_unicode_chrs(request.json["text"])
         response = jsonify({"text": text})
->>>>>>> Stashed changes
         return response
         
 def evaluate_model(path_to_audio):
