@@ -6,6 +6,8 @@ from transformers import AutoModelForAudioClassification, AutoFeatureExtractor
 import librosa
 import torch
 import os
+from pydub import AudioSegment
+from pydub.silence import split_on_silence
 
 
 app = Flask(__name__)
@@ -32,9 +34,12 @@ def process_audio():
         with open(path_to_audio, "wb") as f:
             f.write(audio_data)
         #print(path_to_audio)
-        pred = evaluate_model(path_to_audio)
-        correctness = int(pred) == int(text) 
-        return jsonify({"prediction": pred, "correctness": correctness, "expected": text}), 200
+        preds = evaluate_model(path_to_audio)
+        return_list = []
+        for pred in preds:
+            correctness = int(pred) == int(text)
+            return_list.append({"prediction": pred, "correctness": correctness, "expected": text})
+        return jsonify({"result": return_list}), 200
 
 
 @app.route("/fetch_text", methods=["POST"])
@@ -51,13 +56,20 @@ def evaluate_model(path_to_audio):
     global model 
     global feature_extractor
     
-    audio, rate = librosa.load(path_to_audio, sr=16000)
-    input_values = feature_extractor(audio, sampling_rate=rate, return_tensors = "pt").input_values
-    os.environ["TORCH_USE_NNPACK"] = "0"
-    logits = model(input_values).logits
-    del os.environ["TORCH_USE_NNPACK"]
-    predicted_label = torch.argmax(logits, dim=-1).item()
-    return predicted_label
+    audio = AudioSegment.from_file(path_to_audio)
+    chunks = split_on_silence(audio, min_silence_len=150, silence_thresh=-30)
+    predicted_labels = []
+    for chunk in chunks:
+        chunk.export(".//chunk.wav", format = "wav")
+        wav_chunk, rate = librosa.load(".//chunk.wav", sr=16000)
+        input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
+        os.environ["TORCH_USE_NNPACK"] = "0"
+        logits = model(input_values).logits
+        del os.environ["TORCH_USE_NNPACK"]
+        predicted_label = torch.argmax(logits, dim=-1).item()
+        predicted_labels.append(predicted_label)
+    return predicted_labels
+    
 
 if __name__ == "__main__":
     model_name = "cge7/wav2vec2-base-version3"
