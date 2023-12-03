@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react/no-unescaped-entities */
 import "app/globals.css";
 import "/app/css/style.css";
 import { useState, useRef } from "react";
