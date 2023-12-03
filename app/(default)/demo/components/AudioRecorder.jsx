@@ -149,14 +149,6 @@ const AudioRecorder = ({predictionOutput, setPredictionOutput}) => {
                         </div>
                     </div>
                 </div>
-                <div>
-		    {predictionOutput.map(function(prediction) {
-				return (
-					prediction["correctness"]? (<p>Your correct tone: {prediction["prediction"]}</p>)
-					: (<p>Your incorrect tone: {prediction["prediction"]}</p>)
-				)
-		    })}
-                </div>
             </>
             ) : null}
             </main>
