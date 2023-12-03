@@ -52,7 +52,7 @@ def predict_audio():
         start_time = breakpoints[i]*1000
         end_time = breakpoints[i+1]*1000
         cut_audio = audio[start_time:end_time]
-        syllable_path = f"./syllables/chunk{i}.wav"
+        syllable_path = f"../public/syllables/chunk{i}.wav"
         with open(syllable_path, "w") as f:
              f.write("")
         cut_audio.export(syllable_path, format="wav")
