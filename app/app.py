@@ -41,7 +41,7 @@ def process_audio():
         for pred, tone in zip(preds, tones):
             correctness = int(pred) == int(tone)
             return_list.append({"prediction": int(pred), "correctness": correctness, "expected": int(tone)})
-        print(return_list)
+        # print(return_list)
         return jsonify({"result": return_list}), 200
 
 def parse(string):
@@ -72,10 +72,16 @@ def process_text():
             return jsonify({"error": "No text provided"}), 400
         global text
         global tones 
-        tones = parse(request.json["tones"])
-        # tones = extract_tones(request.json["text"])
+        if request.json["tones"]:
+             tones = parse(request.json["tones"])
+        else:
+             tones = extract_tones(request.json["text"])
         text = split_unicode_chrs(request.json["text"])
-        response = jsonify({"text": text})
+        
+        response = jsonify({
+             "text": text,
+             "tones": tones
+        })
         return response
         
 def evaluate_model(path_to_audio):
