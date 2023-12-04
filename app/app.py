@@ -43,7 +43,6 @@ def predict_audio():
     if not request.json or "breakpoints" not in request.json: # Check if text is sent via JSON
         return jsonify({"error": "No breakpoints provided"}), 400
     breakpoints = request.json["breakpoints"]
-    print(breakpoints)
     # print(return_list)
     breakpoints.insert(0, 0)
     audio = AudioSegment.from_file(path_to_audio)
