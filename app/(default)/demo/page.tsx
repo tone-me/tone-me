@@ -124,23 +124,24 @@ export default function Home() {
           done, press Stop.
         </h1>
         <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/8 flex flex-row items-center justify-center">
-          <div className="px-8">
-            <SelectionBox
-              tonestring={tonestring}
-              setTonestring={setTonestring}
-              setInputText={setInputText}
-            ></SelectionBox>
-          </div>
-
-          <div className="px-8">
-            <AudioRecorder
-              predictionOutput={predictionOutput}
-              setPredictionOutput={setPredictionOutput}
-              boundaries={boundaries}
-              setBoundaries={setBoundaries}
-              audioPath={audioPath}
-              setAudioPath={setAudioPath}
-            ></AudioRecorder>
+          <div className="grid grid-cols-12 pb-12 md:pb-20 container">
+            <div className="lg:col-span-7 col-span-12">
+              <SelectionBox
+                tonestring={tonestring}
+                setTonestring={setTonestring}
+                setInputText={setInputText}
+              ></SelectionBox>
+            </div>
+            <div className="lg:col-span-5 col-span-12 rounded bg-gray-900">
+              <AudioRecorder
+                predictionOutput={predictionOutput}
+                setPredictionOutput={setPredictionOutput}
+                boundaries={boundaries}
+                setBoundaries={setBoundaries}
+                audioPath={audioPath}
+                setAudioPath={setAudioPath}
+              ></AudioRecorder>
+            </div>
           </div>
         </div>
         {arrayEquals(old_tones, tonestring) && (
