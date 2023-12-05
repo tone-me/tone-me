@@ -12,7 +12,19 @@ import pinyin_jyutping_sentence
 import logging
 import sys
 
-app = Flask(__name__)
+def create_app():
+    global model 
+    global feature_extractor
+
+    model_name = "cge7/wav2vec2-base-version3"
+    model = AutoModelForAudioClassification.from_pretrained(model_name)
+    feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
+    text = []
+    tones = []
+    app = Flask(__name__)
+    return app
+
+app = create_app() 
 CORS(app)
 
 @app.route("/fetch_audio", methods=["POST"])
@@ -53,7 +65,7 @@ def predict_audio():
         start_time = breakpoints[i]*1000
         end_time = breakpoints[i+1]*1000
         cut_audio = audio[start_time:end_time]
-        syllable_path = f"/public/syllables/chunk{i}.wav"
+        syllable_path = f"./public/syllables/chunk{i}.wav"
         with open(syllable_path, "w") as f:
              f.write("")
         cut_audio.export(syllable_path, format="wav")
@@ -119,34 +131,24 @@ def evaluate_model(path_to_audio):
     return torch.argmax(logits, dim=-1).item()
 
 
+
 if __name__ == "__main__":
-    root = logging.getLogger()
-    root.setLevel(logging.INFO)
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-    app.logger.setHandler(handler)
-    logging.basicConfig(level=logging.DEBUG)
-    logging.info('This is an info message')
+    # root = logging.getLogger()
+    # root.setLevel(logging.INFO)
+    # handler = logging.StreamHandler(sys.stdout)
+    # handler.setLevel(logging.INFO)
+    # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    # handler.setFormatter(formatter)
+    # app.logger.setHandler(handler)
+    # logging.basicConfig(level=logging.DEBUG)
+    # logging.info('This is an info message')
 
     # app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
     # for rule in app.url_map.iter_rules():
     #     app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
-    app.logger.setLevel(logging.INFO)
-    app.logger.info("hello world")
-    print("printed hello world")
-    model_name = "cge7/wav2vec2-base-version3"
-    model = AutoModelForAudioClassification.from_pretrained(model_name)
-    feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
-    script_directory = os.path.dirname(os.path.realpath(__file__))
-    path_to_audio = os.path.join(script_directory, "/public/7#yao!1.wav")
-    sample_audio, sample_rate = librosa.load(path_to_audio)
-    text = []
-    tones = []
-    path_to_audio = "./recording.wav"
+    # app.logger.setLevel(logging.INFO)
+    # app.logger.info("hello world")
+    # print("printed hello world")
     port = int(os.environ.get("PORT", 10000))
     app.run(debug=True, host='0.0.0.0', port=port)  
-    # print(sample_audio)
-    # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     
