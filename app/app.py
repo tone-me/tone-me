@@ -9,11 +9,11 @@ import os
 from pydub import AudioSegment
 from re import compile as _Re
 import pinyin_jyutping_sentence
-from logging.config import dictConfig
 import logging
+import sys
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "http://localhost:10000"]}})
+CORS(app)
 
 @app.route("/fetch_audio", methods=["POST"])
 def process_audio():
@@ -126,6 +126,13 @@ def evaluate_model(path_to_audio):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(debug=True, host='0.0.0.0', port=port)
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    app.logger.setHandler(handler)
     logging.basicConfig(level=logging.DEBUG)
     logging.info('This is an info message')
 
