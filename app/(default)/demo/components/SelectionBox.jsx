@@ -6,8 +6,9 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
         let production = true;
+        const api_key = process.env.APIKEY;
         let url = production ? 
-        "https://100.20.92.101/fetch_text": 
+        "https://api_key/text": 
         "http://127.0.0.1:10000/fetch_text";
         try {
             const response = await fetch(url, {
