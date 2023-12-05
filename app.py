@@ -36,12 +36,12 @@ def process_audio():
         # print(audio_data)
         script_directory = os.path.dirname(os.path.realpath(__file__))
         path_to_audio = os.path.join(script_directory, "recording.wav")
+        app.config['path_to_audio'] = path_to_audio
         # path_to_audio2 = os.path.join(script_directory, "recording2.wav")
         # Set metadata for the WAV file
         # channels = 2
         # sample_width = 2
         # sample_rate = 48000 
-            
         with open(path_to_audio, "wb") as f:
             f.write(audio_data)
         #print(path_to_audio)
@@ -55,6 +55,7 @@ def predict_audio():
     breakpoints = request.json["breakpoints"]
     # print(return_list)
     breakpoints.insert(0, 0)
+    path_to_audio = app.config['path_to_audio']
     audio = AudioSegment.from_file(path_to_audio)
     predicted_labels = []
     for i in range(len(breakpoints)-1):
