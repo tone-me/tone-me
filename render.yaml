@@ -3,7 +3,7 @@ services:
     env: python
     buildCommand: |
       pip install -r requirements.txt
-    startCommand: gunicorn -b 0.0.0.0:$PORT app:app
+    startCommand: gunicorn -b 0.0.0.0:10000 app:app
 
   - name: nextjs-frontend
     env: node
