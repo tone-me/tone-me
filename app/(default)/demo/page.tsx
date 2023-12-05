@@ -114,7 +114,7 @@ export default function Home() {
       <div>
         <Header />
         <h1 className="prose transform -translate-y-1/2 text-xl mx-2">
-          Version 3. For the below text, first, submit the Chinese sentence or
+          Version 4. For the below text, first, submit the Chinese sentence or
           phrase you want to say on the left. Then record yourself saying that
           using the microphone on the right. <br></br>
           <br></br>Afterwards, you have to manually indicate where the syllable

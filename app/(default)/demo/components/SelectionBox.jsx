@@ -5,7 +5,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
-        let production = false;
+        let production = true;
         let url = production ? "https://tone-me.onrender.com/fetch_text": "http://127.0.0.1:10000/fetch_text";
         try {
             const response = await fetch(url, {
