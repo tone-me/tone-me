@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "start": "next start",
+    "start": "concurrently \"next start\" \"gunicorn -b 0.0.0.0:10000 app:app\"",
     "lint": "next lint",
     "dev": "concurrently \"next dev\" \"gunicorn -b 0.0.0.0:10000 app:app\""
   },
