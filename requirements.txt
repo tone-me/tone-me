@@ -1,0 +1,8 @@
+Flask==3.0.0
+Werkzeug==3.0.1
+Flask-CORS==3.0.1
+transformers==4.11.3
+librosa==0.10.1
+torch==2.1.1
+pydub==0.25.1
+pinyin-jyutping-sentence==1.3
