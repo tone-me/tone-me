@@ -69,7 +69,7 @@ const AudioRecorder = ({
   useEffect(() => {
     // Set the default playback rate to 0.5x when the component mounts
     if (audioRef.current) {
-      audioRef.current.playbackRate = 0.5;
+      audioRef.current.playbackrate = 0.5;
     }
   }, []);
 
@@ -107,7 +107,7 @@ const AudioRecorder = ({
   };
   const handleSpeedChange = (newSpeed) => {
     setSpeed(newSpeed);
-    audioRef.current.playbackRate = newSpeed;
+    audioRef.current.playbackrate = newSpeed;
   };
   const startRecording = async () => {
     setRecordingStatus("recording");
@@ -243,7 +243,7 @@ const AudioRecorder = ({
                             <audio
                               ref={audioRef}
                               src={audio}
-                              playbackRate="0.5"
+                              playbackrate="0.5"
                               controls
                               className="w-full"
                             ></audio>

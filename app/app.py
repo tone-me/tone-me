@@ -11,7 +11,10 @@ from re import compile as _Re
 import pinyin_jyutping_sentence
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "http://localhost:10000"]}})
+app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
+for rule in app.url_map.iter_rules():
+        app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
 
 @app.route("/fetch_audio", methods=["POST"])
 def process_audio():
@@ -115,9 +118,6 @@ def evaluate_model(path_to_audio):
     del os.environ["TORCH_USE_NNPACK"]
     
     return torch.argmax(logits, dim=-1).item()
-
-    
-    
 
 if __name__ == "__main__":
     model_name = "cge7/wav2vec2-base-version3"
