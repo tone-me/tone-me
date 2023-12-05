@@ -136,6 +136,12 @@ def evaluate_model(path_to_audio):
     
     return torch.argmax(logits, dim=-1).item()
 
+'root': {
+    'level': 'INFO',
+    'handlers': ['wsgi']
+}
+app.logger.info(os.environ.get("hello world"))
+
 if __name__ == "__main__":
     app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
     for rule in app.url_map.iter_rules():
