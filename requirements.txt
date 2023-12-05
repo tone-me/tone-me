@@ -1,4 +1,4 @@
-Flask==3.0.0
+Flask==2.2.5
 Werkzeug==3.0.1
 Flask-CORS==3.0.1
 transformers==4.11.3
