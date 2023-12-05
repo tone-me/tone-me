@@ -107,7 +107,7 @@ const AudioRecorder = ({
   };
   const handleSpeedChange = (newSpeed) => {
     setSpeed(newSpeed);
-    audioRef.current.playbackrate = newSpeed;
+    audioRef.current.playbackRate = newSpeed;
   };
   const startRecording = async () => {
     setRecordingStatus("recording");
@@ -256,7 +256,7 @@ const AudioRecorder = ({
                                     value={speed}
                                     onChange={(e) =>
                                       handleSpeedChange(
-                                        parseFloat(e.target.value)
+                                        parseFloat(e.tarfget.value)
                                       )
                                     }
                                   >
