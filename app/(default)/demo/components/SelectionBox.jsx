@@ -8,7 +8,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         let production = true;
         let url = production ? "https://tone-me.onrender.com/fetch_text": "http://127.0.0.1:10000/fetch_text";
         try {
-            const response = await fetch("http://127.0.0.1:10000/fetch_text", {
+            const response = await fetch(url, {
               method: "POST",
               mode: "cors",
               headers: {
