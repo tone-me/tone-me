@@ -8,7 +8,9 @@ const readText = (text, setTextToRead) => {
   setTextToRead(text);
   const speech = new SpeechSynthesisUtterance();
   speech.text = text;
-  speechSynthesis.speak(speech);
+  speech.lang = "zh-CN";
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(speech);
 };
 
 const Table = ({ tonestring, predictionOutput, inputText }) => {

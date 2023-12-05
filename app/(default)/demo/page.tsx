@@ -96,7 +96,7 @@ export default function Home() {
   //   },
   // ]);
   let old_tones: string[] = [];
-  if (predictionOutput.length) {
+  if (predictionOutput && predictionOutput.length) {
     old_tones = predictionOutput.map((elem) => elem["expected"].toString());
   }
 
@@ -114,7 +114,7 @@ export default function Home() {
       <div>
         <Header />
         <h1 className="prose transform -translate-y-1/2 text-xl mx-2">
-          Version 2. For the below text, first, submit the Chinese sentence or
+          Version 3. For the below text, first, submit the Chinese sentence or
           phrase you want to say on the left. Then record yourself saying that
           using the microphone on the right. <br></br>
           <br></br>Afterwards, you have to manually indicate where the syllable
@@ -153,7 +153,6 @@ export default function Home() {
             />
           </div>
         )}
-        {predictionOutput.length}
         {tonestring}
         {inputText}
       </div>
