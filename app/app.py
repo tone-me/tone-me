@@ -12,22 +12,6 @@ import pinyin_jyutping_sentence
 from logging.config import dictConfig
 import logging
 
-dictConfig({
-    'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
-    }},
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
-
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "http://localhost:10000"]}})
 
@@ -138,16 +122,19 @@ def evaluate_model(path_to_audio):
     'level': 'INFO',
     'handlers': ['wsgi']
 }
-app.logger.info(os.environ.get("hello world"))
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))
+    app.run(debug=True, host='0.0.0.0', port=port)
     logging.basicConfig(level=logging.DEBUG)
     logging.info('This is an info message')
 
     # app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
     # for rule in app.url_map.iter_rules():
     #     app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
+    app.logger.setLevel(logging.INFO)
     app.logger.info("hello world")
+    print("printed hello world")
     model_name = "cge7/wav2vec2-base-version3"
     model = AutoModelForAudioClassification.from_pretrained(model_name)
     feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
@@ -159,5 +146,4 @@ if __name__ == "__main__":
     path_to_audio = "./recording.wav"
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host='0.0.0.0', port=port)
+    
