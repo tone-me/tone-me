@@ -5,8 +5,10 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
+        let production = true;
+        let url = production ? "https://tone-me.onrender.com/fetch_text": "http://127.0.0.1:10000/fetch_text";
         try {
-            const response = await fetch("http://127.0.0.1:5000/fetch_text", {
+            const response = await fetch("http://127.0.0.1:10000/fetch_text", {
               method: "POST",
               mode: "cors",
               headers: {
@@ -53,7 +55,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
                         </div>
                         </div>
                         <div className="pt-2">
-                        <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" href="#0" type="submit">Save</a>
+                        <button className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" type="submit">Save</button>
                         <p className="text-sm text-gray-400 mt-3">After saving these preferences, record audio to the right.</p>
                         </div>
                     </div>
