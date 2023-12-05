@@ -29,6 +29,9 @@ dictConfig({
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "http://localhost:10000"]}})
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 
 @app.route("/fetch_audio", methods=["POST"])
 def process_audio():
