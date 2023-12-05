@@ -13,15 +13,11 @@ import logging
 import sys
 
 def create_app():
-    global model 
-    global feature_extractor
-
-    model_name = "cge7/wav2vec2-base-version3"
-    model = AutoModelForAudioClassification.from_pretrained(model_name)
-    feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
-    text = []
-    tones = []
     app = Flask(__name__)
+    app.config['model'] = AutoModelForAudioClassification.from_pretrained("cge7/wav2vec2-base-version3")
+    app.config['feature_extractor'] = AutoFeatureExtractor.from_pretrained("cge7/wav2vec2-base-version3")
+    app.config['tones'] = []
+    app.config['text'] = []
     return app
 
 app = create_app() 
@@ -70,7 +66,7 @@ def predict_audio():
              f.write("")
         cut_audio.export(syllable_path, format="wav")
         predicted_labels.append(evaluate_model(syllable_path))
-    global tones
+    tones = app.config['tones']
     return_list = []
     for pred, tone in zip(predicted_labels, tones):
         correctness = int(pred) == int(tone)
@@ -104,24 +100,21 @@ def process_text():
     if request.method == "POST":
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
-        global text
-        global tones 
         if request.json["tones"]:
-             tones = parse(request.json["tones"])
+            app.config['tones']= parse(request.json["tones"])
         else:
-             tones = extract_tones(request.json["text"])
-        text = split_unicode_chrs(request.json["text"])
+            app.config['tones']= extract_tones(request.json["text"])
+        app.config['text'] = split_unicode_chrs(request.json["text"])
         
         response = jsonify({
-             "text": text,
-             "tones": tones
+             "text": app.config['text'],
+             "tones": app.config['tones']
         })
         return response
         
 def evaluate_model(path_to_audio):
-    global model 
-    global feature_extractor
-
+    model = app.config['model']
+    feature_extractor = app.config['feature_extractor']
     wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
     input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
     os.environ["TORCH_USE_NNPACK"] = "0"

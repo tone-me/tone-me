@@ -256,7 +256,7 @@ const AudioRecorder = ({
                                     value={speed}
                                     onChange={(e) =>
                                       handleSpeedChange(
-                                        parseFloat(e.tarfget.value)
+                                        parseFloat(e.target.value)
                                       )
                                     }
                                   >
