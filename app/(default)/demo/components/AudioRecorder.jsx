@@ -8,7 +8,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
     formData.append("audio", audioBlob, "audio.wav");
     let production = true;
     const api_key = process.env.APIKEY
-    let url = production ? "https://api-key/fetch_audio": "http://127.0.0.1:10000/fetch_audio";
+    let url = "http://localhost:10000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -29,7 +29,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 const fetchPreds = async (boundaries, setPredictionOutput) => {
   try {
     let production = true;
-    let url = production ? "https://api_key/predict_audio": "http://127.0.0.1:10000/predict_audio";
+    let url = "http://localhost:10000/predict_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
