@@ -9,7 +9,4 @@ services:
     buildCommand: |
       npm install
     startCommand: npm start; npm run dev
-    envVars:
-      - key: NODE_ENV
-        value: production
 
