@@ -118,9 +118,8 @@ def evaluate_model(path_to_audio):
     
     return torch.argmax(logits, dim=-1).item()
 
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(debug=True, host='0.0.0.0', port=port)
     root = logging.getLogger()
     root.setLevel(logging.INFO)
     handler = logging.StreamHandler(sys.stdout)
@@ -146,6 +145,8 @@ if __name__ == "__main__":
     text = []
     tones = []
     path_to_audio = "./recording.wav"
+    port = int(os.environ.get("PORT", 10000))
+    app.run(debug=True, host='0.0.0.0', port=port)  
     # print(sample_audio)
     # print(evaluate_model(audio=audio, rate=rate, model=model, feature_extractor=feature_extractor))
     
