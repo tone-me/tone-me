@@ -1,9 +1,10 @@
-Flask
+gunicorn
+flask
 Werkzeug
-Flask-CORS
+flask-CORS
 transformers
 librosa
 torch
 pydub
 pinyin-jyutping-sentence
-gunicorn
+jsonify
