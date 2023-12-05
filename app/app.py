@@ -150,6 +150,7 @@ if __name__ == "__main__":
     # for rule in app.url_map.iter_rules():
     #     app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
     app.logger.info("hello world")
+    print("printed hello world")
     model_name = "cge7/wav2vec2-base-version3"
     model = AutoModelForAudioClassification.from_pretrained(model_name)
     feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
