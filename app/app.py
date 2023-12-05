@@ -10,6 +10,7 @@ from pydub import AudioSegment
 from re import compile as _Re
 import pinyin_jyutping_sentence
 from logging.config import dictConfig
+import logging
 
 dictConfig({
     'version': 1,
@@ -28,10 +29,7 @@ dictConfig({
 })
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "http://localhost:10000"]}})
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+CORS(app)
 
 @app.route("/fetch_audio", methods=["POST"])
 def process_audio():
@@ -137,11 +135,13 @@ def evaluate_model(path_to_audio):
     return torch.argmax(logits, dim=-1).item()
 
 if __name__ == "__main__":
-    app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
-    for rule in app.url_map.iter_rules():
-        app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
-    print('hello world', flush=True)
-    app.logger.info("hello world")
+    logging.basicConfig(level=logging.DEBUG)
+    logging.info('This is an info message')
+
+    # app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
+    # for rule in app.url_map.iter_rules():
+    #     app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
+    # app.logger.info("hello world")
     model_name = "cge7/wav2vec2-base-version3"
     model = AutoModelForAudioClassification.from_pretrained(model_name)
     feature_extractor = AutoFeatureExtractor.from_pretrained(model_name)
