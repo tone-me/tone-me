@@ -1,14 +1,7 @@
 services:
-  - name: flask-backend
-    env: python
-    buildCommand: |
-      pip install -r requirements.txt
-    startCommand: gunicorn -b 0.0.0.0:10000 app:app
-    - name: nextjs-frontend
+  - type: web
+    name: nextjs
     env: node
     buildCommand: |
-      npm install
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
+      pip install -r requirements.txt; yarn; yarn build
+    startCommand: yarn start
