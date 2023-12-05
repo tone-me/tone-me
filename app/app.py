@@ -32,7 +32,7 @@ CORS(app, resources={r"/api/*": {"origins": ["https://tone-me.onrender.com/", "h
 app.logger.info(os.environ.get("RENDER_EXTERNAL_HOSTNAME"))
 for rule in app.url_map.iter_rules():
         app.logger.info(f"Running on {rule.endpoint} ({rule.methods}): {rule.rule}")
-app.logger.info("Hello World")
+print('hello world', flush=True)
 @app.route("/fetch_audio", methods=["POST"])
 def process_audio():
     if request.method == "POST":
