@@ -118,11 +118,6 @@ def evaluate_model(path_to_audio):
     
     return torch.argmax(logits, dim=-1).item()
 
-'root': {
-    'level': 'INFO',
-    'handlers': ['wsgi']
-}
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(debug=True, host='0.0.0.0', port=port)
