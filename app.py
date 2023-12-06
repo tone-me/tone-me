@@ -113,6 +113,13 @@ def process_text():
         })
         return response
         
+
+
+@app.route("/", methods=["GET"])
+def health_check():
+    return jsonify({"response": "OK"}), 200
+
+
 def evaluate_model(path_to_audio):
     model = app.config['model']
     feature_extractor = app.config['feature_extractor']
