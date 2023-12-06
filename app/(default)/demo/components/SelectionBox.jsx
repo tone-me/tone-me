@@ -28,28 +28,28 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
     
     return ( <>
         <section>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
                 <div>
 
                 {/* CTA box */}
                 <form className="grid relative bg-gray-900 rounded py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden" data-aos="zoom-y-out" onSubmit = {onSubmit}>
                     <div className="grid-col-8">
                     {/* CTA content */}
-                    <div className="text-center lg:text-left lg:max-w-xl">
+                    <div className="text-center xxl:text-left xl:text-left lg:text-left md:text-left lg:max-w-xl">
                         <h3 className="h3 text-white mb-2">Input Preferences</h3>
                         <p className="text-gray-300 text-lg mb-6">What would you like to say? </p>
                         <div className="grid lg:grid-cols-2 grid-cols-1">
                         {/* CTA form */}
-                        <div className="">
-                            <div className="px-1 py-1">
+                        <div className="xxl:pr-2 xl:pr-2 lg:pr-2">
+                            <div className="py-1">
                                 <label className="text-white block" htmlFor="text-input">
                                     Sentence<span className="text-red-500">*</span>
                                 </label>
                                 <input className="form-input block w-full appearance-none bg-gray-800 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" name="text-input" id="text-input" type="text-input" placeholder="中国" required />
                             </div>
                         </div>
-                        <div className="">
-                            <div className="px-2 py-1">
+                        <div>
+                            <div className="py-1">
                                 <label className="text-white block">Tones</label>
                                 <input className="form-input block w-full appearance-none bg-gray-800 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" name="tone-input" id="tone-input" type="tone-input" placeholder="1 4 2..." />                    
                             </div>                       
