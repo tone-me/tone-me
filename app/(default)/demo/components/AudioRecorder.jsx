@@ -195,18 +195,8 @@ const AudioRecorder = ({
                           <button
                             onClick={stopRecording}
                             type="button"
-                            className="ml-2 flex items-center justify-center bg-red-400 hover:bg-red-500 rounded-full w-20 h-20 focus:outline-none"
                           >
-                            <svg
-                              className="h-12 w-12 "
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                fill="white"
-                                d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"
-                              />
-                            </svg>
+                            <img width="75px" src="start recording.png"></img>
                           </button>
                           <p className="text-gray-300">Stop Recording</p>
                         </>
@@ -244,15 +234,6 @@ const AudioRecorder = ({
                                     <option value={1.5}>1.5x</option>
                                   </select>
                                 </label>
-                              </div>
-                              <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded col-span-7 text-center">
-                                <a
-                                  download
-                                  href={audio}
-                                  className="download-link"
-                                >
-                                  Download Audio
-                                </a>
                               </div>
                             </div>
                           </div>
