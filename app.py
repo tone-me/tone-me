@@ -64,23 +64,28 @@ def predict_audio():
     # if 'path_to_audio' not in session:
     #     print("something fucked up in between")
     path_to_audio = request.json['path_to_audio']
+    print(path_to_audio)
     audio = AudioSegment.from_file(path_to_audio)
+    print("got the audio loaded")
     predicted_labels = []
     for i in range(len(breakpoints)-1):
+        print(f"processing syllable {i}")
         start_time = breakpoints[i]*1000
         end_time = breakpoints[i+1]*1000
         cut_audio = audio[start_time:end_time]
         syllable_path = f"./public/syllables/chunk{i}.wav"
         with open(syllable_path, "w") as f:
              f.write("")
+        print(f"wrote sylalble {i}")
         cut_audio.export(syllable_path, format="wav")
         predicted_labels.append(evaluate_model(syllable_path))
+    print("finished processing syllables")
     tones = request.json["tones"]
     return_list = []
     for pred, tone in zip(predicted_labels, tones):
         correctness = int(pred) == int(tone)
         return_list.append({"prediction": int(pred), "correctness": correctness, "expected": int(tone)})
-
+    print("get to return statement")
     return jsonify({"result": return_list}), 200
 
 def parse(string):
