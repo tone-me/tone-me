@@ -155,7 +155,7 @@ const AudioRecorder = ({
         <div>
           {/* CTA box */}
           <form
-            className="grid relative bg-gray-900 rounded pt-10 pb-2 px-8 md:pt-16 md:pt-10 md:px-12 shadow-2xl overflow-hidden"
+            className="grid relative bg-gray-900 rounded pt-10 pb-2 px-10 md:pt-16 shadow-2xl overflow-hidden"
             data-aos="zoom-y-out"
           >
             <div className="grid-col-8">
@@ -203,7 +203,8 @@ const AudioRecorder = ({
                       ) : null}
                     </div>
                   </div>
-                  <div className="col-span-8">
+                  <div className="lg:col-span-1 md:col-span-1"></div>
+                  <div className="lg:col-span-8 md:col-span-8 col-span-12">
                     {audio ? (
                       <>
                         <div>
