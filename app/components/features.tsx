@@ -108,7 +108,7 @@ export default function Features() {
                       2. Analysis
                     </div>
                     <div className="text-gray-600">
-                      Our software predicts tone(s) from the audio and compares it
+                      Our software predicts tone(s) from the audio and compares
                       to the intended one(s).
                     </div>
                   </div>
