@@ -37,7 +37,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
                     {/* CTA content */}
                     <div className="text-center lg:text-left lg:max-w-xl">
                         <h3 className="h3 text-white mb-2">Input Preferences</h3>
-                        <p className="text-gray-300 text-lg mb-6">Insert the sentence (in Chinese) which you will say, and if you would like, for higher accuracy, input preferred tone preferences.</p>
+                        <p className="text-gray-300 text-lg mb-6">What would you like to say? </p>
                         <div className="grid lg:grid-cols-2 grid-cols-1">
                         {/* CTA form */}
                         <div className="">

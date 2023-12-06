@@ -154,7 +154,7 @@ const AudioRecorder = ({
         <div>
           {/* CTA box */}
           <form
-            className="grid relative bg-gray-900 rounded py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden"
+            className="grid relative bg-gray-900 rounded pt-10 pb-2 px-8 md:pt-16 md:pt-10 md:px-12 shadow-2xl overflow-hidden"
             data-aos="zoom-y-out"
           >
             <div className="grid-col-8">

@@ -13,7 +13,7 @@ export default function FeaturesBlocks() {
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
             <h2 className="h2 mb-4">Machine Learning</h2>
-            <p className="text-xl text-gray-600">Our tone classifier is a finetuned version of Facebook"s wav2vec2 transformer for speech recognition. We finetuned it on the aishell-3 Mandarin corpus, having leveraged Whisper to split corpus sentences into syllables.</p>
+            <p className="text-xl text-gray-600">Our tone classifier is a finetuned version of Facebook's wav2vec2 transformer for speech recognition. We finetuned it on the aishell-3 Mandarin corpus, leveraging Whisper to split corpus sentences into syllables.</p>
           </div>
 
           {/* Items */}
@@ -33,7 +33,7 @@ export default function FeaturesBlocks() {
                 </g>
               </svg>
               <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">wav2vec2</h4>
-              <p className="text-gray-600 text-center">Facebook"s speech recognition model pretrained on 960 h of unlabeled audio, learning discrete speech units in a self-supervised way. </p>
+              <p className="text-gray-600 text-center">Facebook's speech recognition model pretrained on 960 h of unlabeled audio, learning discrete speech units in a self-supervised way. </p>
             </div>
 
             {/* 2nd item */}
@@ -65,8 +65,8 @@ export default function FeaturesBlocks() {
                   </g>
                 </g>
               </svg>
-              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">&quot;Whisper + stable-ts&quot;</h4>
-              <p className="text-gray-600 text-center">&quot;A framework to timestamp individual syllables in a sentence audio (applied to aishell-3 to generate training data).&quot;</p>
+              <h4 className="text-xl font-bold leading-snug tracking-tight mb-1">Whisper + stable-ts</h4>
+              <p className="text-gray-600 text-center">A framework to timestamp individual syllables in a sentence audio (applied to aishell-3 to generate training data).</p>
             </div>
 
           </div>

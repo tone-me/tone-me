@@ -113,15 +113,16 @@ export default function Home() {
     <main>
       <div>
         <Header />
-        <h1 className="prose transform -translate-y-1/2 text-xl mx-2">
-          Version 4. For the below text, first, submit the Chinese sentence or
-          phrase you want to say on the left. Then record yourself saying that
-          using the microphone on the right. <br></br>
-          <br></br>Afterwards, you have to manually indicate where the syllable
-          breaks in your audio are. Press the white Start button that will show
+        <h1 className="prose transform -translate-y-1/2 text-xl mx-2 pl-10 pr-10">
+          First, submit the Chinese sentence or phrase you want to say on the left.
+	  For higher accuracy, you may optionally submit the intended tones
+	 (especially if your sentence contains ambiguous characters).
+	  Then record yourself saying that using the microphone on the right.
+	  Afterwards, indicate where the syllable breaks in your audio are.
+	  Press the white Start button that will show
           up. Play the audio (you can adjust playback speed), and every time you
-          get to a break between two syllables, press mark syllable. Once you're
-          done, press Stop.
+          get to a break between two syllables, press "Mark syllable". Once you're
+          done, press "Stop".
         </h1>
         <div className="relative w-screen mx-auto px-4 sm:px-6 transform -translate-y-1/8 flex flex-row items-center justify-center">
           <div className="grid grid-cols-12 pb-12 md:pb-20 container">
