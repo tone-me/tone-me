@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "start": "concurrently \"next start\" \"export PATH=$PATH:/usr/local/python3/bin:/opt/render/.local/bin:/opt/render/.local/lib/python3.7/site-packages:/usr/local/lib/python3.7/dist-packages && if lsof -Pi :10000 -sTCP:LISTEN -t >/dev/null ; then pkill -f gunicorn ; fi && gunicorn -b 0.0.0.0:10000 app:app\"",
+    "start": "next start",
     "lint": "next lint",
     "dev": "concurrently \"next dev\" \"gunicorn -b 0.0.0.0:10000 app:app\""
   },

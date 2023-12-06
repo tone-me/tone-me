@@ -9,8 +9,6 @@ import os
 from pydub import AudioSegment
 from re import compile as _Re
 import pinyin_jyutping_sentence
-import logging
-import sys
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +16,7 @@ def create_app():
     app.config['feature_extractor'] = AutoFeatureExtractor.from_pretrained("cge7/wav2vec2-base-version3")
     app.config['tones'] = []
     app.config['text'] = []
+    app.config['path_to_audio'] = ""
     return app
 
 app = create_app() 
@@ -31,8 +30,6 @@ def process_audio():
 
         audio_file = request.files.get("audio")
         audio_data = audio_file.read()
-
-        global path_to_audio
         # print(audio_data)
         script_directory = os.path.dirname(os.path.realpath(__file__))
         path_to_audio = os.path.join(script_directory, "recording.wav")
