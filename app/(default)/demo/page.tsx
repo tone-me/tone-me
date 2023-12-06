@@ -113,13 +113,13 @@ export default function Home() {
     <main>
       <div>
         <Header />
-        <h1 className="prose transform -translate-y-1/2 text-xl mx-2 pl-10 pr-10">
+        <h1 className="text-xl pl-10 pr-10 pt-12">
           First, submit the Chinese sentence or phrase you want to say on the left.
-	  For higher accuracy, you may optionally submit the intended tones
-	 (especially if your sentence contains ambiguous characters).
-	  Then record yourself saying that using the microphone on the right.
-	  Afterwards, indicate where the syllable breaks in your audio are.
-	  Press the white Start button that will show
+	        For higher accuracy, you may optionally submit the intended tones
+	        (especially if your sentence contains ambiguous characters).
+	        Then record yourself saying that using the microphone on the right.
+	        Afterwards, indicate where the syllable breaks in your audio are.
+	        Press the white Start button that will show
           up. Play the audio (you can adjust playback speed), and every time you
           get to a break between two syllables, press "Mark syllable". Once you're
           done, press "Stop".
