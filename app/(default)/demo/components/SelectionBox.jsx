@@ -7,7 +7,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
         setTonestring(formData.get("tone-input"));
         let production = true;
         const api_key = process.env.APIKEY;
-        let url = "http://0.0.0.0:10000/fetch_text"
+        let url = "https://tone-me-4.onrender.com/fetch_text"
         try {
             const response = await fetch(url, {
               method: "POST",
@@ -28,7 +28,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
     
     return ( <>
         <section>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12">
+            <div className="max-w-6xl mx-auto xxl:px-4 xl:px-4 lg:px-4">
                 <div>
 
                 {/* CTA box */}

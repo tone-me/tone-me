@@ -8,7 +8,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
     formData.append("audio", audioBlob, "audio.wav");
     let production = true;
     const api_key = process.env.APIKEY
-    let url = "http://0.0.0.0:10000/fetch_audio";
+    let url = "https://tone-me-4.onrender.com/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -29,7 +29,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 const fetchPreds = async (boundaries, setPredictionOutput) => {
   try {
     let production = true;
-    let url = "http://0.0.0.0:10000/predict_audio";
+    let url = "https://tone-me-4.onrender.com/predict_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -150,7 +150,7 @@ const AudioRecorder = ({
   }, []);
   return (
     <section>
-      <div className="">
+      <div>
         <div>
           {/* CTA box */}
           <form
@@ -158,37 +158,24 @@ const AudioRecorder = ({
             data-aos="zoom-y-out"
           >
             <div className="grid-col-8">
-              <div className="text-center lg:text-left lg:max-w-xl">
+              <div className="items-center lg:items-left md:items-left lg:max-w-xl">
                 <h3 className="h3 text-white mb-2">Input Audio</h3>
                 <p className="text-gray-300 text-lg mb-6">
                   After recording your sentence, indicate the syllable breaks in
                   your audio.
                 </p>
                 <div className="audio-controls grid grid-cols-12">
-                  <div className="col-span-4">
-                    <div>
+                  <div className="lg:col-span-3 md:col-span-3 lg:items-left md:items-left col-span-12 items-center">
+                    <div className="items-center justify-center">
                       {!permission ? (
                         <>
                           <button
                             onClick={getMicrophonePermission}
                             type="button"
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="#FFD4D4"
-                              viewBox="0 0 24 24"
-                              strokeWidth={1.5}
-                              stroke="#D70040"
-                              className="w-24 h-24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
-                              />
-                            </svg>
+                            <img width="75px" src="get microphone.png"></img>
                           </button>
-                          <p>Get Microphone</p>
+                          <p className="text-gray-300">Get Microphone</p>
                         </>
                       ) : null}
                       {permission && recordingStatus === "inactive" ? (
@@ -196,18 +183,8 @@ const AudioRecorder = ({
                           <button
                             onClick={startRecording}
                             type="button"
-                            className="ml-2 flex items-center justify-center bg-blue-400 hover:bg-blue-500 rounded-full w-20 h-20 focus:outline-none"
                           >
-                            <svg
-                              viewBox="0 0 256 256"
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-12 h-12 text-white"
-                            >
-                              <path
-                                fill="currentColor" // Change fill color to the desired color
-                                d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64a48.05 48.05 0 0 0 48 48ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V232a8 8 0 0 1-16 0v-24.4A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0a64 64 0 0 0 128 0a8 8 0 0 1 16 0a80.11 80.11 0 0 1-72 79.6Z"
-                              />
-                            </svg>
+                            <img width="75px" src="start recording.png"></img>
                           </button>
                           <p className="text-gray-300">Start Recording</p>
                         </>
