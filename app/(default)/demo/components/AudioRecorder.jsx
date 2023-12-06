@@ -8,7 +8,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
     formData.append("audio", audioBlob, "audio.wav");
     let production = true;
     const api_key = process.env.APIKEY
-    let url = "https://tone-me-4:10000/fetch_audio";
+    let url = "https://tone-me-4:3000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
@@ -29,7 +29,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 const fetchPreds = async (boundaries, setPredictionOutput) => {
   try {
     let production = true;
-    let url = "https://tone-me-4:10000/predict_audio";
+    let url = "https://tone-me-4:3000/predict_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
