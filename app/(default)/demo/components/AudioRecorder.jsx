@@ -204,7 +204,7 @@ const AudioRecorder = ({
                     </div>
                   </div>
                   <div className="lg:col-span-1 md:col-span-1"></div>
-                  <div className="lg:col-span-8 md:col-span-8 col-span-12">
+                  <div className="lg:col-span-8 md:col-span-8 col-span-12 lg:pt-0 md:pt-0 pt-10 pb-10">
                     {audio ? (
                       <>
                         <div>
@@ -216,26 +216,24 @@ const AudioRecorder = ({
                               controls
                               className="w-full"
                             ></audio>
-                            <div className="grid grid-cols-12 pt-2">
-                              <div className="col-span-5 pt-2">
-                                <label>
-                                  <span className="text-gray-300">Speed</span>
-                                  <select
-                                    className="ml-2 rounded"
-                                    value={speed}
-                                    onChange={(e) =>
-                                      handleSpeedChange(
-                                        parseFloat(e.target.value)
-                                      )
-                                    }
-                                  >
-                                    <option value={0.25}>0.25x</option>
-                                    <option value={0.5}>0.5x</option>
-                                    <option value={1.0}>1.0x</option>
-                                    <option value={1.5}>1.5x</option>
-                                  </select>
-                                </label>
-                              </div>
+                            <div className="pt-2">
+                              <label>
+                                <span className="text-gray-300">Speed</span>
+                                <select
+                                  className="ml-2 rounded"
+                                  value={speed}
+                                  onChange={(e) =>
+                                    handleSpeedChange(
+                                      parseFloat(e.target.value)
+                                    )
+                                  }
+                                >
+                                  <option value={0.25}>0.25x</option>
+                                  <option value={0.5}>0.5x</option>
+                                  <option value={1.0}>1.0x</option>
+                                  <option value={1.5}>1.5x</option>
+                                </select>
+                              </label>
                             </div>
                           </div>
                         </div>
@@ -246,27 +244,27 @@ const AudioRecorder = ({
                         </div>
 
                         <div
-                          className="inline-flex rounded-md shadow-sm pt-2 text-gray-300"
+                          className="inline-flex rounded-md shadow-sm pt-2 text-gray-300 w-full"
                           role="group"
                         >
                           <button
                             onClick={() => setMarkSyllables(true)}
                             type="button"
-                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+                            className="w-1/6 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                           >
                             Start
                           </button>
                           <button
                             onClick={captureTime}
                             type="button"
-                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+                            className="w-2/6 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                           >
                             Mark syllable
                           </button>
                           <button
                             onClick={deleteTime}
                             type="button"
-                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+                            className="w-2/6 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-300 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                           >
                             Delete last
                           </button>
@@ -285,7 +283,7 @@ const AudioRecorder = ({
                               );
                             }}
                             type="button"
-                            className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+                            className="w-1/6 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
                           >
                             Stop
                           </button>
