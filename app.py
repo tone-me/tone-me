@@ -9,8 +9,6 @@ import os
 from pydub import AudioSegment
 from re import compile as _Re
 import pinyin_jyutping_sentence
-import logging
-import sys
 
 def create_app():
     app = Flask(__name__)
@@ -115,7 +113,7 @@ def process_text():
         
 
 
-@app.route("/healthz", methods=["GET"])
+@app.route("/", methods=["GET"])
 def health_check():
     print("health checks")
     return jsonify({"response": "OK"}), 200
