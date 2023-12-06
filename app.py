@@ -113,7 +113,7 @@ def process_text():
         
 
 
-@app.route("/", methods=["GET"])
+@app.route("/healthz", methods=["GET"])
 def health_check():
     print("health checks")
     return jsonify({"response": "OK"}), 200
