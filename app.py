@@ -117,6 +117,7 @@ def process_text():
 
 @app.route("/", methods=["GET"])
 def health_check():
+    print("health checks")
     return jsonify({"response": "OK"}), 200
 
 
