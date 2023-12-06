@@ -1,7 +1,8 @@
 #goal: expose endpoints of ai transformer model 
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
+# from flask_session import Session
 from transformers import AutoModelForAudioClassification, AutoFeatureExtractor
 import librosa
 import torch
@@ -14,9 +15,14 @@ def create_app():
     app = Flask(__name__)
     app.config['model'] = AutoModelForAudioClassification.from_pretrained("cge7/wav2vec2-base-version3")
     app.config['feature_extractor'] = AutoFeatureExtractor.from_pretrained("cge7/wav2vec2-base-version3")
-    app.config['tones'] = []
-    app.config['text'] = []
-    app.config['path_to_audio'] = ""
+    # app.secret_key = 'SECRET_KEY'
+    # app.config["SESSION_PERMANENT"] = False
+    # app.config["SESSION_TYPE"] = "filesystem"
+    # Session(app)
+
+    # app.config['tones'] = []
+    # app.config['text'] = []
+    # app.config['path_to_audio'] = ""
     return app
 
 app = create_app() 
@@ -33,7 +39,10 @@ def process_audio():
         # print(audio_data)
         script_directory = os.path.dirname(os.path.realpath(__file__))
         path_to_audio = os.path.join(script_directory, "recording.wav")
-        app.config['path_to_audio'] = path_to_audio
+        # session['path_to_audio'] = path_to_audio
+        # session.modified = True
+        # if 'path_to_audio' not in session:
+        #     print("yeah path_to_audio isn't in the session")
         # path_to_audio2 = os.path.join(script_directory, "recording2.wav")
         # Set metadata for the WAV file
         # channels = 2
@@ -52,7 +61,9 @@ def predict_audio():
     breakpoints = request.json["breakpoints"]
     # print(return_list)
     breakpoints.insert(0, 0)
-    path_to_audio = app.config['path_to_audio']
+    # if 'path_to_audio' not in session:
+    #     print("something fucked up in between")
+    path_to_audio = request.json['path_to_audio']
     audio = AudioSegment.from_file(path_to_audio)
     predicted_labels = []
     for i in range(len(breakpoints)-1):
@@ -64,7 +75,7 @@ def predict_audio():
              f.write("")
         cut_audio.export(syllable_path, format="wav")
         predicted_labels.append(evaluate_model(syllable_path))
-    tones = app.config['tones']
+    tones = request.json["tones"]
     return_list = []
     for pred, tone in zip(predicted_labels, tones):
         correctness = int(pred) == int(tone)
@@ -99,14 +110,14 @@ def process_text():
         if not request.json or "text" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No text provided"}), 400
         if request.json["tones"]:
-            app.config['tones']= parse(request.json["tones"])
+            tones = parse(request.json["tones"])
         else:
-            app.config['tones']= extract_tones(request.json["text"])
-        app.config['text'] = split_unicode_chrs(request.json["text"])
+            tones = extract_tones(request.json["text"])
+        text = split_unicode_chrs(request.json["text"])
         
         response = jsonify({
-             "text": app.config['text'],
-             "tones": app.config['tones']
+             "text": text,
+             "tones": tones
         })
         return response
         

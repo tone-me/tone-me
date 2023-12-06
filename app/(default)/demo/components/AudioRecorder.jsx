@@ -6,13 +6,13 @@ const fetchData = async (audioBlob, setAudioPath) => {
   try {
     const formData = new FormData();
     formData.append("audio", audioBlob, "audio.wav");
-    let production = true;
-    const api_key = process.env.APIKEY
-    let url = "https://tone-me-4.onrender.com/fetch_audio";
+    let production = false;
+    let url = production ? "https://tone-me-4.onrender.com/fetch_audio" : "http://0.0.0.0:10000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
       body: formData,
+      credentials: "same-origin",
     });
 
     if (!response.ok) {
@@ -26,17 +26,18 @@ const fetchData = async (audioBlob, setAudioPath) => {
   }
 };
 
-const fetchPreds = async (boundaries, setPredictionOutput) => {
+const fetchPreds = async (boundaries, setPredictionOutput, inputText, tonestring, audioPath) => {
   try {
-    let production = true;
-    let url = "https://tone-me-4.onrender.com/predict_audio";
+    let production = false;
+    let url = production ? "https://tone-me-4.onrender.com/predict_audio" : "http://0.0.0.0:10000/predict_audio";
     const response = await fetch(url, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ breakpoints: boundaries }),
+      credentials: "same-origin",
+      body: JSON.stringify({ breakpoints: boundaries, text: inputText, tones: tonestring, path_to_audio: audioPath}),
     });
     const data = await response.json();
     let preds = data.result;
@@ -54,6 +55,8 @@ const AudioRecorder = ({
   setBoundaries,
   audioPath,
   setAudioPath,
+  inputText,
+  tonestring
 }) => {
   const mimeType = "audio/wav";
   const [permission, setPermission] = useState(false);
@@ -295,7 +298,10 @@ const AudioRecorder = ({
                               );
                               fetchPreds(
                                 boundaries.concat([audioRef.current.duration]),
-                                setPredictionOutput
+                                setPredictionOutput,
+                                inputText,
+                                tonestring,
+                                audioPath
                               );
                             }}
                             type="button"

@@ -114,21 +114,19 @@ export default function Home() {
       <div>
         <Header />
         <h1 className="text-xl pl-10 pr-10 pt-12">
-          First, submit the Chinese sentence or phrase you want to say on the left.
-	        For higher accuracy, you may optionally submit the intended tones
-	        (especially if your sentence contains ambiguous characters).
-	        Then record yourself saying that using the microphone on the right.
-	        Afterwards, indicate where the syllable breaks in your audio are.
-	        Press the white Start button that will show
-          up. Play the audio (you can adjust playback speed), and every time you
-          get to a break between two syllables, press "Mark syllable". Once you're
-          done, press "Stop".
+          First, submit the Chinese sentence or phrase you want to say on the
+          left. For higher accuracy, you may optionally submit the intended
+          tones (especially if your sentence contains ambiguous characters).
+          Then record yourself saying that using the microphone on the right.
+          Afterwards, indicate where the syllable breaks in your audio are.
+          Press the white Start button that will show up. Play the audio (you
+          can adjust playback speed), and every time you get to a break between
+          two syllables, press "Mark syllable". Once you're done, press "Stop".
         </h1>
         <div className="pt-12 relative w-screen mx-auto px-4 sm:px-6 flex flex-row items-center justify-center">
           <div className="grid grid-cols-12 pb-12 md:pb-20 container">
             <div className="lg:col-span-6 col-span-12">
               <SelectionBox
-                tonestring={tonestring}
                 setTonestring={setTonestring}
                 setInputText={setInputText}
               ></SelectionBox>
@@ -141,6 +139,8 @@ export default function Home() {
                 setBoundaries={setBoundaries}
                 audioPath={audioPath}
                 setAudioPath={setAudioPath}
+                inputText={inputText}
+                tonestring={tonestring}
               ></AudioRecorder>
             </div>
           </div>

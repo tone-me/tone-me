@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 /* eslint-disable react/no-unescaped-entities */
-const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
+const SelectionBox = ( {setTonestring, setInputText} ) => {
     const onSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
-        let production = true;
+        let production = false;
         const api_key = process.env.APIKEY;
-        let url = "https://tone-me-4.onrender.com/fetch_text"
+        let url = production ? "https://tone-me-4.onrender.com/fetch_text" : "http://0.0.0.0:10000/fetch_text";
         try {
             const response = await fetch(url, {
               method: "POST",
@@ -15,6 +15,7 @@ const SelectionBox = ( {tonestring, setTonestring, setInputText} ) => {
               headers: {
                 "Content-Type": "application/json",
               },
+              credentials: "same-origin",
               body: JSON.stringify({ tones: formData.get("tone-input"), text: formData.get("text-input") }),
             });
             const data = await response.json() 

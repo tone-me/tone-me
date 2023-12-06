@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev": "concurrently \"next dev\" \"gunicorn -b 0.0.0.0:10000 app:app\""
+    "dev":  "next dev" 
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
