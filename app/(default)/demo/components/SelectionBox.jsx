@@ -5,7 +5,7 @@ const SelectionBox = ( {setTonestring, setInputText} ) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
-        let production = false;
+        let production = true;
         const api_key = process.env.APIKEY;
         let url = production ? "https://tone-me-4.onrender.com/fetch_text" : "http://0.0.0.0:10000/fetch_text";
         try {
@@ -15,7 +15,6 @@ const SelectionBox = ( {setTonestring, setInputText} ) => {
               headers: {
                 "Content-Type": "application/json",
               },
-              credentials: "same-origin",
               body: JSON.stringify({ tones: formData.get("tone-input"), text: formData.get("text-input") }),
             });
             const data = await response.json() 
