@@ -10,6 +10,11 @@ import os
 from pydub import AudioSegment
 from re import compile as _Re
 import pinyin_jyutping_sentence
+import requests
+
+API_URL = "https://api-inference.huggingface.co/models/cge7/wav2vec2-base-version3"
+headers = {"Authorization": "Bearer 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"}
+
 
 def create_app():
     app = Flask(__name__)
@@ -79,7 +84,7 @@ def predict_audio():
                 f.write("")
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
-            predicted_labels.append(evaluate_model(syllable_path))
+            predicted_labels.append(query(syllable_path))
             
         print("finished processing syllables")
         tones = request.json["tones"]
@@ -135,6 +140,17 @@ def health_check():
     print("health checks")
     return jsonify({"response": "OK"}), 200
 
+def query(filename):
+    with open(filename, "rb") as f:
+        data = f.read()
+    response = requests.post(API_URL, data=data).json()
+    best_label = 0
+    best_score = 0
+    for elem in response:
+        if elem["score"] > best_score:
+            best_label = elem["label"]
+            best_score = elem["score"]
+    return best_label 
 
 def evaluate_model(path_to_audio):
     model = app.config['model']
@@ -142,7 +158,6 @@ def evaluate_model(path_to_audio):
     wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
     input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
     logits = model(input_values).logits
-    return 2
     
     return torch.argmax(logits, dim=-1).item()
 
@@ -165,6 +180,7 @@ if __name__ == "__main__":
     # app.logger.setLevel(logging.INFO)
     # app.logger.info("hello world")
     # print("printed hello world")
+
     port = int(os.environ.get("PORT", 10000))
     app.run(debug=True, host='0.0.0.0', port=port)  
     
