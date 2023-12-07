@@ -56,7 +56,7 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                 </td>
                 <td>
                   {
-                      <audio src={"syllables/chunk" + row_dict['id'].toString() + ".wav"} type="audio/wav" controls></audio>
+                      <audio src={production ? "./public/syllables/chunk"+ row_dict['id'].toString() + ".wav" : "syllables/chunk" + row_dict['id'].toString() + ".wav" } type="audio/wav" controls></audio>
                   }
                 </td>
               </tr>
