@@ -79,8 +79,9 @@ def predict_audio():
                 f.write("")
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
+            return jsonify({"result": "returns before the model evaluation"}), 200
             predicted_labels.append(evaluate_model(syllable_path))
-            return jsonify({"result": "Got the first syllable loaded"}), 200
+            
         print("finished processing syllables")
         tones = request.json["tones"]
         return_list = []
