@@ -7,6 +7,7 @@ import AudioRecorder from "./components/AudioRecorder";
 import SelectionBox from "./components/SelectionBox";
 import Header from "./components/Header";
 import Table from "./components/Table";
+import Footer from "../../components/footer";
 
 // dependencies: {
 //   "@testing-library/jest-dom": "^5.17.0",
@@ -112,28 +113,18 @@ export default function Home() {
   return (
     <main>
       <div>
-        <Header />
-        <h1 className="text-xl pl-10 pr-10 pt-12">
-          First, submit the Chinese sentence or phrase you want to say on the
-          left. For higher accuracy, you may optionally submit the intended
-          tones (especially if your sentence contains ambiguous characters).
-          Then record yourself saying that using the microphone on the right.
-          Afterwards, indicate where the syllable breaks in your audio are.
-          Press the white Start button that will show up. Play the audio (you
-          can adjust playback speed), and every time you get to a break between
-          two syllables, press "Mark syllable". Once you're done, press "Stop".
-        </h1>
+        <Header />    
         <div className="pt-12 relative w-screen mx-auto px-4 sm:px-6 flex flex-row items-center justify-center">
-          <div className="grid grid-cols-12 pb-12 md:pb-20 container">
-            <div className="lg:col-span-6 col-span-12">
+          <div className="grid grid-cols-12 container">
+            <div className="lg:col-span-6 col-span-12 pr-0 lg:pr-4">
               <SelectionBox
                 setTonestring={setTonestring}
                 setInputText={setInputText}
               ></SelectionBox>
             </div>
-            <div className="lg:col-span-6 col-span-12 rounded bg-gray-900">
+            <div className="lg:col-span-6 col-span-12 rounded bg-gray-900 mt-4 pb-12 lg:pb-0 lg:mt-0" data-aos="zoom-y-out">
               <AudioRecorder
-                predictionOutput={predictionOutput}
+                predictionOutput={predictionOutput}                
                 setPredictionOutput={setPredictionOutput}
                 boundaries={boundaries}
                 setBoundaries={setBoundaries}
@@ -146,7 +137,7 @@ export default function Home() {
           </div>
         </div>
         {arrayEquals(old_tones, tonestring) && (
-          <div className="w-screen flex items-center justify-center">
+          <div className="pt-8 container relative w-screen mx-auto flex flex-row items-center justify-center">
             <Table
               tonestring={tonestring}
               predictionOutput={predictionOutput}
@@ -157,6 +148,9 @@ export default function Home() {
         {tonestring}
         {inputText}
       </div>
-    </main>
+      <div className="pt-12">
+      <Footer />
+      </div>
+    </main>    
   );
 }

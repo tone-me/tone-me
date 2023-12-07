@@ -27,13 +27,13 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
         <table>
           <thead>
             <tr>
-              <th> Word </th>
+              <th style={{ borderTopLeftRadius: '10px' }}> Word </th>
               <th> Pronunciation </th>
               <th> Correct Pronunciation </th>
-              <th>Your Pronunciation </th>
+              <th style={{ borderTopRightRadius: '10px' }}>Your Pronunciation </th>
               </tr>
           </thead>
-          <tbody>
+          <tbody style={{ borderRadius: '10px' }}>
             {data.map( (row_dict, i) => { return (
               <tr key={row_dict['id']}> 
                 <td>
@@ -49,12 +49,12 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                 </td>
                 <td>
                   {row_dict['word'] === textToRead ? (
-                    <p>Speaking...</p>
+                    <p>Speaking 🗣️</p>
                   ) : (
-                    <button onClick={() => readText(row_dict['word'], setTextToRead)}>Listen</button>
+                    <button onClick={() => readText(row_dict['word'], setTextToRead)}>Listen 🔊</button>
                   )}
                 </td>
-                <td>
+                <td style={{ display: 'flex', justifyContent:'center', alignItems:'center'}}>
                   {
                       <audio src={"syllables/chunk" + row_dict['id'].toString() + ".wav"} type="audio/wav" controls></audio>
                   }
