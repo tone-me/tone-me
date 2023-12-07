@@ -67,7 +67,6 @@ def predict_audio():
         path_to_audio = request.json['path_to_audio']
         print(path_to_audio)
         audio = AudioSegment.from_file(path_to_audio)
-        return jsonify({"result": "Got to the audio loaded"}), 200
         print("got the audio loaded")
         predicted_labels = []
         for i in range(len(breakpoints)-1):
@@ -81,6 +80,7 @@ def predict_audio():
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
             predicted_labels.append(evaluate_model(syllable_path))
+            return jsonify({"result": "Got the first syllable loaded"}), 200
         print("finished processing syllables")
         tones = request.json["tones"]
         return_list = []
