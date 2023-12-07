@@ -9,7 +9,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
   try {
     const formData = new FormData();
     formData.append("audio", audioBlob, "audio.wav");
-    let production = true;
+    let production = false;
     let url = production ? "https://tone-me-4.onrender.com/fetch_audio" : "http://0.0.0.0:10000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
@@ -31,7 +31,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 
 const fetchPreds = async (boundaries, setPredictionOutput, inputText, tonestring, audioPath) => {
   try {
-    let production = true;
+    let production = false;
     let url = production ? "https://tone-me-4.onrender.com/predict_audio" : "http://0.0.0.0:10000/predict_audio";
     const response = await fetch(url, {
       method: "POST",

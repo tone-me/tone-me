@@ -90,7 +90,8 @@ def predict_audio():
             new_pred = query(syllable_path)
             if new_pred is None:
                 print("another error")
-                return jsonify({"result": []}), 200
+                print(new_pred)
+                return jsonify({"result": new_pred}), 200
             predicted_labels.append(new_pred)
             
         print("finished processing syllables")
@@ -152,7 +153,7 @@ def query(filename):
         data = f.read()
     response = requests.post(API_URL, data=data).json()
     if not isinstance(response, list):
-        return None
+        return response
 
     best_label = 0
     best_score = 0
