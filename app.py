@@ -140,8 +140,8 @@ def evaluate_model(path_to_audio):
     model = app.config['model']
     feature_extractor = app.config['feature_extractor']
     wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
-    return 2
     input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
+    return 2
     os.environ["TORCH_USE_NNPACK"] = "0"
     logits = model(input_values).logits
     del os.environ["TORCH_USE_NNPACK"]
