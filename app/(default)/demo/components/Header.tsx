@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <div className="">
-      <div
+      {/* <div
         className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1"
         aria-hidden="true"
       >
@@ -33,7 +33,7 @@ const Header = () => {
             <circle cx="155" cy="443" r="64" />
           </g>
         </svg>
-      </div>
+      </div> */}
       {/* Hero content */}
       <div className="pt-32 relative w-screen mx-auto flex flex-row items-center justify-center container">
         {/* Section header */}
@@ -44,6 +44,7 @@ const Header = () => {
           </span>{" "}
         </div>
       </div>
+      <div className="mx-4 sm:mx-0">
       <div
         data-aos="zoom-y-out"
         className="mt-10 relative w-screen mx-auto flex flex-row items-center justify-center container text-xl py-10 text-left bg-gray-200 backdrop-blur-lg rounded-xl m-0"
@@ -77,6 +78,7 @@ const Header = () => {
             </li>
           </ol>
         </ol>
+      </div>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const SelectionBox = ( {setTonestring, setInputText} ) => {
     
     return ( <>
         <section>
-            <div className="max-w-6xl mx-auto xxl:px-4 xl:px-4 lg:px-4">
+            <div className="max-w-6xl mx-auto">
                 <div>
 
                 {/* CTA box */}
