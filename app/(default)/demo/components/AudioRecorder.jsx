@@ -159,9 +159,9 @@ const AudioRecorder = ({
             data-aos="zoom-y-out"
           >
             <div className="grid-col-8">
-              <div className="items-center lg:items-left md:items-left lg:max-w-xl">
-                <h3 className="h3 text-white mb-2">Input Audio</h3>
-                <p className="text-gray-300 text-lg mb-6">
+              <div className="lg:items-left md:items-left items-center lg:max-w-xl">
+                <h3 className="h3 text-white lg:text-left md:text-left mb-2">Input Audio</h3>
+                <p className="text-gray-300 text-lg lg:text-left md:text-left mb-6">
                   After recording your sentence, indicate the syllable breaks in
                   your audio.
                 </p>
