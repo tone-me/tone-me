@@ -196,7 +196,7 @@ const AudioRecorder = ({
                             onClick={stopRecording}
                             type="button"
                           >
-                            <img width="75px" src="start recording.png"></img>
+                            <img width="75px" src="stop recording.png"></img>
                           </button>
                           <p className="text-gray-300">Stop Recording</p>
                         </>
