@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "dev":  "next dev" 
+    "dev": "next dev"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -16,6 +16,7 @@
     "axios": "^1.6.2",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
+    "fix-webm-duration": "^1.0.5",
     "mic-recorder-to-mp3": "^2.2.2",
     "next": "^14.0.3",
     "react": "^18.2.0",
