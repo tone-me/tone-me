@@ -239,7 +239,7 @@ const AudioRecorder = ({
                         </div>
                         <div>
                           {boundaries.map((elem) => (
-                            <p key={elem.id}>{elem}</p>
+                            <p className="text-white" key={elem.id}>{elem}</p>
                           ))}
                         </div>
 
