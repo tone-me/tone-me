@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import "tailwindcss/tailwind.css";
 import { useEffect } from "react";
+/* eslint-disable react/no-unescaped-entities */
+
 
 const fetchData = async (audioBlob, setAudioPath) => {
   try {

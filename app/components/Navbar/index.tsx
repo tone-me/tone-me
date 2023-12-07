@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import "app/globals.css";
+/* eslint-disable react/no-unescaped-entities */
 
 const Navbar = () => {
   return (

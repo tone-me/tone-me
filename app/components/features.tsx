@@ -8,6 +8,7 @@ import Features1 from "/public/images/features-1.png";
 import Features1new from "/public/images/1.png";
 import Features2new from "/public/images/2.png";
 import Features3new from "/public/images/3.png";
+/* eslint-disable react/no-unescaped-entities */
 
 export default function Features() {
   const [tab, setTab] = useState<number>(1);
@@ -53,7 +54,9 @@ export default function Features() {
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
                 <h3 className="h3 mb-3">The Process</h3>
                 <p className="text-xl text-gray-600">
-                  Our three-step process accepts a Chinese voice recording, determines the tones in the recording, and returns feedback on the correctness of the tones.
+                  Our three-step process accepts a Chinese voice recording,
+                  determines the tones in the recording, and returns feedback on
+                  the correctness of the tones.
                 </p>
               </div>
               {/* Tabs buttons */}
@@ -75,7 +78,8 @@ export default function Features() {
                       1. Audio Input
                     </div>
                     <div className="text-gray-600">
-                      Record an audio of yourself pronouncing a character, word, phrase or sentence. Specify what you want to say.
+                      Record an audio of yourself pronouncing a character, word,
+                      phrase or sentence. Specify what you want to say.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
@@ -108,8 +112,8 @@ export default function Features() {
                       2. Analysis
                     </div>
                     <div className="text-gray-600">
-                      Our software predicts tones from the audio and compares
-                      to the intended ones.
+                      Our software predicts tones from the audio and compares to
+                      the intended ones.
                     </div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 export default function Footer() {
   return (
     <footer>
@@ -5,9 +6,11 @@ export default function Footer() {
         {/* Bottom area */}
         <div className="md:flex md:items-center md:justify-between py-4 md:py-8 border-t border-gray-200">
           {/* Copyrights note */}
-          <div className="text-sm text-gray-600 mr-4">&copy; Tone.me, by Chris, Daria, Anshul, Riddhi, and Katherine</div>
+          <div className="text-sm text-gray-600 mr-4">
+            &copy; Tone.me, by Chris, Daria, Anshul, Riddhi, and Katherine
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

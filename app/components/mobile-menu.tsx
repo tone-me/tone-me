@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react/no-unescaped-entities */
 
 import { useState, useRef, useEffect } from "react";
 import { Transition } from "@headlessui/react";

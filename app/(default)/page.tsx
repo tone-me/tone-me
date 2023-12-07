@@ -47,6 +47,7 @@ import Hero from "../components/hero";
 import Features from "../components/features";
 import FeaturesBlocks from "../components/features-blocks";
 import Footer from "../components/footer";
+/* eslint-disable react/no-unescaped-entities */
 
 export default function Home() {
   return (
