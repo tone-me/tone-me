@@ -77,8 +77,11 @@ def predict_audio():
         for i in range(len(breakpoints)-1):
             print(f"processing syllable {i}")
             start_time = breakpoints[i]*1000
-            end_time = breakpoints[i+1]*1000
-            cut_audio = audio[start_time:end_time]
+            if breakpoints[i+1]:
+                end_time = breakpoints[i+1]*1000
+                cut_audio = audio[start_time:end_time]
+            else:
+                cut_audio = audio[start_time:]
             syllable_path = f"./public/syllables/chunk{i}.wav"
             with open(syllable_path, "w") as f:
                 f.write("")
