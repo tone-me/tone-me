@@ -79,7 +79,6 @@ def predict_audio():
                 f.write("")
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
-            return jsonify({"result": "returns before the model evaluation"}), 200
             predicted_labels.append(evaluate_model(syllable_path))
             
         print("finished processing syllables")
@@ -141,6 +140,7 @@ def evaluate_model(path_to_audio):
     model = app.config['model']
     feature_extractor = app.config['feature_extractor']
     wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
+    return 2
     input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
     os.environ["TORCH_USE_NNPACK"] = "0"
     logits = model(input_values).logits
