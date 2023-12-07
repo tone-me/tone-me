@@ -55,6 +55,7 @@ def process_audio():
         # sample_rate = 48000 
         with open(path_to_audio, "wb") as f:
             f.write(audio_data)
+        
         #print(path_to_audio)
 
         return jsonify({"path": path_to_audio}), 200
@@ -66,7 +67,6 @@ def predict_audio():
             return jsonify({"error": "No breakpoints provided"}), 400
         breakpoints = request.json["breakpoints"]
         # print(return_list)
-        breakpoints.insert(0, 0)
         # if 'path_to_audio' not in session:
         #     print("something fucked up in between")
         path_to_audio = request.json['path_to_audio']

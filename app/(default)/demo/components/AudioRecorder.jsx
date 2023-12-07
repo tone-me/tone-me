@@ -6,7 +6,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
   try {
     const formData = new FormData();
     formData.append("audio", audioBlob, "audio.wav");
-    let production = true;
+    let production = false;
     let url = production ? "https://tone-me-4.onrender.com/fetch_audio" : "http://0.0.0.0:10000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
@@ -20,6 +20,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 
     const data = await response.json();
     setAudioPath(data.path);
+    // setPythonAudio(data.audio); 
   } catch (error) {
     console.error("Failed to process text:", error);
   }
@@ -27,7 +28,7 @@ const fetchData = async (audioBlob, setAudioPath) => {
 
 const fetchPreds = async (boundaries, setPredictionOutput, inputText, tonestring, audioPath) => {
   try {
-    let production = true;
+    let production = false;
     let url = production ? "https://tone-me-4.onrender.com/predict_audio" : "http://0.0.0.0:10000/predict_audio";
     const response = await fetch(url, {
       method: "POST",
@@ -54,7 +55,9 @@ const AudioRecorder = ({
   audioPath,
   setAudioPath,
   inputText,
-  tonestring
+  tonestring,
+  audio,
+  setAudio
 }) => {
   const mimeType = "audio/wav";
   const [permission, setPermission] = useState(false);
@@ -62,7 +65,6 @@ const AudioRecorder = ({
   const [recordingStatus, setRecordingStatus] = useState("inactive");
   const [stream, setStream] = useState(null);
   const [audioChunks, setAudioChunks] = useState([]);
-  const [audio, setAudio] = useState(null);
   const audioRef = useRef(null);
   const [speed, setSpeed] = useState(1.0);
   const [markSyllables, setMarkSyllables] = useState(false);
@@ -75,7 +77,7 @@ const AudioRecorder = ({
   }, []);
 
   useEffect(() => {
-    setBoundaries([]);
+    setBoundaries([0]);
   }, [audio]);
   const getMicrophonePermission = async () => {
     if ("MediaRecorder" in window) {

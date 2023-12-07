@@ -1,7 +1,7 @@
 import React from "react";
 import "./table.css"
 import "app/globals.css";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 /* eslint-disable react/no-unescaped-entities */
 
 const readText = (text, setTextToRead) => {
@@ -13,8 +13,10 @@ const readText = (text, setTextToRead) => {
   window.speechSynthesis.speak(speech);
 };
 
-const Table = ({ tonestring, predictionOutput, inputText }) => {
+const Table = ({ tonestring, predictionOutput, inputText, audio, boundaries }) => {
   const [textToRead, setTextToRead] = useState('');
+  //surely nobody is using more than 25 words in their phrase
+  const audioRef = useRef(null); 
   let data = inputText.map((word, index) => {
         return {
           word: word,
@@ -22,6 +24,33 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
           id: index
         };
       });
+  
+  function playAudioSegment(audioRef, startTime, endTime) {
+    // Make sure the audioRef is defined
+    if (audioRef.current) {
+      // Set the start time
+      audioRef.current.currentTime = startTime;
+
+      // Play the audio
+      audioRef.current.play();
+
+      // Stop the audio at the end time
+      audioRef.current.addEventListener(
+        "timeupdate",
+        function handleTimeUpdate() {
+          if (audioRef.current.currentTime >= endTime) {
+            // Pause the audio when it reaches the end time
+            audioRef.current.pause();
+            // Remove the timeupdate event listener to avoid unnecessary calls
+            audioRef.current.removeEventListener(
+              "timeupdate",
+              handleTimeUpdate
+            );
+          }
+        }
+      );
+    }
+  }
   return (
     <>
         <table>
@@ -56,13 +85,16 @@ const Table = ({ tonestring, predictionOutput, inputText }) => {
                 </td>
                 <td style={{ display: 'flex', justifyContent:'center', alignItems:'center'}}>
                   {
-                      <audio src={production ? "./public/syllables/chunk"+ row_dict['id'].toString() + ".wav" : "syllables/chunk" + row_dict['id'].toString() + ".wav" } type="audio/wav" controls></audio>
+                    <>
+                      <button onClick={() => playAudioSegment(audioRef, boundaries[i], boundaries[i+1])} > Listen </button>
+                    </>
                   }
                 </td>
               </tr>
             )})}
           </tbody>
         </table>
+        <audio ref = {audioRef} src={audio} controls className = "visibility: hidden"> </audio> 
     </>
   )
 };
