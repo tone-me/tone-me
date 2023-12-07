@@ -84,7 +84,11 @@ def predict_audio():
                 f.write("")
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
-            predicted_labels.append(query(syllable_path))
+            new_pred = query(syllable_path)
+            if new_pred is None:
+                print("another error")
+                return jsonify({"result": []}), 200
+            predicted_labels.append(new_pred)
             
         print("finished processing syllables")
         tones = request.json["tones"]
@@ -144,6 +148,9 @@ def query(filename):
     with open(filename, "rb") as f:
         data = f.read()
     response = requests.post(API_URL, data=data).json()
+    if not isinstance(response, list):
+        return None
+
     best_label = 0
     best_score = 0
     for elem in response:

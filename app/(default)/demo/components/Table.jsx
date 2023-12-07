@@ -11,6 +11,7 @@ const readText = (text, setTextToRead) => {
   speech.lang = "zh-CN";
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(speech);
+  setTextToRead(" ")
 };
 
 const Table = ({ tonestring, predictionOutput, inputText, audio, boundaries }) => {
@@ -80,13 +81,13 @@ const Table = ({ tonestring, predictionOutput, inputText, audio, boundaries }) =
                   {row_dict['word'] === textToRead ? (
                     <p>Speaking 🗣️</p>
                   ) : (
-                    <button onClick={() => readText(row_dict['word'], setTextToRead)}>Listen 🔊</button>
+                    <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => readText(row_dict['word'], setTextToRead)}>Listen 🔊</button>
                   )}
                 </td>
-                <td style={{ display: 'flex', justifyContent:'center', alignItems:'center'}}>
+                <td>
                   {
                     <>
-                      <button onClick={() => playAudioSegment(audioRef, boundaries[i], boundaries[i+1])} > Listen </button>
+                      <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded" onClick={() => playAudioSegment(audioRef, boundaries[i], boundaries[i+1])} > Listen 🔊 </button>
                     </>
                   }
                 </td>

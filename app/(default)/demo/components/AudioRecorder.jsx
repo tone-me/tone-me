@@ -240,6 +240,7 @@ const AudioRecorder = ({
                           </div>
                         </div>
                         <div>
+                          <p className="text-white"> Here's where your syllable boundaries will show up (starting with 0 seconds)</p>
                           {boundaries.map((elem) => (
                             <p className="text-white" key={elem.id}>{elem}</p>
                           ))}
