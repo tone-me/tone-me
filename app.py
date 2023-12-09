@@ -63,6 +63,7 @@ def process_audio():
 @app.route("/predict_audio", methods=["POST"])
 def predict_audio():
     if request.method == "POST":
+        production = False
         if not request.json or "breakpoints" not in request.json: # Check if text is sent via JSON
             return jsonify({"error": "No breakpoints provided"}), 400
         breakpoints = request.json["breakpoints"]
@@ -87,20 +88,20 @@ def predict_audio():
                 f.write("")
             print(f"wrote sylalble {i}")
             cut_audio.export(syllable_path, format="wav")
-            new_pred = query(syllable_path)
-            if new_pred is None:
-                print("another error")
-                print(new_pred)
-                return jsonify({"result": new_pred}), 200
+            if production: 
+                new_pred = query(syllable_path)
+                if new_pred is None:
+                    print("another error")
+                    print(new_pred)
+                    return jsonify({"result": new_pred}), 200
+            else:
+                new_pred = evaluate_model(syllable_path)
             predicted_labels.append(new_pred)
-            
-        print("finished processing syllables")
         tones = request.json["tones"]
         return_list = []
         for pred, tone in zip(predicted_labels, tones):
             correctness = int(pred) == int(tone)
             return_list.append({"prediction": int(pred), "correctness": correctness, "expected": int(tone)})
-        print("get to return statement")
         return jsonify({"result": return_list}), 200
 
 def parse(string):
@@ -168,7 +169,9 @@ def evaluate_model(path_to_audio):
     feature_extractor = app.config['feature_extractor']
     wav_chunk, rate = librosa.load(path_to_audio, sr=16000)
     input_values = feature_extractor(wav_chunk, sampling_rate=rate, return_tensors = "pt").input_values
+    os.environ["TORCH_USE_NNPACK"] = "0"
     logits = model(input_values).logits
+    del os.environ["TORCH_USE_NNPACK"]
     
     return torch.argmax(logits, dim=-1).item()
 
