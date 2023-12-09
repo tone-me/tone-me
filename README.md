@@ -60,7 +60,7 @@ We used the [Data-AISHELL3](https://www.openslr.org/93/) Mandarin Speech Corpus 
   <img src="https://github.com/tone-me/tone-me/assets/88895223/84dd58d6-7c57-4675-9d21-b2c5831b4843" alt="Tone-Me pipeline architecture">
 </div>
 
-
+The code used to train the model is included in the ```model``` folder, but it wasn't written for public distribution and is only included for reference.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
