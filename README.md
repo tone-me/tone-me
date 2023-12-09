@@ -89,7 +89,7 @@ We recommend that you install the following packages within a virtual environmen
   npm install
   ```
 * pip
-* ```sh
+  ```sh
   pip install -r requirements.txt
   ```
 
@@ -98,7 +98,7 @@ Then, you can run ```python3 app.py``` in one shell, and ```npm run dev``` in an
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `License.txt` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
