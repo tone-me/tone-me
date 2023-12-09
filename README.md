@@ -41,6 +41,7 @@ Developed by Chris Ge, Daria Kryvosheieva, Anshul Gupta, Riddhi Bhagwat, & Kathe
 ## About The Project
 
 <div align="center">
+  <h2> Video Demo </h2>
   <a href="https://youtu.be/rbQpK_QUHbY">
     <img src="https://img.youtube.com/vi/rbQpK_QUHbY/0.jpg" alt="Tone-Me Demo" width=800>
   </a>
