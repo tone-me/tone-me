@@ -1,7 +1,12 @@
 {
   "name": "tone-me",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
+  "homepage": "https://github.com/tone-me/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tone-me/tone-me"
+  },
   "scripts": {
     "build": "next build",
     "start": "next start",
