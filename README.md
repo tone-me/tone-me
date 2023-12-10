@@ -116,7 +116,7 @@ Chris Ge - cge7@mit.edu
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-This project would not have been possible without the support from [AIM Labs](https://www.ai-at-mit.com/labs). We're especially grateful to Sagnik Anupam for all of his advice and help. 
+This project would not have been possible without the support from [AIM Labs](https://www.ai-at-mit.com/labs). We're especially grateful to Sagnik Anupam for all of his advice and the opportunity we had to [present](https://docs.google.com/presentation/d/1zpF4ZCvgt_rvDgFS2yuanvwExa79vGbWYwujscRgT-8/edit?usp=sharing) during Demo Day.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
