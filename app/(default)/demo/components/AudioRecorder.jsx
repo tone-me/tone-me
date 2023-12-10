@@ -6,10 +6,15 @@ import { useEffect } from "react";
 
 
 const fetchData = async (audioBlob, setAudioPath) => {
+  // sends the audio over to app.py, where it uploads the audio for future use in
+  // predicting the tones once we know where the syllables are 
+  
   try {
+    // store the audio as a file in form data
     const formData = new FormData();
     formData.append("audio", audioBlob, "audio.wav");
-    let production = false;
+    let production = false; //whether we're trying to host locally or on Render
+    //the fetch_audio refers to the function that it calls in app.py 
     let url = production ? "https://tone-me-4.onrender.com/fetch_audio" : "http://0.0.0.0:10000/fetch_audio";
     const response = await fetch(url, {
       method: "POST",
@@ -22,14 +27,17 @@ const fetchData = async (audioBlob, setAudioPath) => {
     }
 
     const data = await response.json();
+    // the response is in the form of a json {"path": file_name of where the audio is stored}
     setAudioPath(data.path);
-    // setPythonAudio(data.audio); 
   } catch (error) {
     console.error("Failed to process text:", error);
   }
 };
 
 const fetchPreds = async (boundaries, setPredictionOutput, inputText, tonestring, audioPath) => {
+
+  // send the syllable boundaries over to app.py, wait for it to calculate the predicted tones, and then store them 
+  // passing in inputText, tonestring, and audioPath here because we're unable to store values on the Flask server between calls
   try {
     let production = false;
     let url = production ? "https://tone-me-4.onrender.com/predict_audio" : "http://0.0.0.0:10000/predict_audio";
@@ -42,16 +50,15 @@ const fetchPreds = async (boundaries, setPredictionOutput, inputText, tonestring
       body: JSON.stringify({ breakpoints: boundaries, text: inputText, tones: tonestring, path_to_audio: audioPath}),
     });
     const data = await response.json();
+    // the response is in the form json { "result": [list of prediction objects for each word = {"prediction": ?, "correctness": ?, "expected": ?}}]}
     let preds = data.result;
-    setPredictionOutput(preds);
-    console.log(preds);
+    setPredictionOutput(preds); // store the prediction output in the react hook, which will then be used to update the Table.jsx
   } catch (error) {
     console.error("Failed to predict audio:", error);
   }
 };
 
 const AudioRecorder = ({
-  predictionOutput,
   setPredictionOutput,
   boundaries,
   setBoundaries,
@@ -62,34 +69,33 @@ const AudioRecorder = ({
   audio,
   setAudio
 }) => {
-  const mimeType = "audio/wav";
-  const [permission, setPermission] = useState(false);
-  const mediaRecorder = useRef(null);
-  const [recordingStatus, setRecordingStatus] = useState("inactive");
-  const [stream, setStream] = useState(null);
-  const [audioChunks, setAudioChunks] = useState([]);
-  const audioRef = useRef(null);
-  const [speed, setSpeed] = useState(1.0);
-  const [markSyllables, setMarkSyllables] = useState(false);
+  const mimeType = "audio/wav"; //the media type for our audioBlob
+  const [permission, setPermission] = useState(false); // whether or not we have microphone permission
+  const mediaRecorder = useRef(null); //reference to the MediaRecorder object that records the audio
+  const [recordingStatus, setRecordingStatus] = useState("inactive"); // recording or inactive, decides what icon we display for the microphone
+  const [stream, setStream] = useState(null); // used with the MediaRecorder 
+  const [audioChunks, setAudioChunks] = useState([]); // also used with the MediaRecorder
+  const audioRef = useRef(null); // reference to the html audio element that plays back what was recorded
+  const [speed, setSpeed] = useState(1.0); // playbackspeed of the audio element 
+  const [markSyllables, setMarkSyllables] = useState(false); // whether we've started marking syllables (i.e. has the user pressed start)
 
-  useEffect(() => {
-    // Set the default playback rate to 0.5x when the component mounts
-    if (audioRef.current) {
-      audioRef.current.playbackrate = 0.5;
-    }
-  }, []);
-
+  // reset the syllable boundaries every time we record a new audio
   useEffect(() => {
     setBoundaries([0]);
   }, [audio]);
+
+
   const getMicrophonePermission = async () => {
     if ("MediaRecorder" in window) {
       try {
+        // this is the funtion that actually asks for audio permission
         const streamData = await navigator.mediaDevices.getUserMedia({
           audio: true,
           video: false,
         });
         setPermission(true);
+
+        //use that audio stream for the recording
         setStream(streamData);
       } catch (err) {
         alert(err.message);
@@ -100,6 +106,7 @@ const AudioRecorder = ({
   };
 
   const captureTime = () => {
+    // append the current audio time to the syllables list
     if (markSyllables) {
       let curTime = audioRef.current.currentTime;
       setBoundaries(boundaries.concat([curTime]));
@@ -107,27 +114,27 @@ const AudioRecorder = ({
   };
 
   const deleteTime = () => {
+    // delete the last syllable time that we have marked 
     if (boundaries.length >= 1) {
       setBoundaries(boundaries.slice(0, boundaries.length - 1));
     }
   };
   const handleSpeedChange = (newSpeed) => {
+    // change the playbackrate
     setSpeed(newSpeed);
     audioRef.current.playbackRate = newSpeed;
   };
-  function getDuration(event) {
-    event.target.currentTime = 0
-    event.target.removeEventListener('timeupdate', getDuration)
-    console.log(event.target.duration)
-    console.log("above was inside getDuration");
-  }
+
   const handleStopSyllables = () => {
+    // stop marking the syllables
     setMarkSyllables(false);
     setBoundaries(
-      boundaries.concat([audioRef.current.duration])
+      boundaries.concat([audioRef.current.duration]) // add the end of the audio clip as the end of the last syllable
     );
+
+    //get the predictions now that we have the syllables
     fetchPreds(
-      boundaries.concat([audioRef.current.duration]),
+      boundaries.concat([audioRef.current.duration]), //we have to add it again here because the react hook doesn't update until recompilation
       setPredictionOutput,
       inputText,
       tonestring,
@@ -139,14 +146,15 @@ const AudioRecorder = ({
     //create new Media recorder instance using the stream
     const audioContext = new (window.AudioContext ||
       window.webkitAudioContext)();
-    const source = audioContext.createMediaStreamSource(stream);
-
+    
     const media = new MediaRecorder(stream, { type: mimeType });
     //set the MediaRecorder instance to the mediaRecorder ref
     mediaRecorder.current = media;
     //invokes the start method to start the recording process
     mediaRecorder.current.start();
     let localAudioChunks = [];
+
+    //when there's a new recording chunk, add it to the chunks list
     mediaRecorder.current.ondataavailable = (event) => {
       if (typeof event.data === "undefined") return;
       if (event.data.size === 0) return;
@@ -170,6 +178,8 @@ const AudioRecorder = ({
       setAudioChunks([]);
     };
   };
+
+  //get microphone permission upon mounting the page
   useEffect(() => {
     getMicrophonePermission();
   }, []);
@@ -192,7 +202,7 @@ const AudioRecorder = ({
                 <div className="audio-controls grid grid-cols-12">
                   <div className="lg:col-span-3 md:col-span-3 lg:items-left md:items-left col-span-12 items-center">
                     <div className="items-center justify-center">
-                      {!permission ? (
+                      {!permission ? ( // only show the get permission microphone button if we don't have permission
                         <>
                           <button
                             onClick={getMicrophonePermission}
@@ -203,7 +213,7 @@ const AudioRecorder = ({
                           <p className="text-gray-300">Get Microphone</p>
                         </>
                       ) : null}
-                      {permission && recordingStatus === "inactive" ? (
+                      {permission && recordingStatus === "inactive" ? ( // if we have permission but haven't started recording yet, show the start recording button
                         <>
                           <button
                             onClick={startRecording}
@@ -214,7 +224,7 @@ const AudioRecorder = ({
                           <p className="text-gray-300">Start Recording</p>
                         </>
                       ) : null}
-                      {recordingStatus === "recording" ? (
+                      {recordingStatus === "recording" ? ( // if we're recording, show the recording button
                         <>
                           <button
                             onClick={stopRecording}
@@ -232,7 +242,7 @@ const AudioRecorder = ({
                     {audio ? (
                       <>
                         <div>
-                          <div className="audio-container">
+                          <div className="audio-container"> 
                             <audio
                               ref={audioRef}
                               src={audio}

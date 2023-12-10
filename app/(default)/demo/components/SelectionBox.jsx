@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 /* eslint-disable react/no-unescaped-entities */
 const SelectionBox = ( {setTonestring, setInputText} ) => {
+    // send the input text and tonestring (optional) to app.py so that it can figure out what the tones are for the text if not provided and just return them if it is provided
     const onSubmit = async (e) => {
         e.preventDefault();
+        // get the data as a Form Data
         const formData = new FormData(e.currentTarget);
         setTonestring(formData.get("tone-input"));
         let production = false;
-        const api_key = process.env.APIKEY;
         let url = production ? "https://tone-me-4.onrender.com/fetch_text" : "http://0.0.0.0:10000/fetch_text";
         try {
             const response = await fetch(url, {
@@ -18,7 +19,7 @@ const SelectionBox = ( {setTonestring, setInputText} ) => {
               body: JSON.stringify({ tones: formData.get("tone-input"), text: formData.get("text-input") }),
             });
             const data = await response.json() 
-            // console.log(data.text)
+            // the response is in the form of a json {"text": array of chinese characters, "tones": array of ints}
             setInputText(data.text)
             setTonestring(data.tones)
           } catch (error) {

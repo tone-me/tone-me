@@ -43,6 +43,7 @@ interface Output {
 }
 
 function arrayEquals(a: string[], b: string[]) {
+  // checks if two arrays are equal in values
   let ans =
     Array.isArray(a) &&
     Array.isArray(b) &&
@@ -52,30 +53,6 @@ function arrayEquals(a: string[], b: string[]) {
 }
 
 export default function Home() {
-  // const [microphonePermission, setMicrophonePermission] = useState(false);
-
-  // const handleMicrophonePermission = async () => {
-  //   try {
-  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  //     // If the promise resolves, the user granted permission
-  //     setMicrophonePermission(true);
-  //     stream.getTracks().forEach((track) => track.stop()); // Stop the stream
-  //   } catch (error) {
-  //     console.error("Error accessing microphone:", error);
-  //     setMicrophonePermission(false);
-  //   }
-  // };
-
-  // const addAudioElement = (blob: any) => {
-  //   console.log("complete");
-  //   const url = URL.createObjectURL(blob);
-  //   const audio = document.createElement("audio");
-  //   audio.src = url;
-  //   audio.controls = true;
-  //   document.body.appendChild(audio);
-  // };
-  // fetchData();
-
   const [tonestring, setTonestring] = useState<string[]>([]);
   const [inputText, setInputText] = useState<string[]>([]);
   const [predictionOutput, setPredictionOutput] = useState<Output[]>([]);
@@ -85,6 +62,7 @@ export default function Home() {
   const audioRef = useRef(null);
   // const [pythonAudio, setPythonAudio] = useState<number[]>([]);
 
+  // manual example of input and predictions output that's useful for debugging
   // const [tonestring, setTonestring] = useState(["1", "2"]);
   // const [inputText, setInputText] = useState(["中", "国"]);
   // const [predictionOutput, setPredictionOutput] = useState([
@@ -100,65 +78,12 @@ export default function Home() {
   //   },
   // ]);
 
+  // basically, we don't want to render the table after the user has inputted new text data but hasn't recorded themselves yet
+  // as the data in the predictionOutput would be from the old recording / text
   let old_tones: string[] = [];
   if (predictionOutput && predictionOutput.length) {
     old_tones = predictionOutput.map((elem) => elem["expected"].toString());
   }
-
-  // console.log("rerendering");
-  // console.log(
-  //   inputText.map((word, index) => {
-  //     return {
-  //       word: word,
-  //       pronunciation: predictionOutput[index],
-  //     };
-  //   })
-  // );
-  // let audioURL = "";
-  // console.log(pythonAudio);
-  // if (pythonAudio) {
-  //   const uint8Array = new Uint8Array(pythonAudio);
-  //   let audioBlob = new Blob([uint8Array], { type: "audio/wav" });
-  //   audioURL = URL.createObjectURL(audioBlob);
-  // }
-  function playAudioSegment(audioRef: any, startTime: number, endTime: number) {
-    // Make sure the audioRef is defined
-    console.log(audioRef);
-    console.log(audioRef.current);
-    if (audioRef.current) {
-      // Set the start time
-      console.log("are we even playing this");
-      audioRef.current.currentTime = startTime;
-
-      // Play the audio
-      audioRef.current.play();
-
-      // Stop the audio at the end time
-      audioRef.current.addEventListener(
-        "timeupdate",
-        function handleTimeUpdate() {
-          if (audioRef.current.currentTime >= endTime) {
-            // Pause the audio when it reaches the end time
-            audioRef.current.pause();
-            // Remove the timeupdate event listener to avoid unnecessary calls
-            audioRef.current.removeEventListener(
-              "timeupdate",
-              handleTimeUpdate
-            );
-          }
-        }
-      );
-    }
-  }
-
-  // const itemsRef: any = useRef({});
-  // const array = [
-  //   [0, 0.5],
-  //   [0.5, 1],
-  // ];
-  // useEffect(() => {
-  //   console.log(itemsRef.current[0]);
-  // }, itemsRef);
   return (
     <main>
       <div>
@@ -176,7 +101,6 @@ export default function Home() {
               data-aos="zoom-y-out"
             >
               <AudioRecorder
-                predictionOutput={predictionOutput}
                 setPredictionOutput={setPredictionOutput}
                 boundaries={boundaries}
                 setBoundaries={setBoundaries}
@@ -190,30 +114,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* {array.map((item, id) => {
-          itemsRef.current[id] = useRef(null);
-          return (
-            <div key={id}>
-              <audio src={audio} controls ref={itemsRef.current[id]}></audio>
-              <button
-                onClick={() =>
-                  playAudioSegment(itemsRef.current[id], item[0], item[1])
-                }
-              >
-                Play
-              </button>
-            </div>
-          );
-        })} */}
 
-        {/* <audio ref={itemsRef[0]} src={audio} controls></audio>
-        <button onClick={() => playAudioSegment(itemsRef[0], 0.5, 1)}>
-          Play{" "}
-        </button>
-        <audio ref={itemsRef[1]} src={audio} controls></audio>
-        <button onClick={() => playAudioSegment(itemsRef[1], 0, 0.5)}>
-          Play{" "}
-        </button> */}
         {arrayEquals(old_tones, tonestring) && (
           <div className="pt-8 container relative w-screen mx-auto flex flex-row items-center justify-center">
             <Table
