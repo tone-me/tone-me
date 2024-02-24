@@ -107,7 +107,7 @@ Distributed under the MIT License. See `License.txt` for more information.
 ## Contact
 
 Chris Ge - cge7@mit.edu
-
+Riddhi Bhagwat - riddhib@mit.edu
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
