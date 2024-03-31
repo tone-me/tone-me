@@ -63,7 +63,7 @@ We used the [Data-AISHELL3](https://www.openslr.org/93/) Mandarin Speech Corpus 
 
 The code used to train the model is included in the ```model``` folder, but it wasn't written for public distribution and is only included for reference. Our [model](https://huggingface.co/cge7/wav2vec2-base-version3) is publicly available on Hugging Face.  
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -76,7 +76,6 @@ Some of the main frameworks and libraries that we used in our project
 * [![Flask][Flask.com]][Flask-url]
 * [![Hugging Face][HuggingFace.com]][HuggingFace-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- INSTALLATION AND SETUP -->
@@ -101,8 +100,6 @@ Then, you can run ```python3 app.py``` in one shell, and ```npm run dev``` in an
 
 Distributed under the MIT License. See `License.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CONTACT -->
 ## Contact
 
@@ -110,18 +107,12 @@ Chris Ge - cge7@mit.edu |
 Riddhi Bhagwat - riddhib@mit.edu | 
 Anshul Gupta – anshulg@mit.edu
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 This project would not have been possible without the support from [AIM Labs](https://www.ai-at-mit.com/labs). We're especially grateful to Sagnik Anupam for all of his advice and the opportunity we had to [present](https://docs.google.com/presentation/d/1zpF4ZCvgt_rvDgFS2yuanvwExa79vGbWYwujscRgT-8/edit?usp=sharing) during Demo Day.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
