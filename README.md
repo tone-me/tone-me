@@ -47,7 +47,7 @@ Developed by Chris Ge, Daria Kryvosheieva, Anshul Gupta, Riddhi Bhagwat, & Kathe
   </a>
 </div>
 
-Our three-step process accepts a Chinese voice recording,determines the tones in the recording, and returns feedback on the correctness of the tones.
+Our three-step process accepts a Chinese voice recording, determines the tones in the recording, and returns feedback on the correctness of the tones.
 
 <ol>
   <li> <b>Audio Input.</b> Record an audio of yourself pronouncing a character, word, phrase or sentence. Specify what you want to say.</li>
@@ -55,7 +55,7 @@ Our three-step process accepts a Chinese voice recording,determines the tones in
   <li> <b>Feedback.</b> The software returns whether or not your pronunciation was right, and displays the audio of your pronunciation of each syllable compared to an authentic pronunciation</li>
 </ol>
 
-We used the [Data-AISHELL3](https://www.openslr.org/93/) Mandarin Speech Corpus as raw data split it into audio segments of individual syllables using [Whisper](https://openai.com/research/whisper) and [stable-ts](https://github.com/jianfch/stable-ts/blob/main/README.md), filtered the syllables using Pydub, and fine-tuned the [wave2vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2) transformer model on the resulting audio segments. Here's a diagram of our model pipeline:
+We used the [Data-AISHELL3](https://www.openslr.org/93/) Mandarin Speech Corpus as raw data, split it into audio segments of individual syllables using [Whisper](https://openai.com/research/whisper) and [stable-ts](https://github.com/jianfch/stable-ts/blob/main/README.md), filtered the syllables using Pydub, and fine-tuned the [wave2vec2](https://huggingface.co/docs/transformers/model_doc/wav2vec2) transformer model on the resulting audio segments. Here's a diagram of our model pipeline:
 
 <div align="center">
   <img src="https://github.com/tone-me/tone-me/assets/88895223/84dd58d6-7c57-4675-9d21-b2c5831b4843" alt="Tone-Me pipeline architecture">
@@ -105,8 +105,8 @@ Distributed under the MIT License. See `License.txt` for more information.
 
 Chris Ge - cge7@mit.edu |
 Riddhi Bhagwat - riddhib@mit.edu | 
-Anshul Gupta – anshulg@mit.edu
-
+Anshul Gupta – anshulg@mit.edu |
+Daria Kryvosheieva - daria_k@mit.edu
 
 
 <!-- ACKNOWLEDGMENTS -->
